@@ -19,9 +19,10 @@ class Bootstrap {
                     $controllers->{$url[1]}($url[2]);
                 elseif (isset($url[1]) AND method_exists($controllers, $url[1]))
                     $controllers->{$url[1]}();
-                else {
-                    echo "methode non existante";
-                }
+                    elseif(isset($url[1]) AND !method_exists($controllers, $url[1]))
+                            echo 'methode non trouve';
+                
+                
             } else {
                 echo "fichier non existant(cpntrollers)";
             }

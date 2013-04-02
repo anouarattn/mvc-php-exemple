@@ -1,9 +1,9 @@
 <?php
 
-class Error {
+class Controller {
 
     function __construct() {
-       echo  "error";
+        echo 'main controller';
     }
 
 }

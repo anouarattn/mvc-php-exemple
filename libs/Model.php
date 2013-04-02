@@ -1,9 +1,9 @@
 <?php
 
-class Index {
+class Model {
 
     function __construct() {
-        echo "we are in index";
+        
     }
 
 }
