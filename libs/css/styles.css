@@ -1,0 +1,103 @@
+#body
+{
+background-color: #f1f0f1;
+
+}
+nav
+{
+  border: 2px dotted #ccc8cb; 
+  background-color: #e3e1e2;
+}
+
+nav ul
+{
+    
+list-style-type: none;
+padding: 0%;
+margin-left:auto;
+margin-right:auto;
+width:70%;
+ 
+}
+
+.menu-principal
+{
+    display: inline-block;
+    height:50px;
+    width:100px;
+    vertical-align: top;
+}
+
+
+nav a {
+    display: inline-block;
+    width: 100px;
+    padding: 10px 10px 10px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    background-color:  #363633;
+     text-decoration: none;
+    color: White;
+}
+
+nav a:hover
+{
+    
+    background-color:#1f1f1d; 
+    border-left: solid 2px white;
+}
+
+
+li ul
+{
+    display:  none;
+}
+
+
+nav li:hover ul
+{
+
+    display: inline-block;
+    
+    
+}
+
+
+
+#animateur
+{
+   margin-left: 44px;
+    
+}
+
+#formation
+{
+   margin-left: 44px;
+    
+}
+
+#association
+{
+   margin-left: 44px;
+    
+}
+
+#membre
+{
+   margin-left: 44px;
+    
+}
+
+#accuiel
+{
+   margin-left: 44px;
+    
+}
+
+
+#invitation
+{
+   margin-left: 44px;
+    
+}
+

@@ -3,12 +3,12 @@
 class View {
 
     function __construct() {
-        echo 'we are in vies main';
+         require_once 'libs/staticview.php';
     }
     
     public function render($view_name)
     {
-        require 'views'. $view_name .php;
+         require_once 'views'. $view_name .php;
         
     }
 

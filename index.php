@@ -1,8 +1,8 @@
 <?php
 
-require 'libs/bootstrap.php';
-require 'libs/Controller.php';
-require 'libs/View.php';
+require_once  'libs/bootstrap.php';
+require_once 'libs/Controller.php';
+require_once 'libs/View.php';
 
 
 $boot=new Bootstrap();
