@@ -47,10 +47,15 @@ class Animateur extends Controller {
 
     public function look() {
         $this->view->render("animateur/look");
+  $pp=(new Animateur_model())->getAll("Animateur_object", 'animateur');
+        print_r($pp);
     }
 
     public function index() {
         $this->view->render("animateur/index");
+       
+       
+
     }
 
 }

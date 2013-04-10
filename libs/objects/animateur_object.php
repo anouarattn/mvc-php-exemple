@@ -1,6 +1,6 @@
 <?php
 
-class Animateur_object {
+class Animateur_object extends Object {
 
     private $_id;
     private $_nom;
@@ -14,6 +14,7 @@ class Animateur_object {
     private $_contrat;
 
     public function __construct(array $entrees) {
+        
         $this->hydrate($entrees);
     }
 

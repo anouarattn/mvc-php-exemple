@@ -53,17 +53,7 @@ class Animateur_model extends Model {
         $inserto->execute();
     }
 
-    public function getAll($from) {
-        //retourne la liste de tous les animateurs
-        $tabAnimateur = array();
-        $inserto = $this->_db->query('SELECT * FROM animateur ORDER BY nanimateur');
-
-        while ($donnees = $inserto->fetch(PDO::FETCH_ASSOC)) {
-
-            $tabAnimateur[] = new Animateur($donnees);
-        }
-        return $tabAnimateur;
-    }
+    
 
     public function setDb(PDO $db) {
         $this->_db = $db;
