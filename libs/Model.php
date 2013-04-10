@@ -19,7 +19,17 @@ class Model {
    
         return  $Object_tab;
     }
+    
+    
+       public static function get_culomns_name($table_name) {
+        $db_access=new PDO('mysql:host=localhost;dbname=pole', 'root', '');
+        $get_decription=$db_access->query('DESCRIBE '.$table_name.';');
+        while ($donnees = $get_decription->fetch(PDO::FETCH_BOTH)) {
 
+            $get_columns_name[] = $donnees[0];
+        }
+        return $get_columns_name;
+    }
 }
 
 ?>

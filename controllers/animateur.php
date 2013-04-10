@@ -47,8 +47,10 @@ class Animateur extends Controller {
 
     public function look() {
         $this->view->render("animateur/look");
-  $pp=(new Animateur_model())->getAll("Animateur_object", 'animateur');
-        print_r($pp);
+        $tab_rows=(new Animateur_model())->getAll("Animateur_object", 'animateur');
+        Utility::grid($tab_rows,  (new Animateur_model())->get_culomns_name("animateur"));
+               
+
     }
 
     public function index() {
