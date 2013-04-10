@@ -53,10 +53,10 @@
                 <li id="animateur"  class="menu-principal">
                     <a href="/mvc_test/animateur" >Animateur</a>
                     <ul>
-                        <li><a href="/mvc_test/animateur/subpage/add" >Ajout</a></li>
-                        <li><a href="/mvc_test/animateur/subpage/delete" >Suppression</a></li>
-                        <li><a href="/mvc_test/animateur/subpage/modify" >Modification</a></li>
-                        <li><a href="/mvc_test/animateur/subpage/look" >Visualisation</a></li>
+                        <li><a href="/mvc_test/animateur/add" >Ajout</a></li>
+                        <li><a href="/mvc_test/animateur/delete" >Suppression</a></li>
+                        <li><a href="/mvc_test/animateur/modify" >Modification</a></li>
+                        <li><a href="/mvc_test/animateur/look" >Visualisation</a></li>
                     </ul>
                 </li>
 

@@ -16,7 +16,7 @@ class Bootstrap {
 
                 $controllers = new $url[0];
 
-                if (isset($url[2]))
+                if (isset($url[2]) AND method_exists($controllers, $url[1]))
                     $controllers->{$url[1]}($url[2]);
                 elseif (isset($url[1]) AND method_exists($controllers, $url[1]))
                     $controllers->{$url[1]}();
