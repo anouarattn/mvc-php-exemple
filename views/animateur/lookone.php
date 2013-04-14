@@ -30,7 +30,7 @@
                 <li>e-mail: <?php echo $_GET["e-mail"] ?></li>
                 <li>CIN: <?php echo $_GET["CIN"] ?></li>
                 <li>Adresse: <?php echo $_GET["Adresse"] ?></li>
-                <li>Tel: <?php echo $_GET["Téléphone"] ?></li>
+                <li>Tel: <?php echo $_GET["Telephone"] ?></li>
             </ul>
         </div>
         <div class="clear"></div>

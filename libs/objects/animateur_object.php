@@ -15,6 +15,7 @@ class Animateur_object extends Object {
 
     public function __construct(array $entrees) {
         
+        
         $this->hydrate($entrees);
     }
 
@@ -139,6 +140,7 @@ class Animateur_object extends Object {
     public function hydrate(array $entrees) {
 //cette methode va copie chaque champ du tableau associatif entrees dans le champ corespondant de la classe animateur
 // la fonction ucfirst() retourne la chaine $key mais avec la premier lettre en majiscule comme ça en respecte le nom des méthodes setter	
+        
         $i = 0;
         $tab_attributs = array('Id', 'Nom', 'Prenom', 'Adresse', 'Telephone', 'Email', 'Cin', 'Photo', 'Cv', 'Contrat');
         foreach ($entrees as $value) {
