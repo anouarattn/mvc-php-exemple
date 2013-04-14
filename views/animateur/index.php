@@ -1,4 +1,8 @@
-<?php
 
-echo '<br/>  index of animateur';
-?>
+
+
+
+
+  </section>
+           </body>
+</html>

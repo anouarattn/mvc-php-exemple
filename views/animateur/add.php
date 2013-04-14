@@ -1,5 +1,5 @@
 <br/><br/>
-<section>
+
 
     <article>
     <form  method="post"  action="/mvc_test/animateur/add"  enctype="multipart/form-data"> 
@@ -26,4 +26,7 @@
     </form>
 </article>
 
-</section>
+
+  </section>
+           </body>
+</html>

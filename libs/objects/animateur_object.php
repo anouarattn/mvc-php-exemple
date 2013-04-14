@@ -140,13 +140,21 @@ class Animateur_object extends Object {
 //cette methode va copie chaque champ du tableau associatif entrees dans le champ corespondant de la classe animateur
 // la fonction ucfirst() retourne la chaine $key mais avec la premier lettre en majiscule comme ça en respecte le nom des méthodes setter	
         $i = 0;
-        $tab_attributs = array('Id', 'Nom', 'Prenom', 'Email', 'Telephone', 'Cin', 'Adresse', 'Photo', 'Cv', 'Contrat');
+        $tab_attributs = array('Id', 'Nom', 'Prenom', 'Adresse', 'Telephone', 'Email', 'Cin', 'Photo', 'Cv', 'Contrat');
         foreach ($entrees as $value) {
             $method = 'set' . $tab_attributs[$i++];
             $this->$method($value);
         }
     }
 
+    public function  get_getter(){
+        static $j=0;
+        $tab_attributs = array('Id', 'Nom', 'Prenom', 'Email', 'Telephone', 'Cin', 'Adresse', 'Photo', 'Cv', 'Contrat');
+        if($j<10){
+        $getter='get'.$tab_attributs[$j++];
+        return $this->$getter();}
+        else $j=0;return $this->get_getter();
+    }
 
 
 }

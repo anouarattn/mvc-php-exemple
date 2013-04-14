@@ -1,8 +1,10 @@
 <?php
+
 require_once 'libs/Utility.php';
 require_once 'libs/Model.php';
 require_once 'models/animateur_model.php';
 require_once 'libs/objects/animateur_object.php';
+
 class Animateur extends Controller {
 
     function __construct() {
@@ -11,30 +13,30 @@ class Animateur extends Controller {
     }
 
     public function add() {
-        
-        $this->view->render("animateur/add");
 
-        if(isset($_POST['submit'])){
-        $cv = Utility::upload("cv_animateur", "libs/uploads/cv/", FALSE, array('pdf', 'doc', 'docx'));
-        $picture = Utility::upload("photo_animateur", "libs/uploads/picture/", FALSE, array('png', 'gif', 'jpg', 'jpeg'));
-        $contrat= Utility::upload("contrat_animateur", "libs/uploads/contrat/", FALSE, array('pdf', 'doc', 'docx'));
 
-        $anim=new Animateur_object(array(
-            ""
-            , $_POST["nom_animateur"]
-            , $_POST["pnom_animateur"]
-            , $_POST["email_animateur"]
-            , $_POST["tel_animateur"]
-            , $_POST["cin_animateur"]
-            , $_POST["ad_animateur"]
-            ,$picture[1]
-            ,$cv[1]
-            , $contrat[1]
-            )     
-        );
-        (new Animateur_model())->add($anim);
+
+        if (isset($_POST['submit'])) {
+            $cv = Utility::upload("cv_animateur", "libs/uploads/cv/", FALSE, array('pdf', 'doc', 'docx'));
+            $picture = Utility::upload("photo_animateur", "libs/uploads/picture/", FALSE, array('png', 'gif', 'jpg', 'jpeg'));
+            $contrat = Utility::upload("contrat_animateur", "libs/uploads/contrat/", FALSE, array('pdf', 'doc', 'docx'));
+
+            $anim = new Animateur_object(array(
+                ""
+                , $_POST["nom_animateur"]
+                , $_POST["pnom_animateur"]
+                , $_POST["email_animateur"]
+                , $_POST["tel_animateur"]
+                , $_POST["cin_animateur"]
+                , $_POST["ad_animateur"]
+                , $picture[1]
+                , $cv[1]
+                , $contrat[1]
+                    )
+            );
+            (new Animateur_model())->add($anim);
         }
-        
+        $this->view->render("animateur/add");
     }
 
     public function delete() {
@@ -46,18 +48,21 @@ class Animateur extends Controller {
     }
 
     public function look() {
-        $this->view->render("animateur/look");
-        $tab_rows=(new Animateur_model())->getAll("Animateur_object", 'animateur');
-        Utility::grid($tab_rows,  (new Animateur_model())->get_culomns_name("animateur"));
-               
-
+        
+        $tab_rows = (new Animateur_model())->getAll("Animateur_object", 'animateur');
+        if(isset($tab_rows)){
+            $_POST["noms_column"]=array("identifiant", "Nom", "Prenom", "e-mail", "Téléphone", "CIN", "Adresse", "Photo", "CV", "Contrat");
+            $_POST["donnees"]=$tab_rows;
+           // $_POST["type"]="animateur";
+       // Utility::grid($tab_rows, array("identifiant", "Nom", "Prenom", "e-mail", "Téléphone", "CIN", "Adresse", "Photo", "CV", "Contrat"),"animateur");}
+        }$this->view->render("animateur/look");
     }
 
     public function index() {
         $this->view->render("animateur/index");
-       
-       
-
+    }
+     public function lookone() {
+       $this->view->render("animateur/lookone");
     }
 
 }
