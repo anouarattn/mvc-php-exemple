@@ -19,12 +19,12 @@
 
 
                 <li id="formation"   class="menu-principal">
-                    <a href="pages/view/formation.php" >Formation</a>
+                    <a href="/mvc_test/formation/index" >Formation</a>
                     <ul>
-                        <li><a href="pages/view/formation/ajout.php" >Ajout</a></li>
-                        <li><a href="pages/view/formation/supression.php" >Suppression</a></li>
-                        <li><a href="pages/view/formation/modification.php" >Modification</a></li>
-                        <li><a href="pages/view/formation/visualisation.php" >Visualisation</a></li>
+                        <li><a href="/mvc_test/formation/add" >Ajout</a></li>
+                        <li><a href="/mvc_test/formation/delete" >Suppression</a></li>
+                        <li><a href="/mvc_test/formation/modify" >Modification</a></li>
+                        <li><a href="/mvc_test/formation/view" >Visualisation</a></li>
                     </ul>
                 </li>
 
@@ -51,7 +51,7 @@
                 </li>
 
                 <li id="animateur"  class="menu-principal">
-                    <a href="/mvc_test/animateur" >Animateur</a>
+                    <a href="/mvc_test/animateur/index" >Animateur</a>
                     <ul>
                         <li><a href="/mvc_test/animateur/add" >Ajout</a></li>
                         <li><a href="/mvc_test/animateur/delete" >Suppression</a></li>

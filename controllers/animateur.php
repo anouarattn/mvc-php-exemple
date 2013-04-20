@@ -63,6 +63,8 @@ class Animateur extends Controller {
     }
 
     public function index() {
+        $animated_formation=(new Animateur_model())->getcolomn('anime',$colomn_name,$where="1=1") ;
+        
         $this->view->render("animateur/index");
     }
 
