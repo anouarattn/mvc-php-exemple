@@ -1,5 +1,11 @@
 <?php
 
+require_once 'libs/Utility.php';
+require_once 'libs/Model.php';
+require_once 'models/animateur_model.php';
+require_once 'libs/objects/animateur_object.php';
+require_once 'libs/objects/groupe_object.php';
+
 class Model {
 
     public $_db;
@@ -8,12 +14,17 @@ class Model {
         $this->_db = $_db;
     }
 
-    public  function getAll($object_type,$table_name) {
+    public  function getAll($object_type,$table_name,$where="1" ) {
         
         //retourne la liste de tous les Object(animateur, association, formation ...) de la base de données
-        $getall = $this->_db->query('SELECT * FROM '.$table_name.';');
+    
+                $getall = $this->_db->query('SELECT * FROM '.$table_name.' WHERE ' .$where. ';');
+                
+
+    
         while ($donnees = $getall->fetch(PDO::FETCH_ASSOC)) {
-           
+            
+          // print_r($donnees);
             $Object_tab[] = new $object_type($donnees);
         }
    
@@ -42,6 +53,14 @@ class Model {
             $get_columns_name[] = $donnees[0];
         }
         return $get_columns_name;
+    }
+    
+    public  function delete($table_name,$id) {
+        
+        $db_access=new PDO('mysql:host=localhost;dbname=pole', 'root', '');
+       $nb= $db_access->exec('DELETE FROM '.$table_name.' WHERE idanimateur='.$id.';');
+        
+    //    echo print_r($db_access->errorInfo());
     }
 }
 

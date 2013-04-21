@@ -41,7 +41,7 @@ foreach ($_POST["donnees"] as $object) {
     while ($i < $size2) {
         $tag="<td>";
         $temp = $object->get_getter();
-        if($i==0) {$_POST["id"]=$temp;}
+        if($i==0) {$id_val=$temp;}
         if($i==1) {$tag="<td class=\"nom\">";}
         $gett.=$_POST["noms_column"][$i] . '=' . $temp . '&';
         if (in_array(substr(strrchr($temp, '.'), 1), array('pdf', 'doc', 'docx')))
@@ -53,9 +53,10 @@ foreach ($_POST["donnees"] as $object) {
         $i++;
         
     }
-    echo "<td><a href=\"/mvc_test/animateur/edit/" . $_POST["id"] . "\" ><img src=\"/mvc_test/libs/uploads/picture/edit.png\"  alt=\"modifier\" height= \"40\" width=\"30\" ></a></td>";
-    echo "<td><a href=\"/mvc_test/animateur/delete/" . $_POST["id"] . "\" ><img src=\"/mvc_test/libs/uploads/picture/delete.png\"  alt=\"supprimer\" height= \"40\" width=\"30\" ></a></td>";
-    echo "<td><a href=\"/mvc_test/animateur/lookone" . substr($gett, 0, strlen($gett) - 1) . "\" ><img src=\"/mvc_test/libs/uploads/picture/plus.png\"  alt=\"plus\" height= \"40\" width=\"30\" ></a></td>";
+$rand= rand(1, 23827);
+    echo "<td><a href=\"/mvc_test/animateur/edit/" .$id_val."\" ><img src=\"/mvc_test/libs/uploads/picture/edit.png\"  alt=\"modifier\" height= \"40\" width=\"30\" ></a></td>";
+    echo "<td><a  href= \"javascript:confirmm(".$id_val.")\" ><img src=\"/mvc_test/libs/uploads/picture/delete.png\"  alt=\"supprimer\" height= \"40\" width=\"30\" ></a></td>";
+    echo "<td><a href=\"/mvc_test/animateur/lookone" . substr($gett, 0, strlen($gett) - 1) . "\"  ><img src=\"/mvc_test/libs/uploads/picture/plus.png\"  alt=\"plus\" height= \"40\" width=\"30\" ></a></td>";
   //  echo "<td><a href=\"/mvc_test/animateur/lookone" . substr($gett, 0, strlen($gett) - 1) . "\" >" . "Plus" . "</a></td>";
    // echo "<td><a href=\"/mvc_test/animateur/lookone" . substr($gett, 0, strlen($gett) - 1) . "\" >" . "Plus" . "</a></td>";
     //echo "<td><a href=\"/mvc_test/animateur/lookone" . substr($gett, 0, strlen($gett) - 1) . "\" >" . "Plus" . "</a></td>";
@@ -63,13 +64,23 @@ foreach ($_POST["donnees"] as $object) {
     echo "</tr> ";
 }
 
-
 echo "</table>";
 echo "</fieldset>";
 echo "</article>";
 ?>
 
 <script>
+    
+    function confirmm(a,b){
+        
+      var r=confirm("Clique Sur OK pour Confirmer votre choix?");
+     if (r==true)
+  {
+         window.location="/mvc_test/animateur/delete/"  + a  ;
+ // this.href=\"/mvc_test/animateur/delete/" . $_POST["id"] ."\" ;
+  }
+          
+    }
 
 function changed()
 {
@@ -77,18 +88,22 @@ function changed()
     var x=document.getElementsByTagName("tr");
 var sel = document.getElementsByTagName("input")[0].value.toString();
 var re = new RegExp(sel, "i");
-    while(i<5){
+    while(i<x.length){
 
 var y=x[i].getElementsByClassName("nom")[0];
 
    var b=   y.innerHTML.search(re);
  
-if(b!=0){
+if(b!==0){
     x[i].setAttribute("hidden");   
 }
-else if (b>=0 & x[i].hasAttribute("hidden")){x[i].removeAttribute("hidden");}
+else if (b==0 & x[i].hasAttribute("hidden")){x[i].removeAttribute("hidden");}
+
 i++;
-}}
+}
+
+
+}
 </script>
 </section>
 </body>

@@ -10,7 +10,7 @@
 
 
     <body>
-        <nav>
+        <nav id="fofo">
             <ul>
 
                 <li id="acceuil" class="menu-principal">
@@ -24,7 +24,7 @@
                         <li><a href="/mvc_test/formation/add" >Ajout</a></li>
                         <li><a href="/mvc_test/formation/delete" >Suppression</a></li>
                         <li><a href="/mvc_test/formation/modify" >Modification</a></li>
-                        <li><a href="/mvc_test/formation/view" >Visualisation</a></li>
+                        <li><a href="/mvc_test/formation/look" >Visualisation</a></li>
                     </ul>
                 </li>
 

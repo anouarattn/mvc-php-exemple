@@ -16,7 +16,7 @@
 <div id="cv" class="instaFade">
     <div class="mainDetails">
         <div id="headshot" class="quickFade">
-            <img src=<?php echo "/mvc_test/image/get?val=" . $_GET["Photo"] ?> alt=<?php echo $_GET["Nom"] . " " . $_GET["Prenom"] ?> />
+            <img src=<?php echo "/mvc_test/libs/uploads/animateur/picture/" . $_GET["Photo"] ?> alt=<?php echo $_GET["Nom"] . " " . $_GET["Prenom"] ?> />
         </div>
 
         <div id="name">
@@ -40,27 +40,28 @@
 
         <section>
             <div class="sectionTitle">
-                <h1>Formation Animer</h1>
+                <h1>Formations Animer</h1>
             </div>
 
             <div class="sectionContent">
-                <article>
-                    <h2>Job Title at Company</h2>
-                    <p class="subDetails">April 2011 - Present</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultricies massa et erat luctus hendrerit. Curabitur non consequat enim. Vestibulum bibendum mattis dignissim. Proin id sapien quis libero interdum porttitor.</p>
-                </article>
+                
+              <?php
+              
+                                 
+              foreach ($_POST["formation_animer"] as $value) {
+                  
+              
+                echo "<article>";
+                 echo   "<h2><a href=\"\mvc_test/formation/lookone?identifiant=".$value->getId(). "&Intitulé=".$value->getIntitule()."&Emplacement=".$value->getEmplacement()."&Adresse=".$value->getAdrsempl()."&Date-debut=".$value->getDate_d()."&Date-fin=".$value->getDate_f()."&type=".$value->getType()."&Plan=".$value->getPlan()."\" >".$value->getIntitule()."</a></h2>";
+                 echo   "<p class=\"subDetails\">".$value->getDate_d(). "  -  " .$value->getDate_f(). "</p>";
+                 echo   "<p class=\"subDetails\"> Type: ".$value->getType(). "</p>";
+                echo    "<p>".$value->getEmplacement(). "</p>";
+                echo "</article>";
+                 }
+              
+              ?>
 
-                <article>
-                    <h2>Job Title at Company</h2>
-                    <p class="subDetails">Janruary 2007 - March 2011</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultricies massa et erat luctus hendrerit. Curabitur non consequat enim. Vestibulum bibendum mattis dignissim. Proin id sapien quis libero interdum porttitor.</p>
-                </article>
-
-                <article>
-                    <h2>Job Title at Company</h2>
-                    <p class="subDetails">October 2004 - December 2006</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultricies massa et erat luctus hendrerit. Curabitur non consequat enim. Vestibulum bibendum mattis dignissim. Proin id sapien quis libero interdum porttitor.</p>
-                </article>
+               
             </div>
             <div class="clear"></div>
         </section>

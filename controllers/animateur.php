@@ -3,6 +3,7 @@
 require_once 'libs/Utility.php';
 require_once 'libs/Model.php';
 require_once 'models/animateur_model.php';
+require_once 'models/anime_formation_model.php';
 require_once 'libs/objects/animateur_object.php';
 
 class Animateur extends Controller {
@@ -39,8 +40,15 @@ class Animateur extends Controller {
         $this->view->render("animateur/add");
     }
 
-    public function delete() {
-        $this->view->render("animateur/delete");
+    public function delete($id) {
+
+    
+         if(intval($id).''==$id){
+          (new Animateur_model())->delete("animateur",$id);}
+          else  {echo "Identifiant Non trouvé";}  
+         
+         $this->look();
+
     }
 
     public function modify() {
@@ -63,14 +71,17 @@ class Animateur extends Controller {
     }
 
     public function index() {
-        $animated_formation=(new Animateur_model())->getcolomn('anime',$colomn_name,$where="1=1") ;
         
-        $this->view->render("animateur/index");
     }
 
     public function lookone() {
-        $this->view->render("animateur/lookone");
+        
+         $_POST["formation_animer"] = (new Anime_formation_model())->get_formation_animateur($_GET["identifiant"]);
+         
+      $this->view->render("animateur/lookone");
     }
+    
+    
 
 }
 ?>

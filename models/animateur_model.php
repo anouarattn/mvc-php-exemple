@@ -27,11 +27,11 @@ class Animateur_model extends Model {
       
       */
     }
-
+/*
     public function delete(Animateur $anim) {
         // supprime un animateur de la base de données utilisation de la mèthode exec()
         $this->_db->exec('DELETE FROM Animateur WHERE id=' . $anim->getId() . ';');
-    }
+    }*/
 
     public function update(Animateur $anim) {
 
@@ -58,6 +58,12 @@ class Animateur_model extends Model {
     public function setDb(PDO $db) {
         $this->_db = $db;
     }
+    
+   public function get_formation_animateur(){
+       
+       
+       
+   }
 
 }
 

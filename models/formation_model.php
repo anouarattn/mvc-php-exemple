@@ -1,25 +1,23 @@
 <?php
 
-class Animateur_model extends Model {
+class Formation_model extends Model {
 
     function __construct() {
         parent::__construct(new PDO('mysql:host=localhost;dbname=pole', 'root', ''));
     }
 
-     public  function add(Animateur_object $animateur) {
-        $add = $this->_db->prepare('INSERT INTO animateur(nanimateur,pranimateur,addanimateur,telanimateur,mailanimateur,cinanimateur,photoanimateur,cvanimateur,contranimateur) values(:nom,:prenom,:adresse,:tel,:email,:cin,:photo,:cv,:contrat)');
-
-        $add->bindValue(':nom', $animateur->getNom());
-        $add->bindValue(':prenom', $animateur->getPrenom());
-        $add->bindValue(':adresse', $animateur->getAdresse());
-        $add->bindValue(':email', $animateur->getEmail());
-        $add->bindValue(':tel', $animateur->getTelephone());
-        $add->bindValue(':cin', $animateur->getCin());
-        $add->bindValue(':photo', $animateur->getPhoto());
-        $add->bindValue(':cv', $animateur->getCv());
-        $add->bindValue(':contrat', $animateur->getContrat());
+     public  function add(Formation_object $formation) {
+       //  print_r($formation);
+        $add = $this->_db->prepare('INSERT INTO formation(intiformation,eformation,adeformation,tformation,fformation,dformation,planacces) values(:intitule,:emplacement,:adrempl,:typef,:date_fin,:date_debut,:planacc)');
+        $add->bindValue(':intitule', $formation->getIntitule());
+        $add->bindValue(':emplacement', $formation->getEmplacement());
+        $add->bindValue(':adrempl', $formation->getAdrsempl());
+        $add->bindValue(':typef', $formation->getType());
+        $add->bindValue(':date_fin', $formation->getDate_f());
+        $add->bindValue(':date_debut', $formation->getDate_d());
+        $add->bindValue(':planacc', $formation->getPlan());
         $add->execute();
-
+//print_r($add->errorinfo());
         
       /*  echo "\nPDOStatement::errorInfo():\n";
         $inserto = $sth->errorInfo();
@@ -28,10 +26,7 @@ class Animateur_model extends Model {
       */
     }
 
-    public function delete(Animateur $anim) {
-        // supprime un animateur de la base de données utilisation de la mèthode exec()
-        $this->_db->exec('DELETE FROM Animateur WHERE id=' . $anim->getId() . ';');
-    }
+  
 
     public function update(Animateur $anim) {
 
