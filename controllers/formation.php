@@ -2,6 +2,7 @@
 require_once 'libs/Utility.php';
 require_once 'libs/Model.php';
 require_once 'models/formation_model.php';
+require_once 'models/anime_formation_model.php';
 require_once 'models/groupe_model.php';
 require_once 'models/seance_model.php';
 
@@ -73,6 +74,19 @@ public function lookone()
      
     else {$_POST["groupe"]=0;}
     
+   
+    
+    // animateurs
+     $formation_animateur = (new Anime_formation_model())->get_animateur_formation($_GET["identifiant"]);
+     if(isset($formation_animateur))
+     {
+         
+         $_POST["formation_animer_par"]=$formation_animateur;
+        // print_r($_POST["formation_animer_par"]);
+     }
+     else {$_POST["animateurs"]=0;}
+    
+    
       // print_r($tab_seance_object); 
     $this->view->render("formation/lookone");
 }
@@ -82,6 +96,16 @@ public function agenda()
 {
     
     $this->view->render("formation/agenda");
+}
+
+public function add_animateur_to_formation()      
+{
+    $tab_rows = (new Animateur_model())->getAll("Animateur_object", 'animateur');
+    //print_r($tab_rows);
+    if(isset($tab_rows)){
+        $_POST["donnees"]=$tab_rows;
+    $this->view->render("formation/add_animateur_to_formation");
+    }
 }
 
 }

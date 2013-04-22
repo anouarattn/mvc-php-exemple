@@ -22,8 +22,6 @@
                     <a href="/mvc_test/formation/index" >Formation</a>
                     <ul>
                         <li><a href="/mvc_test/formation/add" >Ajout</a></li>
-                        <li><a href="/mvc_test/formation/delete" >Suppression</a></li>
-                        <li><a href="/mvc_test/formation/modify" >Modification</a></li>
                         <li><a href="/mvc_test/formation/look" >Visualisation</a></li>
                     </ul>
                 </li>
@@ -54,8 +52,6 @@
                     <a href="/mvc_test/animateur/index" >Animateur</a>
                     <ul>
                         <li><a href="/mvc_test/animateur/add" >Ajout</a></li>
-                        <li><a href="/mvc_test/animateur/delete" >Suppression</a></li>
-                        <li><a href="/mvc_test/animateur/modify" >Modification</a></li>
                         <li><a href="/mvc_test/animateur/look" >Visualisation</a></li>
                     </ul>
                 </li>

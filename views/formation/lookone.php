@@ -2,7 +2,7 @@
 
 
 <fieldset>
-<legend><h1>Information Générale</h1></legend>
+<legend><h1>Informations Générales</h1></legend>
             <ul>
                 <li>Identifiant: <?php echo $_GET["identifiant"] ?></li>
                 <li>Intitulé: <?php echo $_GET["Intitulé"] ?></li>
@@ -49,6 +49,28 @@ else echo "<a href=\"#\">edit </a>";
             ?>
         
 </fieldset>
+
+<fieldset>
+    <legend><h1>Animateurs de la Formatoion</h1></legend>
+    <?php 
+
+if(!isset($_POST["animateurs"])){
+        echo "<ul>";
+        foreach ($_POST["formation_animer_par"] as  $value) {
+                echo "<li>";
+                echo "<a href=\"\mvc_test/animateur/lookone?identifiant=".$value->getId(). "&Intitulé=".$value->getNom()."&Nom=".$value->getPrenom()."&Prenom=".$value->getPrenom()."&e-mail=".$value->getEmail()."&Telephone=".$value->getTelephone()."&CIN=".$value->getCin()."&Adresse=".$value->getAdresse()."&Photo=".$value->getPhoto()."&CV=".$value->getCv()."&Contrat=".$value->getContrat()."\" >".$value->getNom() ." ". $value->getPrenom()."</a>";
+                echo "</li>";  
+}
+        echo "</ul>";   
+} 
+else {echo "<a href=\"javascript:add_animateur()\">add</a>";}
+
+?>
+</fieldset>
+
+<fieldset>
+    <legend><h1>Participants</h1></legend>
+</fieldset>
     
 </section>
 </body>
@@ -58,13 +80,9 @@ else echo "<a href=\"#\">edit </a>";
 
 
 <script>
-function programme(){
- 
- var ok=window.open("/maps_api/","windows",'width=800,height=500' );
-
-       
- 
-          
+    
+function add_animateur(){
+       var ok=window.open("add_animateur_to_formation","windows",'width=800,height=500' ); 
     }
 
 

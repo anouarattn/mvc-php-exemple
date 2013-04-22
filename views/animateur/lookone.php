@@ -47,7 +47,7 @@
                 
               <?php
               
-                                 
+                if(isset($_POST["formation_animer"])){                 
               foreach ($_POST["formation_animer"] as $value) {
                   
               
@@ -58,7 +58,8 @@
                 echo    "<p>".$value->getEmplacement(). "</p>";
                 echo "</article>";
                  }
-              
+                }
+                else echo "aucune formation"
               ?>
 
                

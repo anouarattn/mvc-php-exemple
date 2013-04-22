@@ -22,5 +22,21 @@ class Anime_formation_model extends Model {
    
        if(isset($Object_tab)) return  $Object_tab;
     }
+    
+    
+    public function get_animateur_formation($id_formation) {
+
+        $getall = $this->_db->query('SELECT * FROM animateur    join anime_formation on animateur_idanimateur=idanimateur WHERE formation_idformation=' . $id_formation . ';');
+        //print_r($getall);
+         while ($donnees = $getall->fetch(PDO::FETCH_ASSOC)) {
+            unset($donnees["formation_idformation"]);
+            unset($donnees["animateur_idanimateur"]);
+
+        // print_r($donnees);
+            $Object_tab[] = new Animateur_object($donnees);
+        }
+   
+       if(isset($Object_tab)) return  $Object_tab;
+    }
 }
 ?>
