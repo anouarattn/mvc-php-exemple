@@ -10,7 +10,7 @@ require_once 'libs/objects/formation_object.php';
 require_once 'libs/objects/groupe_object.php';
 require_once 'libs/objects/seance_object.php';
 
-class Formation extends Controller {
+class Association extends Controller {
 
     function __construct() {
           parent::__construct();

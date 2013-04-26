@@ -71,7 +71,7 @@ echo "</article>";
       var r=confirm("Clique Sur OK pour Confirmer votre choix?");
      if (r==true)
   {
-         window.location="/mvc_test/animateur/delete/"  + a  ;
+         window.location="/mvc_test/formation/delete/"  + a  ;
  // this.href=\"/mvc_test/animateur/delete/" . $_POST["id"] ."\" ;
   }
           

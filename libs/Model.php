@@ -55,10 +55,10 @@ class Model {
         return $get_columns_name;
     }
     
-    public  function delete($table_name,$id) {
+    public  function delete($table_name,$id,$colomn_name) {
         
         $db_access=new PDO('mysql:host=localhost;dbname=pole', 'root', '');
-       $nb= $db_access->exec('DELETE FROM '.$table_name.' WHERE idanimateur='.$id.';');
+       $nb= $db_access->exec('DELETE FROM '.$table_name.' WHERE '. $colomn_name .'='.$id.';');
         
     //    echo print_r($db_access->errorInfo());
     }

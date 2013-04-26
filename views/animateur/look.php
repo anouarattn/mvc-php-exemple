@@ -71,7 +71,7 @@ echo "</article>";
 
 <script>
     
-    function confirmm(a,b){
+    function confirmm(a){
         
       var r=confirm("Clique Sur OK pour Confirmer votre choix?");
      if (r==true)

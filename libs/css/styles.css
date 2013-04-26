@@ -1,10 +1,12 @@
 body
 {
+    
     background-color:#f1f0f1;
 
 }
 nav
 {
+   
   border: 2px dotted #ccc8cb; 
   background-color: #e3e1e2;
 }
@@ -16,7 +18,7 @@ list-style-type: none;
 padding: 0%;
 margin-left:auto;
 margin-right:auto;
-width:70%;
+width:60%;
  
 }
 
@@ -63,6 +65,11 @@ nav li:hover ul
 }
 
 
+#centre
+{
+   margin-left: 44px;
+    
+}
 
 #animateur
 {
@@ -82,11 +89,7 @@ nav li:hover ul
     
 }
 
-#membre
-{
-   margin-left: 44px;
-    
-}
+
 
 #accuiel
 {
@@ -94,10 +97,4 @@ nav li:hover ul
     
 }
 
-
-#invitation
-{
-   margin-left: 44px;
-    
-}
 

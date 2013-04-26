@@ -44,7 +44,7 @@ class Animateur extends Controller {
 
     
          if(intval($id).''==$id){
-          (new Animateur_model())->delete("animateur",$id);}
+          (new Animateur_model())->delete("animateur",$id,'idanimateur');}
           else  {echo "Identifiant Non trouvé";}  
          
          $this->look();
