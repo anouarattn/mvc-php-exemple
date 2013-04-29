@@ -26,6 +26,8 @@ faxeassociation,mailassociaiton,prassociation,rassociation) values(:nom,:adresse
       
       */
     }
+    
+    
 
 }
 ?>

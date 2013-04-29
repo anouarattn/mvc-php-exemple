@@ -31,7 +31,8 @@
                     <a  href="/mvc_test/association/index" >Association</a>
 
                     <ul>
-                       <li><a href="/mvc_test/association/add" >Ajout</a></li>
+                       <li><a href="/mvc_test/association/add" >Ajout Association</a></li>
+                        <li><a href="/mvc_test/membre/add" >Ajout Membre</a></li>
                         <li><a href="/mvc_test/association/look" >Visualisation</a></li>
                     </ul>
                 </li>

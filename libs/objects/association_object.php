@@ -76,16 +76,27 @@ class Association_object extends Object {
         $this->_region = $_region;
     }
 
-    function __construct($_id, $_nom, $_adresse, $_telephone, $_faxe, $_email, $_president, $_region) {
-        $this->_id = $_id;
-        $this->_nom = $_nom;
-        $this->_adresse = $_adresse;
-        $this->_telephone = $_telephone;
-        $this->_faxe = $_faxe;
-        $this->_email = $_email;
-        $this->_president = $_president;
-        $this->_region = $_region;
+    function __construct(array $donnees) {
+       // print_r($donnees);
+        $i = 0;
+        $tab_attributs = array('_id', '_nom', '_adresse', '_telephone', '_faxe', '_email', '_president', '_region');
+        foreach ($donnees as $value) {
+          //  echo $value."= ".$i;
+            $method = 'set' . $tab_attributs[$i++];
+            $this->$method($value);
+        }
     }
+    public function  get_getter(){
+        static $j=0;
+        $tab_attributs = array('_id', '_nom', '_adresse', '_telephone', '_faxe', '_email', '_president', '_region');
+        if($j<8){
+        $getter='get'.$tab_attributs[$j++];
+        return $this->$getter();}
+        else $j=0;return $this->get_getter();
+    }
+
+    
+ 
 
 
 }
