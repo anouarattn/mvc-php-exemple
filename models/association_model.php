@@ -15,9 +15,8 @@ faxeassociation,mailassociaiton,prassociation,rassociation) values(:nom,:adresse
         $add->bindValue(':email', $association->get_email());
         $add->bindValue(':tel', $association->get_telephone());
         $add->bindValue(':fax', $association->get_faxe());
-        $add->bindValue(':photo', $association->getPhoto());
-        $add->bindValue(':cv', $association->getCv());
-        $add->bindValue(':contrat', $association->getContrat());
+        $add->bindValue(':president', $association->get_president());
+        $add->bindValue(':region', $association->get_region());
         $add->execute();
 
         

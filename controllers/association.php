@@ -1,12 +1,11 @@
 <?php
 require_once 'libs/Utility.php';
 require_once 'libs/Model.php';
-require_once 'models/formation_model.php';
-require_once 'models/anime_formation_model.php';
+require_once 'models/association_model.php';
 require_once 'models/groupe_model.php';
 require_once 'models/seance_model.php';
 
-require_once 'libs/objects/formation_object.php';
+require_once 'libs/objects/association_object.php';
 require_once 'libs/objects/groupe_object.php';
 require_once 'libs/objects/seance_object.php';
 
@@ -23,42 +22,41 @@ public function add()
     if (isset($_POST['submit'])) {
         
            
-            $formation = new Formation_object(array(
+            $association = new Association_object(
                 ""
-                , $_POST["nom_formation"]
-                , $_POST["lieu_formation"]
-                , $_POST["adresse_lieu_formation"]
-                , $_POST["formation_type"]
-                , $_POST["date_fin_formation"]
-                ,  $_POST["date_debut_formation"]
-                , $_POST["plan_accees"]
-                    )
+                , $_POST["nom_association"]
+                , $_POST["ad_association"]
+                , $_POST["tel_association"]
+                , $_POST["fax_association"]
+                ,  $_POST["email_association"]
+                , $_POST["president_association"]
+                , $_POST["region_association"]    
             );
-       //  print_r($formation);
-            (new Formation_model())->add($formation);
+       //  print_r($association);
+            (new association_model())->add($association);
         }
     
-    $this->view->render("formation/add");  
+    $this->view->render("association/add");  
 }
 
 public function look()
 {
     
-       $tab_rows = (new Formation_model())->getAll("Formation_object", 'formation');
+       $tab_rows = (new association_model())->getAll("association_object", 'association');
         if (isset($tab_rows)) {
             $_POST["noms_column"] = array("identifiant", "Intitulé", "Emplacement", "Adresse", "Date-debut", "Date-fin", "type", "Plan");
             $_POST["donnees"] = $tab_rows;
            //print_r($tab_rows);
             // $_POST["type"]="animateur";
             // Utility::grid($tab_rows, array("identifiant", "Nom", "Prenom", "e-mail", "Téléphone", "CIN", "Adresse", "Photo", "CV", "Contrat"),"animateur");}
-            $this->view->render("formation/look");
+            $this->view->render("association/look");
         }    
 }
 
 public function lookone()
 {
      $tab_seance_object=array();
-    $tab_groupe_objects = (new Groupe_model())->getAll("Groupe_object", 'groupe',"formation_idformation=".$_GET["identifiant"]);
+    $tab_groupe_objects = (new Groupe_model())->getAll("Groupe_object", 'groupe',"association_idassociation=".$_GET["identifiant"]);
     if(isset($tab_groupe_objects))
     {
        
@@ -77,34 +75,34 @@ public function lookone()
    
     
     // animateurs
-     $formation_animateur = (new Anime_formation_model())->get_animateur_formation($_GET["identifiant"]);
-     if(isset($formation_animateur))
+     $association_animateur = (new Anime_association_model())->get_animateur_association($_GET["identifiant"]);
+     if(isset($association_animateur))
      {
          
-         $_POST["formation_animer_par"]=$formation_animateur;
-        // print_r($_POST["formation_animer_par"]);
+         $_POST["association_animer_par"]=$association_animateur;
+        // print_r($_POST["association_animer_par"]);
      }
      else {$_POST["animateurs"]=0;}
     
     
       // print_r($tab_seance_object); 
-    $this->view->render("formation/lookone");
+    $this->view->render("association/lookone");
 }
 
 public function agenda()
         
 {
     
-    $this->view->render("formation/agenda");
+    $this->view->render("association/agenda");
 }
 
-public function add_animateur_to_formation()      
+public function add_animateur_to_association()      
 {
     $tab_rows = (new Animateur_model())->getAll("Animateur_object", 'animateur');
     //print_r($tab_rows);
     if(isset($tab_rows)){
         $_POST["donnees"]=$tab_rows;
-    $this->view->render("formation/add_animateur_to_formation");
+    $this->view->render("association/add_animateur_to_association");
     }
 }
 
@@ -112,7 +110,7 @@ public function add_animateur_to_formation()
 
     
          if(intval($id).''==$id){
-          (new Formation_model())->delete("formation",$id,'idformation');}
+          (new association_model())->delete("association",$id,'idassociation');}
           else  {echo "Identifiant Non trouvé";}  
          
          $this->look();
