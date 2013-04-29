@@ -58,11 +58,11 @@ public function lookone()
      $tab_seance_object=array();
  
     // animateurs
-     $association_animateur = (new Anime_association_model())->get_animateur_association($_GET["identifiant"]);
-     if(isset($association_animateur))
+    // $association = (new Association_model())->getAll("Association_object","association");
+     if(isset($association))
      {
          
-         $_POST["association_animer_par"]=$association_animateur;
+         $_POST["association"]=$association;
         // print_r($_POST["association_animer_par"]);
      }
      else {$_POST["animateurs"]=0;}

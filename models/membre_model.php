@@ -7,6 +7,7 @@ class Membre_model extends Model {
     }
 
      public  function add(Membre_object $membre) {
+       //  print_r($membre);
         $add = $this->_db->prepare('INSERT INTO membre(nmembre,pnmembre,addmembre,telmembre,mailmembre,cinmembre) values(:nom,:prenom,:adresse,:tel,:email,:cin)');
 
         $add->bindValue(':nom', $membre->getNom());
@@ -16,7 +17,10 @@ class Membre_model extends Model {
         $add->bindValue(':tel', $membre->getTelephone());
         $add->bindValue(':cin', $membre->getCin());
         $add->execute();
-
+       //print_r($add->errorinfo());
+       return $this->_db->lastInsertId();
+       
+       
         
       /*  echo "\nPDOStatement::errorInfo():\n";
         $inserto = $sth->errorInfo();

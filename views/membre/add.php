@@ -23,7 +23,7 @@
        echo "<select name=\"association\" id=\"association\">  ";
 
        foreach ($_POST["tab_of_association_name"] as $value) {
-           echo "<option value=\"$value->get_id()\" >   ".$value->get_nom()."</option>";
+           echo "<option value=\"".$value->get_id()."\" >   ".$value->get_nom()."</option>";
        }
         echo "</select>";
         
@@ -34,19 +34,29 @@
        echo "</select>";
        echo "il faut ajouter une association";
    }
-   ?>
+
             
-   <br/>
-     <label for="fonction_association" >Fonction dans l'Association : </label>
-    <select name="fonction_association" id="fonction_association"  >  
-    <option value="president">président </option>
-        <option value="secretaire">secrétaire</option>
-        <option value="tresorier">trésorier</option>
-        <option value="vice_président">vice président</option>
-        <option value="add">ajouter...</option>
-    </select>
+   echo "<br/>";
+  
+    echo "<label for=\"fonction_association\" >Fonction dans l'Association : </label>";
+   echo "<select name=\"fonction_association\" id=\"fonction_association\"  > ";
+       
+        
+        $file=fopen("c://wamp/www/mvc_test/libs/other/fonction_association.txt","r") or exit("Unable to open file!");
+        while($vat=fgets($file))
+  {
+            echo "<option value=\"".$vat."\" >".$vat."</option>";
+ 
+  }
+  fclose($file);
+
+
+    
+            ?>
+  </select>
      <a href="javascript:add()">autre...</a>
      <br/>
+     <label for="date_debut_fonction" >Date début fonction : </label><input type="date" name="date_debut_fonction" id="date_debut_fonction" /><br/>
             
     
             <input type="submit" value="Submit" name="submit" /><br/>
@@ -67,16 +77,9 @@
 
 function  add()
 {
-    var fonction=prompt("Entrer le nom de la fonction");
-    var node=document.createElement("option");
-    alert("dd");
-    node.setAttribute("value",fonction);  alert("ddd");
-var textnode=document.createTextNode(fonction);  alert("dddd");
-node.appendChild(textnode);  alert("ddddd");
-    
-    document.getElementsByTagName("select").appendChild(node);  alert("ddddddd");
-    
+   window.open("/mvc_test/membre/add_fonction","_blank","height=200,width=400,status=yes,toolbar=no,menubar=no,location=no")
 }
 
 
 </script>
+

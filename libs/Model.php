@@ -36,9 +36,12 @@ class Model {
         
         //retourne la liste de tous les Object(animateur, association, formation ...) de la base de données
          $tab[]=array();
-        $getall = $this->_db->query('SELECT '.$colomn_name.' FROM '.$table_name.'WHERE '.$where.';');
+   
+        $getall = $this->_db->query("SELECT ".$colomn_name." FROM ".$table_name." WHERE  ".$where." ;");
+      //  print_r($this->_db->errorinfo()); 
+        
         while ($donnees = $getall->fetch(PDO::FETCH_ASSOC)) {
-           
+           print_r($donnees);
             $tab[] = $donnees;
         }
    
