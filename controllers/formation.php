@@ -5,11 +5,12 @@ require_once 'models/formation_model.php';
 require_once 'models/anime_formation_model.php';
 require_once 'models/groupe_model.php';
 require_once 'models/seance_model.php';
+require_once 'models/anime_formation_model.php';
 
 require_once 'libs/objects/formation_object.php';
 require_once 'libs/objects/groupe_object.php';
 require_once 'libs/objects/seance_object.php';
-
+require_once 'libs/objects/anime_formation_object.php';
 class Formation extends Controller {
 
     function __construct() {
@@ -106,6 +107,28 @@ public function add_animateur_to_formation()
         $_POST["donnees"]=$tab_rows;
     $this->view->render("formation/add_animateur_to_formation");
     }
+    
+     if(isset($_POST["submit"])){
+         foreach ($_POST as $key => $value) {
+             if ($key!= "submit" && $key!= "donnees" && $key!="id_formation" ){
+                   
+
+                $add=(new Anime_formation_model())->add(new Anime_formation_object(intval($_POST["id_formation"]),intval($key)));
+                 
+             } 
+                            
+
+             
+         }
+         
+     }
+    
+    
+}
+
+public function delete_animateur_from_formation($id_animateur,$id_formation){
+    (new Anime_formation_model())->delete_animateur_from_formation($id_animateur,$id_formation);
+    
 }
 
  public function delete($id) {
@@ -118,6 +141,41 @@ public function add_animateur_to_formation()
          $this->look();
 
     }
+    
+    public function modify($ids="") {
+        
+           if (isset($_POST['submit'])) {
+               
+                $formation = new Formation_object(array(
+                  $_POST["id_formation"]
+                , $_POST["intitule_formation"]
+                , $_POST["lieu_formation"]
+                , $_POST["adresse_lieu_formation"]
+                        , $_POST["type_formation"]
+                , $_POST["date_debut__formation"]
+                , $_POST["date_fin_formation"]
+                
+                , ""
+                    )
+            );
+               
+                        (new Formation_model())->update($formation);
+   
+           }
+else  {
+                $id = explode(",", $ids);
+                $where="idformation=";
+                 $where.=$id[0];
+                
+                
+        $_POST["result"]=(new Formation_model())->getAll("Formation_object", "formation",$where);
+}
+        
+                        $this->view->render("formation/modify");
+
+        
+    }
+
 
 }
 ?>

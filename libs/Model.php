@@ -19,8 +19,7 @@ class Model {
         //retourne la liste de tous les Object(animateur, association, formation ...) de la base de données
     
                 $getall = $this->_db->query('SELECT * FROM '.$table_name.' WHERE ' .$where. ';');
-                
-
+              //  print_r($this->_db->errorinfo());
     
         while ($donnees = $getall->fetch(PDO::FETCH_ASSOC)) {
             

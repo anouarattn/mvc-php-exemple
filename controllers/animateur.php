@@ -40,19 +40,52 @@ class Animateur extends Controller {
         $this->view->render("animateur/add");
     }
 
-    public function delete($id) {
-
-    
-         if(intval($id).''==$id){
-          (new Animateur_model())->delete("animateur",$id,'idanimateur');}
+    public function delete( $ids) {
+        $id = explode(",", $ids);
+        foreach ($id as $value) {
+            
+        
+         if(intval($value).''==$value){
+          (new Animateur_model())->delete("animateur",intval($value),'idanimateur');}
           else  {echo "Identifiant Non trouvé";}  
-         
+         }
          $this->look();
 
     }
 
-    public function modify() {
-        $this->view->render("animateur/modify");
+    public function modify($ids="") {
+        
+           if (isset($_POST['submit'])) {
+               
+                $anim = new Animateur_object(array(
+                  $_POST["id_animateur"]
+                , $_POST["nom_animateur"]
+                , $_POST["pnom_animateur"]
+                , $_POST["ad_animateur"]
+                , $_POST["tel_animateur"]
+                , $_POST["email_animateur"]
+                , $_POST["cin_animateur"]
+                , ""
+                , ""
+                , ""
+                    )
+            );
+               
+                        (new Animateur_model())->update($anim);
+   
+           }
+else {
+                $id = explode(",", $ids);
+                $where="idanimateur=";
+                 $where.=$id[0];
+                
+                
+        $_POST["result"]=(new Animateur_model())->getAll("Animateur_object", "animateur",$where);
+}
+        
+                        $this->view->render("animateur/modify");
+
+        
     }
 
     public function look() {

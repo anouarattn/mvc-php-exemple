@@ -23,11 +23,21 @@ for ($j = 0; $j < $size2; $j++) {
 
     echo "<th>" . $_POST["noms_column"][$j] . "</th> ";
 }
-echo "<th>" . "Modifier" . "</th> ";
-echo "<th>" . "Supprimer" . "</th> ";
+echo "<th>
+    <select id=\"Action\"  onchange=\"operation();\">
+    <option value=\"0\">....</option>
+  <option value=\"1\">Supprimer</option>
+  <option value=\"2\">Modifier</option>
+  <option value=\"3\">Imprimer</option>
+</select>
+
+</th> ";
+
+//echo "<th>" . "Supprimer" . "</th> ";
 echo "<th>" . "Plus" . "</th> ";
 
 echo "</tr> ";
+
 
 
 
@@ -48,20 +58,18 @@ foreach ($_POST["donnees"] as $object) {
         $i++;
         
     }
-$rand= rand(1, 23827);
-    echo "<td><a href=\"/mvc_test/animateur/edit/" .$id_val."\" ><img src=\"/mvc_test/libs/uploads/picture/edit.png\"  alt=\"modifier\" height= \"40\" width=\"30\" ></a></td>";
-    echo "<td><a  href= \"javascript:confirmm(".$id_val.")\" ><img src=\"/mvc_test/libs/uploads/picture/delete.png\"  alt=\"supprimer\" height= \"40\" width=\"30\" ></a></td>";
+
+ echo "<td><input type=\"checkbox\" class=\"checkbox\" value=\"" . $id_val . "\" ></td>";
+ 
+   
     echo "<td><a href=\"/mvc_test/formation/lookone" . substr($gett, 0, strlen($gett) - 1) . "\"  ><img src=\"/mvc_test/libs/uploads/picture/plus.png\"  alt=\"plus\" height= \"40\" width=\"30\" ></a></td>";
-  //  echo "<td><a href=\"/mvc_test/animateur/lookone" . substr($gett, 0, strlen($gett) - 1) . "\" >" . "Plus" . "</a></td>";
-   // echo "<td><a href=\"/mvc_test/animateur/lookone" . substr($gett, 0, strlen($gett) - 1) . "\" >" . "Plus" . "</a></td>";
-    //echo "<td><a href=\"/mvc_test/animateur/lookone" . substr($gett, 0, strlen($gett) - 1) . "\" >" . "Plus" . "</a></td>";
+
 
     echo "</tr> ";
 }
 
-echo "</table>";
-echo "</fieldset>";
-echo "</article>";
+echo "</table></fieldset></article>";
+
 ?>
 
 <script>
@@ -103,3 +111,66 @@ i++;
 </section>
 </body>
 </html>
+
+<script src="/mvc_test/libs/js/jquery.js"  ></script>
+<script>
+
+    function operation()
+    {
+//alert($("select#Action").val()===1);
+        if ($("select#Action").val() == 1) {
+          
+var delete_elemtent=new Array(); 
+                $("input:checkbox").each(function()
+                {
+                    if ($(this).is(':checked') === true)
+                    {
+                        delete_elemtent.push($(this).val()); 
+                        $(this).parent().parent().remove();
+                    }
+                }
+            );
+                if(delete_elemtent==0) {  $("select#Action").val('0');}
+                else{
+           
+var deletee = window.open("delete/" + delete_elemtent, "windows", 'width=800,height=500');
+                        deletee.close();
+                       
+                       $("select#Action").val('0');
+                // this.href=\"/mvc_test/animateur/delete/" . $_POST["id"] ."\" ;
+            }
+
+        }
+
+        else if ($("select#Action").val() == 2) {
+        var delete_elemtent=new Array(); 
+
+        
+         $("input:checkbox").each(function()
+                {
+                    if ($(this).is(':checked') === true)
+                    {
+                        delete_elemtent.push($(this).val()); 
+                        $(this).prop('checked', false);
+                    }
+                }
+            );
+                if(delete_elemtent.length==0) {$("select#Action").val('0'); }
+                else{
+var deletee = window.open("modify/" + delete_elemtent, "windows", 'width=800,height=500');
+$("select#Action").val('0');
+                }
+
+        }
+        else if ($("select#Action").val() == 3) {
+
+        }
+        //$("input:checkbox").each(function() { alert($(this).is(':checked')); });
+        //alert($("select#Action").val());
+
+
+
+
+    }
+
+</script>

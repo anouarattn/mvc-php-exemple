@@ -33,10 +33,10 @@ class Animateur_model extends Model {
         $this->_db->exec('DELETE FROM Animateur WHERE id=' . $anim->getId() . ';');
     }*/
 
-    public function update(Animateur $anim) {
+    public function update(Animateur_object $anim) {
 
         $inserto = $this->_db->prepare('UPDATE  animateur SET nanimateur=:nom,pranimateur=:prenom,addanimateur=:adresse,mailanimateur=:email,
-        telanimateur=:tel,cinanimateur=:cin,photoanimateur=:photo,cvanimateur=:cv,autanimateur=:autre WHERE idanimateur=' . $anim->getId() . ';');
+        telanimateur=:tel,cinanimateur=:cin WHERE idanimateur=' . $anim->getId() . ';');
 
 
 
@@ -46,9 +46,7 @@ class Animateur_model extends Model {
         $inserto->bindValue(':email', $anim->getEmail());
         $inserto->bindValue(':tel', $anim->getTelephone());
         $inserto->bindValue(':cin', $anim->getCin());
-        $inserto->bindValue(':photo', $anim->getPhoto());
-        $inserto->bindValue(':cv', $anim->getCv());
-        $inserto->bindValue(':autre', $anim->getAutre());
+
 
         $inserto->execute();
     }

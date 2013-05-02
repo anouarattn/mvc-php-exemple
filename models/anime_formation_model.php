@@ -38,5 +38,35 @@ class Anime_formation_model extends Model {
    
        if(isset($Object_tab)) return  $Object_tab;
     }
+    
+      public  function add(Anime_formation_object $anime_formation) {
+     //   print_r($fonction_association);
+        $add = $this->_db->prepare('INSERT INTO anime_formation(animateur_idanimateur,formation_idformation) values(:animateurid,:formationid)');
+                $add->bindValue(':animateurid', intval($anime_formation->getId_animateur()));
+
+        $add->bindValue(':formationid', intval($anime_formation->getId_formation()));
+ //print_r($add);
+    
+        $add->execute();
+     print_r($add->errorinfo());
+//print_r($add->errorinfo());
+        
+      /*  echo "\nPDOStatement::errorInfo():\n";
+        $inserto = $sth->errorInfo();
+        print_r($arr);
+      
+      */
+    }
+    
+    public  function delete_animateur_from_formation($id_animateur,$id_formation) {
+        
+        
+       $nb= $this->_db->exec('DELETE FROM anime_formation WHERE animateur_idanimateur ='.$id_animateur.' AND formation_idformation='.$id_formation.';');
+        print_r($nb);
+  //  echo print_r($this->_db->errorInfo());
+    }
+    
+   
+    
 }
 ?>

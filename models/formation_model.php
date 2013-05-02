@@ -28,24 +28,22 @@ class Formation_model extends Model {
 
   
 
-    public function update(Animateur $anim) {
+    public function update(Formation_object $formation) {
+        $inserto = $this->_db->prepare('UPDATE  formation SET intiformation=:intitule,eformation=:emplc,adeformation=:adresse_emplc,tformation=:type,fformation=:dfin,dformation=:dd WHERE idformation=' . $formation->getId() . ';');
 
-        $inserto = $this->_db->prepare('UPDATE  animateur SET nanimateur=:nom,pranimateur=:prenom,addanimateur=:adresse,mailanimateur=:email,
-        telanimateur=:tel,cinanimateur=:cin,photoanimateur=:photo,cvanimateur=:cv,autanimateur=:autre WHERE idanimateur=' . $anim->getId() . ';');
+print_r($formation);
+
+        $inserto->bindValue(':intitule', $formation->getIntitule());
+        $inserto->bindValue(':emplc', $formation->getEmplacement());
+        $inserto->bindValue(':adresse_emplc', $formation->getAdrsempl());
+        $inserto->bindValue(':type', $formation->getType());
+        $inserto->bindValue(':dfin', $formation->getDate_f());
+        $inserto->bindValue(':dd', $formation->getDate_d());
 
 
-
-        $inserto->bindValue(':nom', $anim->getNom());
-        $inserto->bindValue(':prenom', $anim->getPrenom());
-        $inserto->bindValue(':adresse', $anim->getAdresse());
-        $inserto->bindValue(':email', $anim->getEmail());
-        $inserto->bindValue(':tel', $anim->getTelephone());
-        $inserto->bindValue(':cin', $anim->getCin());
-        $inserto->bindValue(':photo', $anim->getPhoto());
-        $inserto->bindValue(':cv', $anim->getCv());
-        $inserto->bindValue(':autre', $anim->getAutre());
 
         $inserto->execute();
+        print_r($inserto->errorinfo());
     }
 
     
