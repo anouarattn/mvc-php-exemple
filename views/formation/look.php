@@ -1,11 +1,14 @@
 <input type="text"  name="search" onkeydown="changed()" >
-<select name="select" >
-  <option value="nom">Nom</option>
-  <option value="cin">CIN</option>
-  <option value="adresse">Adresse</option>
-  <option value="id">Id</option>
+<select id="search"  >
+    <option value="....">....</option>
+    <option value="intitule">Intitulé</option>
+    <option value="type">Type</option>
+    <option value="emplacement">Emplacement</option>
+    <option value="adresse">Adresse</option>
+    <option value="date">Date</option>
+     <option value="id">identifiant</option>
 </select>
-<input type="submit" onclick="changed()"  >
+
 
 
 <?php
@@ -45,68 +48,180 @@ $gett = '';
 
 foreach ($_POST["donnees"] as $object) {
     $i = 0;
-    $gett = '?';
+
     echo "<tr> ";
-    
+
     while ($i < $size2) {
-        $tag="<td>";
+
         $temp = $object->get_getter();
-        if($i==0) {$id_val=$temp;}
-        if($i==1) {$tag="<td class=\"nom\">";}
-        $gett.=$_POST["noms_column"][$i] . '=' . $temp . '&';
-            echo         $tag. $temp . "</td>";
+        if ($i == 0) {
+            $id_val = $temp;
+        }
+
+
+        echo "<td class=\"" . $_POST["noms_column"][$i] . "\">" . $temp . "</td>";
         $i++;
-        
     }
 
- echo "<td><input type=\"checkbox\" class=\"checkbox\" value=\"" . $id_val . "\" ></td>";
- 
-   
-    echo "<td><a href=\"/mvc_test/formation/lookone" . substr($gett, 0, strlen($gett) - 1) . "\"  ><img src=\"/mvc_test/libs/uploads/picture/plus.png\"  alt=\"plus\" height= \"40\" width=\"30\" ></a></td>";
+    echo "<td><input type=\"checkbox\" class=\"checkbox\" value=\"" . $id_val . "\" ></td>";
+
+
+    echo "<td><a href=\"/mvc_test/formation/lookone/" . $id_val . "\"  ><img src=\"/mvc_test/libs/uploads/picture/plus.png\"  alt=\"plus\" height= \"40\" width=\"30\" ></a></td>";
 
 
     echo "</tr> ";
 }
 
 echo "</table></fieldset></article>";
-
 ?>
 
 <script>
-    
-    function confirmm(a,b){
-        
-      var r=confirm("Clique Sur OK pour Confirmer votre choix?");
-     if (r==true)
-  {
-         window.location="/mvc_test/formation/delete/"  + a  ;
- // this.href=\"/mvc_test/animateur/delete/" . $_POST["id"] ."\" ;
-  }
-          
-    }
 
-function changed()
-{
-    var i =1;
-    var x=document.getElementsByTagName("tr");
-var sel = document.getElementsByTagName("input")[0].value.toString();
-var re = new RegExp(sel, "i");
-    while(i<x.length){
-
-var y=x[i].getElementsByClassName("nom")[0];
-
-   var b=   y.innerHTML.search(re);
  
-if(b!==0){
-    x[i].setAttribute("hidden");   
-}
-else if (b==0 & x[i].hasAttribute("hidden")){x[i].removeAttribute("hidden");}
 
-i++;
-}
+    function changed()
+    {
+
+        if ($("select#search").val() == "intitule") {
+
+            var i = 1;
+            var x = document.getElementsByTagName("tr");
+            var sel = document.getElementsByTagName("input")[0].value.toString();
+            var re = new RegExp(sel, "i");
+            while (i < x.length) {
+
+                var y = x[i].getElementsByClassName("Intitulé")[0];
+
+                var b = y.innerHTML.search(re);
+
+                if (b !== 0) {
+                    x[i].setAttribute("hidden");
+                }
+                else if (b == 0 & x[i].hasAttribute("hidden")) {
+                    x[i].removeAttribute("hidden");
+                }
+
+                i++;
+            }
+
+        }
+        else if ($("select#search").val() == "type") {
+            var i = 1;
+            var x = document.getElementsByTagName("tr");
+            var sel = document.getElementsByTagName("input")[0].value.toString();
+            var re = new RegExp(sel, "i");
+            while (i < x.length) {
+
+                var y = x[i].getElementsByClassName("type")[0];
+
+                var b = y.innerHTML.search(re);
+
+                if (b !== 0) {
+                    x[i].setAttribute("hidden");
+                }
+                else if (b == 0 & x[i].hasAttribute("hidden")) {
+                    x[i].removeAttribute("hidden");
+                }
+
+                i++;
+            }
+
+        }
+        else if ($("select#search").val() == "emplacement") {
+            var i = 1;
+            var x = document.getElementsByTagName("tr");
+            var sel = document.getElementsByTagName("input")[0].value.toString();
+            var re = new RegExp(sel, "i");
+            while (i < x.length) {
+
+                var y = x[i].getElementsByClassName("Emplacement")[0];
+
+                var b = y.innerHTML.search(re);
+
+                if (b < 0) {
+                    x[i].setAttribute("hidden");
+                }
+                else if (b == 0 & x[i].hasAttribute("hidden")) {
+                    x[i].removeAttribute("hidden");
+                }
+
+                i++;
+            }
+
+        }
+          else if ($("select#search").val() == "emplacement") {
+            var i = 1;
+            var x = document.getElementsByTagName("tr");
+            var sel = document.getElementsByTagName("input")[0].value.toString();
+            var re = new RegExp(sel, "i");
+            while (i < x.length) {
+
+                var y = x[i].getElementsByClassName("Emplacement")[0];
+
+                var b = y.innerHTML.search(re);
+
+                if (b < 0) {
+                    x[i].setAttribute("hidden");
+                }
+                else if (b == 0 & x[i].hasAttribute("hidden")) {
+                    x[i].removeAttribute("hidden");
+                }
+
+                i++;
+            }
+
+        }
+        else if ($("select#search").val() == "id") {
+
+            var i = 1;
+            var x = document.getElementsByTagName("tr");
+            var sel = document.getElementsByTagName("input")[0].value.toString();
+            var re = new RegExp(sel, "i");
+            while (i < x.length) {
+
+                var y = x[i].getElementsByClassName("identifiant")[0];
+
+                var b = y.innerHTML.search(re);
+
+                if (b < 0) {
+                    x[i].setAttribute("hidden");
+                }
+                else if (b == 0 & x[i].hasAttribute("hidden")) {
+                    x[i].removeAttribute("hidden");
+                }
+
+                i++;
+            }
+
+        }
+        else if ($("select#search").val() == "date") {
+
+            var i = 1;
+            var x = document.getElementsByTagName("tr");
+            var sel = document.getElementsByTagName("input")[0].value.toString();
+            var re = new RegExp(sel, "i");
+            while (i < x.length) {
+
+                var y = x[i].getElementsByClassName("Date-debut")[0];
+
+                var b = y.innerHTML.search(re);
+
+                if (b < 0) {
+                    x[i].setAttribute("hidden");
+                }
+                else if (b == 0 & x[i].hasAttribute("hidden")) {
+                    x[i].removeAttribute("hidden");
+                }
+
+                i++;
+            }
+
+        }
 
 
-}
+
+
+    }
 </script>
 </section>
 </body>
@@ -119,47 +234,51 @@ i++;
     {
 //alert($("select#Action").val()===1);
         if ($("select#Action").val() == 1) {
-          
-var delete_elemtent=new Array(); 
-                $("input:checkbox").each(function()
+
+            var delete_elemtent = new Array();
+            $("input:checkbox").each(function()
+            {
+                if ($(this).is(':checked') === true)
                 {
-                    if ($(this).is(':checked') === true)
-                    {
-                        delete_elemtent.push($(this).val()); 
-                        $(this).parent().parent().remove();
-                    }
+                    delete_elemtent.push($(this).val());
+                    $(this).parent().parent().remove();
                 }
+            }
             );
-                if(delete_elemtent==0) {  $("select#Action").val('0');}
-                else{
-           
-var deletee = window.open("delete/" + delete_elemtent, "windows", 'width=800,height=500');
-                        deletee.close();
-                       
-                       $("select#Action").val('0');
+            if (delete_elemtent.length == 0) {
+                $("select#Action").val('0');
+            }
+            else {
+
+                var deletee = window.open("delete/" + delete_elemtent, "windows", 'width=800,height=500');
+                deletee.close();
+
+                $("select#Action").val('0');
                 // this.href=\"/mvc_test/animateur/delete/" . $_POST["id"] ."\" ;
             }
 
         }
 
         else if ($("select#Action").val() == 2) {
-        var delete_elemtent=new Array(); 
+            var delete_elemtent = new Array();
 
-        
-         $("input:checkbox").each(function()
+
+            $("input:checkbox").each(function()
+            {
+                if ($(this).is(':checked') === true)
                 {
-                    if ($(this).is(':checked') === true)
-                    {
-                        delete_elemtent.push($(this).val()); 
-                        $(this).prop('checked', false);
-                    }
+                    delete_elemtent.push($(this).val());
+                    $(this).prop('checked', false);
                 }
+            }
             );
-                if(delete_elemtent.length==0) {$("select#Action").val('0'); }
-                else{
-var deletee = window.open("modify/" + delete_elemtent, "windows", 'width=800,height=500');
-$("select#Action").val('0');
-                }
+            if (delete_elemtent.length == 0) {
+                $("select#Action").val('0');
+            }
+            else {
+                var deletee = window.open("modify/" + delete_elemtent, "windows", 'width=800,height=500');
+                $("select#Action").val('0');
+            }
 
         }
         else if ($("select#Action").val() == 3) {

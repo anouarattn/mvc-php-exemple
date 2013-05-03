@@ -1,11 +1,10 @@
-<input type="text"  name="search" onkeydown="changed()" >
-<select name="select" >
+<input type="text"  name="text" onkeydown="changed()" >
+<select id="search" >
   <option value="nom">Nom</option>
   <option value="cin">CIN</option>
   <option value="adresse">Adresse</option>
   <option value="id">Id</option>
 </select>
-<input type="submit" onclick="changed()"  >
 
 
 <?php

@@ -4,14 +4,14 @@
 <fieldset>
 <legend><h1>Informations Générales</h1></legend>
             <ul>
-                <li id="id" value=<?php echo $_GET["identifiant"] ?> >Identifiant: <?php echo $_GET["identifiant"] ?></li>
-                <li>Intitulé: <?php echo $_GET["Intitulé"] ?></li>
-                <li>Emplacement: <?php echo $_GET["Emplacement"] ?></li>
-                <li>Adresse: <?php echo $_GET["Adresse"] ?></li>
-                <li>Date debut: <?php echo $_GET["Date-debut"] ?></li>
-                <li>Date fin: <?php echo $_GET["Date-fin"] ?></li>
-                <li>Type: <?php echo $_GET["type"] ?></li>
-                <li><a href="javascript:maps<?php echo $_GET["Plan"] ?>" >Plan d'accées</a> </li>
+                <li id="id" value=<?php  echo $_POST["formation"][0]->getId() ?> >Identifiant: <?php echo $_POST["formation"][0]->getId() ?></li>
+                <li>Intitulé: <?php echo $_POST["formation"][0]->getIntitule() ?></li>
+                <li>Emplacement: <?php echo $_POST["formation"][0]->getEmplacement() ?></li>
+                <li>Adresse: <?php echo $_POST["formation"][0]->getAdrsempl() ?></li>
+                <li>Date debut: <?php echo $_POST["formation"][0]->getDate_d() ?></li>
+                <li>Date fin: <?php echo $_POST["formation"][0]->getDate_f() ?></li>
+                <li>Type: <?php echo $_POST["formation"][0]->getType() ?></li>
+                <li><a href="javascript:maps<?php echo $_POST["formation"][0]->getPlan() ?>" >Plan d'accées</a> </li>
             </ul>
         
 </fieldset>

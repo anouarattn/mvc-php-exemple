@@ -16,21 +16,21 @@
 <div id="cv" class="instaFade">
     <div class="mainDetails">
         <div id="headshot" class="quickFade">
-            <img src=<?php echo "/mvc_test/libs/uploads/animateur/picture/" . $_GET["Photo"] ?> alt=<?php echo $_GET["Nom"] . " " . $_GET["Prenom"] ?> />
+            <img src=<?php echo "/mvc_test/libs/uploads/animateur/picture/" . $_POST["animateur"][0]->getPhoto() ?> alt=<?php echo $_POST["animateur"][0]->getNom() . " " . $_POST["animateur"][0]->getPrenom() ?> />
         </div>
 
         <div id="name">
-            <h1 class="quickFade delayTwo"><?php echo $_GET["Nom"] . " " . $_GET["Prenom"] ?></h1>
+            <h1 class="quickFade delayTwo"><?php echo $_POST["animateur"][0]->getNom() . " " . $_POST["animateur"][0]->getPrenom() ?></h1>
             <h2 class="quickFade delayThree">Animateur</h2>
         </div>
 
         <div id="contactDetails" class="quickFade delayFour">
             <ul>
-                <li>Identifiant: <?php echo $_GET["identifiant"] ?></li>
-                <li>e-mail: <?php echo $_GET["e-mail"] ?></li>
-                <li>CIN: <?php echo $_GET["CIN"] ?></li>
-                <li>Adresse: <?php echo $_GET["Adresse"] ?></li>
-                <li>Tel: <?php echo $_GET["Telephone"] ?></li>
+                <li>Identifiant: <?php echo $_POST["animateur"][0]->getId() ?></li>
+                <li>E-mail: <?php echo $_POST["animateur"][0]->getEmail() ?></li>
+                <li>Cin: <?php echo  $_POST["animateur"][0]->getCin() ?></li>
+                <li>Adresse: <?php echo $_POST["animateur"][0]->getAdresse() ?></li>
+                <li>Tel: <?php echo $_POST["animateur"][0]->getTelephone() ?></li>
             </ul>
         </div>
         <div class="clear"></div>

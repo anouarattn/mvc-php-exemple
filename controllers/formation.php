@@ -56,10 +56,15 @@ public function look()
         }    
 }
 
-public function lookone()
+public function lookone($id)
 {
+    
+    if( isset($id) and intval($id)===$id){
+        
+ $_POST["formation"]=(new Formation_model())->getAll("Formation_object","formation","idformation=".$id);
+
      $tab_seance_object=array();
-    $tab_groupe_objects = (new Groupe_model())->getAll("Groupe_object", 'groupe',"formation_idformation=".$_GET["identifiant"]);
+    $tab_groupe_objects = (new Groupe_model())->getAll("Groupe_object", 'groupe',"formation_idformation=".$id);
     if(isset($tab_groupe_objects))
     {
        
@@ -78,7 +83,7 @@ public function lookone()
    
     
     // animateurs
-     $formation_animateur = (new Anime_formation_model())->get_animateur_formation($_GET["identifiant"]);
+     $formation_animateur = (new Anime_formation_model())->get_animateur_formation($id);
      if(isset($formation_animateur))
      {
          
@@ -86,10 +91,11 @@ public function lookone()
         // print_r($_POST["formation_animer_par"]);
      }
      else {$_POST["animateurs"]=0;}
-    
-    
-      // print_r($tab_seance_object); 
     $this->view->render("formation/lookone");
+    }
+    else {echo " non-trouvé :o";}
+      // print_r($tab_seance_object); 
+    
 }
 
 public function agenda()

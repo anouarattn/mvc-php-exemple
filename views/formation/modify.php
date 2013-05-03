@@ -15,9 +15,7 @@
 
          echo   "<label for=\"adresse_lieu_formation\" >Adresse : </label><input type=\"adresse_lieu\" name=\"adresse_lieu_formation\" value=\"".$value->getAdrsempl()."\" id=\"adresse_lieu_formation\" placeholder=\"E-mail de l'Animateur\"  /><br/>";
           echo  "<label for=\"type_formation\" >Type : </label><input type=\"text\" name=\"type_formation\" value=\"".$value->getType()."\" id=\"type_formation\" placeholder=\"CIN de l'Animateur\"  /><br/>";
-          echo "<a id=\"maps\" href=\"javascript:maps()\" >Modifier le Plan d'accès</a><br/>";
-          echo "<label for=\"lieu_formation\" >Plan : </label> <input type=\"text\" name=\"plan_accees\" id=\"position\" value=\"".$value->getPlan()."\" /><br/>";
-
+         
       echo "<input type=\"submit\" value=\"Submit\" name=\"submit\" onclick=\"ok();\" /><br/>";
 }
            echo "</p>";

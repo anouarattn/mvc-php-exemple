@@ -107,10 +107,15 @@ else {
         
     }
 
-    public function lookone() {
+    public function lookone($id) {
         
-         $_POST["formation_animer"] = (new Anime_formation_model())->get_formation_animateur($_GET["identifiant"]);
-         
+        if( isset($id) and intval($id)==$id){
+         $_POST["animateur"]=(new Animateur_model())->getAll("Animateur_object","animateur","idanimateur=".$id);
+        
+       // print_r($_POST["animateur"][0]->getId());
+        
+         $_POST["formation_animer"] = (new Anime_formation_model())->get_formation_animateur($id);
+         }
       $this->view->render("animateur/lookone");
     }
     
