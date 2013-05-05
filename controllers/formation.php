@@ -6,6 +6,8 @@ require_once 'models/anime_formation_model.php';
 require_once 'models/groupe_model.php';
 require_once 'models/seance_model.php';
 require_once 'models/anime_formation_model.php';
+require_once 'models/seance_model.php';
+
 
 require_once 'libs/objects/formation_object.php';
 require_once 'libs/objects/groupe_object.php';
@@ -47,7 +49,7 @@ public function look()
     
        $tab_rows = (new Formation_model())->getAll("Formation_object", 'formation');
         if (isset($tab_rows)) {
-            $_POST["noms_column"] = array("identifiant", "Intitulé", "Emplacement", "Adresse", "Date-debut", "Date-fin", "type", "Plan");
+            $_POST["noms_column"] = array("identifiant", "Intitulé", "Emplacement", "Adresse", "Date-debut", "Date-fin", "type");
             $_POST["donnees"] = $tab_rows;
            //print_r($tab_rows);
             // $_POST["type"]="animateur";
@@ -59,7 +61,7 @@ public function look()
 public function lookone($id)
 {
     
-    if( isset($id) and intval($id)===$id){
+    if( isset($id) and intval($id).""==$id){
         
  $_POST["formation"]=(new Formation_model())->getAll("Formation_object","formation","idformation=".$id);
 
@@ -67,15 +69,18 @@ public function lookone($id)
     $tab_groupe_objects = (new Groupe_model())->getAll("Groupe_object", 'groupe',"formation_idformation=".$id);
     if(isset($tab_groupe_objects))
     {
-       
+       $tab_groupe_name_and_id=array();
         foreach ($tab_groupe_objects as $value) {
            // print_r($value->getId());
             // un tableau associatif pour chaque groupe id il donne un tableau d'objet seance
-            $tab_seances_object["".$value->getNom()]=(new Sceance_model())->getAll("Seance_object", 'seance',"groupe_idgroupe=".$value->getId());
+           $tab_groupe_name_and_id["".$value->getNom()]=$value->getId();
+            $tab_seances_object["".$value->getNom()]=(new Seance_model())->getAll("Seance_object", 'seance',"groupe_idgroupe=".$value->getId());
            // print_r( $tab_seances_object["".$value->getId()]);
         }
       //  print_r($tab_seance_object); 
-       $_POST["donnees"]=$tab_seances_object;
+        
+        $_POST["donnees"]=$tab_seances_object;
+        $_POST["groupe_name_and_id"]= $tab_groupe_name_and_id;
     }  
      
     else {$_POST["groupe"]=0;}
@@ -179,6 +184,53 @@ else  {
         
                         $this->view->render("formation/modify");
 
+        
+    }
+    
+     public function add_groupe_to_formation()
+    {
+        
+             if (isset($_POST['submit'])) {
+                 
+                 $groupe = new Groupe_object(
+                         array(
+    'idgroupe'=>"",
+    'ngroupe' => $_POST['nom_groupe'],
+    'formation_idformation' => $_POST['id_formation'],
+    'pcgroupe' => $_POST['cible_groupe'],
+)
+);
+                 
+                 (new Groupe_model())->add($groupe);
+                 
+             }
+        
+              $this->view->render("formation/add_groupe_to_formation");
+    }
+    
+    public function add_seance_to_formation()
+    {
+        
+        if (isset($_POST['submit'])) {
+                         echo "okkkkkkkkkkkk";
+
+                 $seance = new Seance_object(
+                         array(
+    'idseance'=>"",
+    'nseance' => $_POST['nom_seance'],
+    'groupe_idgroupe' => $_POST['groupe'],
+    'ddseance' => $_POST['debut_seance'],
+    'dfseance' => $_POST['fin_seance'],
+)
+);
+              print_r($seance);   
+                 (new Seance_model())->add($seance);
+                 
+             }
+              
+
+              $this->view->render("formation/add_seance_to_formation");
+        
         
     }
 

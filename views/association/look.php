@@ -1,9 +1,10 @@
-<input type="text"  name="text" onkeydown="changed()" >
+<input type="text" id="input"  onkeydown="changed()" >
 <select id="search" >
-  <option value="nom">Nom</option>
-  <option value="cin">CIN</option>
-  <option value="adresse">Adresse</option>
-  <option value="id">Id</option>
+    <option value="...">...</option>
+    <option value="nom">Nom</option>
+    <option value="cin">CIN</option>
+    <option value="adresse">Adresse</option>
+    <option value="id">Id</option>
 </select>
 
 
@@ -22,8 +23,15 @@ for ($j = 0; $j < $size2; $j++) {
 
     echo "<th>" . $_POST["noms_column"][$j] . "</th> ";
 }
-echo "<th>" . "Modifier" . "</th> ";
-echo "<th>" . "Supprimer" . "</th> ";
+echo "<th>
+    <select id=\"Action\"  onchange=\"operation();\">
+    <option value=\"0\">....</option>
+  <option value=\"1\">Supprimer</option>
+  <option value=\"2\">Modifier</option>
+  <option value=\"3\">Imprimer</option>
+</select>
+
+</th> ";
 echo "<th>" . "Plus" . "</th> ";
 
 echo "</tr> ";
@@ -34,26 +42,22 @@ $gett = '';
 
 foreach ($_POST["donnees"] as $object) {
     $i = 0;
-    $gett = '?';
+ 
     echo "<tr> ";
-    
+    $id_val;
     while ($i < $size2) {
-        $tag="<td>";
+        
         $temp = $object->get_getter();
         if($i==0) {$id_val=$temp;}
-        if($i==1) {$tag="<td class=\"nom\">";}
-        $gett.=$_POST["noms_column"][$i] . '=' . $temp . '&';
-            echo         $tag. $temp . "</td>";
+      
+            echo "</td>";  "<td class=\"".$_POST["noms_column"][$i]."\">" . $temp . "</td>"; 
         $i++;
         
     }
-$rand= rand(1, 23827);
-    echo "<td><a href=\"/mvc_test/association/edit/" .$id_val."\" ><img src=\"/mvc_test/libs/uploads/picture/edit.png\"  alt=\"modifier\" height= \"40\" width=\"30\" ></a></td>";
-    echo "<td><a  href= \"javascript:confirmm(".$id_val.")\" ><img src=\"/mvc_test/libs/uploads/picture/delete.png\"  alt=\"supprimer\" height= \"40\" width=\"30\" ></a></td>";
-    echo "<td><a href=\"/mvc_test/association/lookone" . substr($gett, 0, strlen($gett) - 1) . "\"  ><img src=\"/mvc_test/libs/uploads/picture/plus.png\"  alt=\"plus\" height= \"40\" width=\"30\" ></a></td>";
-  //  echo "<td><a href=\"/mvc_test/animateur/lookone" . substr($gett, 0, strlen($gett) - 1) . "\" >" . "Plus" . "</a></td>";
-   // echo "<td><a href=\"/mvc_test/animateur/lookone" . substr($gett, 0, strlen($gett) - 1) . "\" >" . "Plus" . "</a></td>";
-    //echo "<td><a href=\"/mvc_test/animateur/lookone" . substr($gett, 0, strlen($gett) - 1) . "\" >" . "Plus" . "</a></td>";
+ echo "<td><input type=\"checkbox\" class=\"checkbox\" value=\"" . $id_val . "\" ></td>";
+     echo "<td><a href=\"/mvc_test/association/lookone/" . $id_val . "\"  ><img src=\"/mvc_test/libs/uploads/picture/plus.png\"  alt=\"plus\" height= \"40\" width=\"30\" ></a></td>";
+
+
 
     echo "</tr> ";
 }

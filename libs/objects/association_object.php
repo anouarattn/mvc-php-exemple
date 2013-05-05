@@ -10,8 +10,13 @@ class Association_object extends Object {
     private $_email;
     private $_president;
     private $_region;
+    private $_secteur;
 
   
+     public function get_secteur() {
+        return $this->_secteur;
+    }
+    
     public function get_id() {
         return $this->_id;
     }
@@ -44,6 +49,10 @@ class Association_object extends Object {
         return $this->_region;
     }
 
+    public function set_secteur($_secteur) {
+        $this->_secteur = $_secteur;
+    }
+    
     public function set_id($_id) {
         $this->_id = $_id;
     }
@@ -79,7 +88,7 @@ class Association_object extends Object {
     function __construct(array $donnees) {
        // print_r($donnees);
         $i = 0;
-        $tab_attributs = array('_id', '_nom', '_adresse', '_telephone', '_faxe', '_email', '_president', '_region');
+        $tab_attributs = array('_id', '_nom', '_adresse', '_telephone', '_faxe', '_email', '_president', '_region','_secteur');
         foreach ($donnees as $value) {
           //  echo $value."= ".$i;
             $method = 'set' . $tab_attributs[$i++];
@@ -88,8 +97,8 @@ class Association_object extends Object {
     }
     public function  get_getter(){
         static $j=0;
-        $tab_attributs = array('_id', '_nom', '_adresse', '_telephone', '_faxe', '_email', '_president', '_region');
-        if($j<8){
+        $tab_attributs = array('_id', '_nom', '_adresse', '_telephone', '_faxe', '_email', '_president', '_region','_secteur');
+        if($j<9){
         $getter='get'.$tab_attributs[$j++];
         return $this->$getter();}
         else $j=0;return $this->get_getter();

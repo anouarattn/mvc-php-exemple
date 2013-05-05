@@ -48,7 +48,7 @@ class Anime_formation_model extends Model {
  //print_r($add);
     
         $add->execute();
-     print_r($add->errorinfo());
+     //print_r($add->errorinfo());
 //print_r($add->errorinfo());
         
       /*  echo "\nPDOStatement::errorInfo():\n";

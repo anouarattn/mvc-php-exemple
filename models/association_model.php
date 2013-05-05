@@ -8,7 +8,7 @@ class Association_model extends Model {
     
     public  function add(Association_object $association) {
         $add = $this->_db->prepare('INSERT INTO association(nassociation,adassociation,telassociation,	
-faxeassociation,mailassociaiton,prassociation,rassociation) values(:nom,:adresse,:tel,:fax,:email,:president,:region)');
+faxeassociation,mailassociaiton,prassociation,rassociation,secactivite) values(:nom,:adresse,:tel,:fax,:email,:president,:region,:secteur)');
 
         $add->bindValue(':nom', $association->get_nom());
         $add->bindValue(':adresse', $association->get_adresse());
@@ -17,6 +17,7 @@ faxeassociation,mailassociaiton,prassociation,rassociation) values(:nom,:adresse
         $add->bindValue(':fax', $association->get_faxe());
         $add->bindValue(':president', $association->get_president());
         $add->bindValue(':region', $association->get_region());
+        $add->bindValue(':secteur', $association->get_secteur());
         $add->execute();
 
         

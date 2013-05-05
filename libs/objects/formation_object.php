@@ -131,8 +131,8 @@ class Formation_object extends Object {
 
     public function  get_getter(){
            static $j=0;
-        $tab_attributs = array('Id', 'Intitule', 'Emplacement', 'Adrsempl', 'Date_d', 'Date_f','Type','Plan');
-        if($j<8){
+        $tab_attributs = array('Id', 'Intitule', 'Emplacement', 'Adrsempl', 'Date_d', 'Date_f','Type');
+        if($j<7){
         $getter='get'.$tab_attributs[$j++];
         return $this->$getter();}
         else $j=0;return $this->get_getter();

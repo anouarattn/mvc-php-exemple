@@ -2,4 +2,3 @@ président
 secrétaire
 trésorier
 vice président
-président 2

@@ -16,6 +16,26 @@ class Association extends Controller {
         $this->view = new View();
         
     }
+    
+    
+    public function add_secteur()
+    {
+          if(isset($_POST["submit"]))
+         {
+             echo "ok";
+             file_put_contents("c://wamp/www/mvc_test/libs/other/secteur_association.txt", "\n".$_POST["secteur_association"], FILE_APPEND );
+            // $file=fopen("c://wamp/www/mvc_test/libs/other/fonction_association.txt","r+") or exit("Unable to open file!");
+              //fwrite($file,$_POST["fonction"]."\n"); 
+               //fclose($file);
+             
+         }
+         $this->view->render("association/add_secteur_association");
+        
+        
+        
+    }
+    
+    
 public function add()
 {
     
@@ -30,7 +50,8 @@ public function add()
                 , $_POST["fax_association"]
                 ,  $_POST["email_association"]
                 , $_POST["president_association"]
-                , $_POST["region_association"]    
+                , $_POST["region_association"]
+                    ,$_POST["secteur_association"]
             ));
        //  print_r($association);
             (new association_model())->add($association);
@@ -44,7 +65,7 @@ public function look()
     
        $tab_rows = (new association_model())->getAll("association_object", 'association');
         if (isset($tab_rows)) {
-            $_POST["noms_column"] = array("identifiant", "Nom", "Adresse", "Télephone","Fax","Email", "Président", "Region");
+            $_POST["noms_column"] = array("identifiant", "Nom", "Adresse", "Télephone","Fax","Email", "Président", "Region","secteur");
             $_POST["donnees"] = $tab_rows;
            //print_r($tab_rows);
             // $_POST["type"]="animateur";

@@ -24,7 +24,7 @@ class Bootstrap {
                 elseif (isset($url[1]) AND method_exists($controllers, $url[1]))
                     $controllers->{$url[1]}();
                 elseif (isset($url[1]) AND !method_exists($controllers, $url[1]))
-                    echo 'methode  non trouve';
+                    echo 'methode  non trouve ';
             }
             else{
                 require_once 'controllers/index.php';

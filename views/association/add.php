@@ -37,6 +37,31 @@
         <option value="Gharb_Cherarda_Beni_Hsan">Gharb-Cherarda-Beni Hsan</option>
         <option value="Laayoune_Boujdour_Sakia_El_Hamra">Laayoune-Boujdour-Sakia El Hamra</option>
     </select><br/>
+                 <label for="secteur_association" >Secteur d'activité : </label>
+<input type="text" name="secteur_association" id="secteur_association" placeholder="secteur d'activité" value="" readonly />
+   <?php  
+
+
+        
+  
+   echo "<select name=\"secteur\" id=\"secteur\"  onchange=\"operation();\" > ";
+       
+        
+        $file=fopen("c://wamp/www/mvc_test/libs/other/secteur_association.txt","r") or exit("Unable to open file!");
+          echo "<option value=\"...\" >...</option>";
+        while($vat=fgets($file))
+  {
+            echo "<option value=\"".$vat."\" >".$vat."</option>";
+ 
+  }
+  fclose($file);
+
+
+    
+            ?>
+  </select>
+     <a href="javascript:add()">autre...</a>
+     <br/>
             
             
             <input type="submit" value="Submit" name="submit" /><br/>
@@ -50,3 +75,21 @@
   </section>
            </body>
 </html>
+<script src="/mvc_test/libs/js/jquery.js"  ></script>
+<script>
+   function operation()
+    {
+        $("#secteur_association").val($("#secteur").val()+","+$("#secteur_association").val());
+        
+        
+        
+    }
+    
+function  add()
+{
+ 
+   window.open("/mvc_test/association/add_secteur","_blank","height=200,width=400,status=yes,toolbar=no,menubar=no,location=no")
+}
+
+
+</script>
