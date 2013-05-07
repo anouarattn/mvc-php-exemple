@@ -52,7 +52,7 @@
                   
               
                 echo "<article>";
-                 echo   "<h2><a href=\"\mvc_test/formation/lookone?identifiant=".$value->getId(). "&Intitulé=".$value->getIntitule()."&Emplacement=".$value->getEmplacement()."&Adresse=".$value->getAdrsempl()."&Date-debut=".$value->getDate_d()."&Date-fin=".$value->getDate_f()."&type=".$value->getType()."&Plan=".$value->getPlan()."\" >".$value->getIntitule()."</a></h2>";
+                 echo   "<h2><a href=\"\mvc_test/formation/lookone/".$value->getId()."\" >".$value->getIntitule()."</a></h2>";
                  echo   "<p class=\"subDetails\">".$value->getDate_d(). "  -  " .$value->getDate_f(). "</p>";
                  echo   "<p class=\"subDetails\"> Type: ".$value->getType(). "</p>";
                 echo    "<p>".$value->getEmplacement(). "</p>";

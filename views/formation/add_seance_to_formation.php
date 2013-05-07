@@ -14,12 +14,11 @@
 <script>
     
    
-        var newtext = document.createTextNode(" Some text added dynamically. ");
         var groupe =window.opener.document.getElementsByClassName("groupe");
        
        for(var i=0,l=groupe.length;i<l;i++)
            {
-               var newtext = document.createTextNode(groupe[i].innerHTML);
+              
                var option =document.createElement('option');
               
                option.setAttribute('name', groupe[i].innerHTML);

@@ -127,23 +127,23 @@ echo "</table></fieldset></article>";
             }
 
         }
-        else if ($("select#search").val() == "emplacement") {
+        else if ($("select#search").val() == "adresse") {
             var i = 1;
             var x = document.getElementsByTagName("tr");
             var sel = document.getElementsByTagName("input")[0].value.toString();
             var re = new RegExp(sel, "i");
             while (i < x.length) {
 
-                var y = x[i].getElementsByClassName("Emplacement")[0];
+                var y = x[i].getElementsByClassName("Adresse")[0];
 
                 var b = y.innerHTML.search(re);
 
-                if (b < 0) {
-                    x[i].setAttribute("hidden");
-                }
-                else if (b == 0 & x[i].hasAttribute("hidden")) {
-                    x[i].removeAttribute("hidden");
-                }
+                 if (b < 0) {
+                x[i].setAttribute("hidden");
+            }
+            else if (b >= 0 & x[i].hasAttribute("hidden")) {
+                x[i].removeAttribute("hidden");
+            }
 
                 i++;
             }
@@ -161,11 +161,11 @@ echo "</table></fieldset></article>";
                 var b = y.innerHTML.search(re);
 
                 if (b < 0) {
-                    x[i].setAttribute("hidden");
-                }
-                else if (b == 0 & x[i].hasAttribute("hidden")) {
-                    x[i].removeAttribute("hidden");
-                }
+                x[i].setAttribute("hidden");
+            }
+            else if (b >= 0 & x[i].hasAttribute("hidden")) {
+                x[i].removeAttribute("hidden");
+            }
 
                 i++;
             }
@@ -183,7 +183,7 @@ echo "</table></fieldset></article>";
 
                 var b = y.innerHTML.search(re);
 
-                if (b < 0) {
+                if (b !== 0) {
                     x[i].setAttribute("hidden");
                 }
                 else if (b == 0 & x[i].hasAttribute("hidden")) {
@@ -206,12 +206,12 @@ echo "</table></fieldset></article>";
 
                 var b = y.innerHTML.search(re);
 
-                if (b < 0) {
-                    x[i].setAttribute("hidden");
-                }
-                else if (b == 0 & x[i].hasAttribute("hidden")) {
-                    x[i].removeAttribute("hidden");
-                }
+                 if (b < 0) {
+                x[i].setAttribute("hidden");
+            }
+            else if (b >= 0 & x[i].hasAttribute("hidden")) {
+                x[i].removeAttribute("hidden");
+            }
 
                 i++;
             }

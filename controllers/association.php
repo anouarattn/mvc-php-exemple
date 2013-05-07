@@ -64,6 +64,7 @@ public function look()
 {
     
        $tab_rows = (new association_model())->getAll("association_object", 'association');
+
         if (isset($tab_rows)) {
             $_POST["noms_column"] = array("identifiant", "Nom", "Adresse", "Télephone","Fax","Email", "Président", "Region","secteur");
             $_POST["donnees"] = $tab_rows;
@@ -74,20 +75,13 @@ public function look()
         }    
 }
 
-public function lookone()
+public function lookone($id)
 {
-     $tab_seance_object=array();
- 
-    // animateurs
-    // $association = (new Association_model())->getAll("Association_object","association");
-     if(isset($association))
-     {
-         
-         $_POST["association"]=$association;
-        // print_r($_POST["association_animer_par"]);
-     }
-     else {$_POST["animateurs"]=0;}
     
+    if( isset($id) and intval($id)==$id)
+    {
+     $_POST["association"]=(new Association_model())->getAll("Association_object","association","idassociation=".$id);
+    }
     
       // print_r($tab_seance_object); 
     $this->view->render("association/lookone");

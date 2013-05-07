@@ -1,14 +1,16 @@
 <input type="text" id="input"  onkeydown="changed()" >
 <select id="search" >
     <option value="...">...</option>
-    <option value="nom">Nom</option>
-    <option value="cin">CIN</option>
-    <option value="adresse">Adresse</option>
+    <option value="Nom">Nom</option>
+    <option value="Adresse">Adresse</option>
+     <option value="Region">Region</option>
+      <option value="secteur">secteur</option>
     <option value="id">Id</option>
 </select>
 
 
 <?php
+
 $size2 = count($_POST["noms_column"]);
 echo "<br/><br/>";
 echo "<article>";
@@ -50,7 +52,7 @@ foreach ($_POST["donnees"] as $object) {
         $temp = $object->get_getter();
         if($i==0) {$id_val=$temp;}
       
-            echo "</td>";  "<td class=\"".$_POST["noms_column"][$i]."\">" . $temp . "</td>"; 
+            echo   "<td class=\"".$_POST["noms_column"][$i]."\">" . $temp . "</td>"; 
         $i++;
         
     }
@@ -66,6 +68,7 @@ echo "</table>";
 echo "</fieldset>";
 echo "</article>";
 ?>
+<script src="/mvc_test/libs/js/jquery.js"  ></script>
 
 <script>
     
@@ -81,27 +84,105 @@ echo "</article>";
     }
 
 function changed()
-{
-    var i =1;
-    var x=document.getElementsByTagName("tr");
-var sel = document.getElementsByTagName("input")[0].value.toString();
-var re = new RegExp(sel, "i");
-    while(i<x.length){
+    {
+  
+        if($("select#search").val() == "Nom"){
+            
+            var i = 1;
+        var x = document.getElementsByTagName("tr");
+        var sel = document.getElementsByTagName("input")[0].value.toString();
+        var re = new RegExp(sel, "i");
+        while (i < x.length) {
 
-var y=x[i].getElementsByClassName("nom")[0];
+            var y = x[i].getElementsByClassName("Nom")[0];
 
-   var b=   y.innerHTML.search(re);
- 
-if(b!==0){
-    x[i].setAttribute("hidden");   
-}
-else if (b==0 & x[i].hasAttribute("hidden")){x[i].removeAttribute("hidden");}
+            var b = y.innerHTML.search(re);
 
-i++;
-}
+            if (b !== 0) {
+                x[i].setAttribute("hidden");
+            }
+            else if (b == 0 & x[i].hasAttribute("hidden")) {
+                x[i].removeAttribute("hidden");
+            }
+
+            i++;
+        }
+            
+        }
+        else if ($("select#search").val() == "Adresse"){
+                var i = 1;
+        var x = document.getElementsByTagName("tr");
+        var sel = document.getElementsByTagName("input")[0].value.toString();
+        var re = new RegExp(sel, "i");
+        while (i < x.length) {
+
+            var y = x[i].getElementsByClassName("Adresse")[0];
+
+            var b = y.innerHTML.search(re);
+
+            if (b < 0) {
+                x[i].setAttribute("hidden");
+            }
+            else if (b >= 0 & x[i].hasAttribute("hidden")) {
+                x[i].removeAttribute("hidden");
+            }
+
+            i++;
+        }
+            
+        }
+        else if ($("select#search").val() == "Region"){
+                var i = 1;
+        var x = document.getElementsByTagName("tr");
+        var sel = document.getElementsByTagName("input")[0].value.toString();
+        var re = new RegExp(sel, "i");
+        while (i < x.length) {
+
+            var y = x[i].getElementsByClassName("Region")[0];
+
+            var b = y.innerHTML.search(re);
+
+            if (b < 0) {
+                x[i].setAttribute("hidden");
+            }
+            else if (b == 0 & x[i].hasAttribute("hidden")) {
+                x[i].removeAttribute("hidden");
+            }
+
+            i++;
+        }
+            
+        }
+        else if ($("select#search").val() == "secteur"){
+            
+                var i = 1;
+        var x = document.getElementsByTagName("tr");
+        var sel = document.getElementsByTagName("input")[0].value.toString();
+        var re = new RegExp(sel, "i");
+        while (i < x.length) {
+
+            var y = x[i].getElementsByClassName("secteur")[0];
+
+            var b = y.innerHTML.search(re);
+
+            if (b < 0) {
+                x[i].setAttribute("hidden");
+            }
+            else if (b == 0 & x[i].hasAttribute("hidden")) {
+                x[i].removeAttribute("hidden");
+            }
+
+            i++;
+        }
+            
+        }
+        
+        
 
 
-}
+    }
+
+
 </script>
 </section>
 </body>

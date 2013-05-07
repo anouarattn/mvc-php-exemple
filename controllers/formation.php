@@ -69,21 +69,10 @@ public function lookone($id)
     $tab_groupe_objects = (new Groupe_model())->getAll("Groupe_object", 'groupe',"formation_idformation=".$id);
     if(isset($tab_groupe_objects))
     {
-       $tab_groupe_name_and_id=array();
-        foreach ($tab_groupe_objects as $value) {
-           // print_r($value->getId());
-            // un tableau associatif pour chaque groupe id il donne un tableau d'objet seance
-           $tab_groupe_name_and_id["".$value->getNom()]=$value->getId();
-            $tab_seances_object["".$value->getNom()]=(new Seance_model())->getAll("Seance_object", 'seance',"groupe_idgroupe=".$value->getId());
-           // print_r( $tab_seances_object["".$value->getId()]);
-        }
-      //  print_r($tab_seance_object); 
-        
-        $_POST["donnees"]=$tab_seances_object;
-        $_POST["groupe_name_and_id"]= $tab_groupe_name_and_id;
+      $_POST["groupe"]=$tab_groupe_objects;
     }  
      
-    else {$_POST["groupe"]=0;}
+    
     
    
     
@@ -212,7 +201,7 @@ else  {
     {
         
         if (isset($_POST['submit'])) {
-                         echo "okkkkkkkkkkkk";
+                         
 
                  $seance = new Seance_object(
                          array(
@@ -223,7 +212,7 @@ else  {
     'dfseance' => $_POST['fin_seance'],
 )
 );
-              print_r($seance);   
+         
                  (new Seance_model())->add($seance);
                  
              }

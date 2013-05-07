@@ -146,10 +146,9 @@ echo "</article>";
             if (b < 0) {
                 x[i].setAttribute("hidden");
             }
-            else if (b == 0 & x[i].hasAttribute("hidden")) {
+            else if (b >= 0 & x[i].hasAttribute("hidden")) {
                 x[i].removeAttribute("hidden");
             }
-
             i++;
         }
             
