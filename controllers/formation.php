@@ -222,6 +222,34 @@ else  {
         
         
     }
+    
+    public function delete_groupe($ids)
+    {
+        print_r($ids);
+        $ids=explode(",",$ids);
+        foreach ($ids as $value) {
+            
+            (new Groupe_model())->delete("groupe", $value, "idgroupe");
+        }
+       
+        
+        
+    }
+    
+    public function get_seance($id)
+    {
+        $result=(new Seance_model())->getAll("Seance_object", "seance","groupe_idgroupe=".$id);
+        
+        
+        if(isset($result))
+        { 
+        $_POST["result"]=$result;
+        $this->view->render("formation/get_seance");
+            
+        }
+        else echo "pas de seance dans le groupe";
+         
+    }
 
 
 }

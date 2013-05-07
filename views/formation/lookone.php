@@ -36,8 +36,9 @@ echo "<input class=\"edit\"  type=\"hidden\" value=\"Ajout Groupe\" onclick=\"ad
 echo "<input class=\"edit\"  type=\"hidden\" value=\"Suppression Seance\" onclick=\"delete_seance()\" />";
 echo "<input class=\"edit\" type=\"hidden\" value=\"Suppression Groupe\" onclick=\"delete_groupe()\" />";
     
-    echo "<div id='calendar'></div>";
 
+
+    echo "<div id='calendar'></div>";
 
 
     echo "</fieldset>";
@@ -65,7 +66,7 @@ echo "<input class=\"edit\" type=\"hidden\" value=\"Suppression Groupe\" onclick
 <fieldset>
     <legend><h1>Participants</h1></legend>
 </fieldset>
-
+  <div id='seance'></div>
 </section>
 </body>
 </html>
@@ -159,7 +160,8 @@ echo "<input class=\"edit\" type=\"hidden\" value=\"Suppression Groupe\" onclick
              
              
          });
-         window.open("/mvc_test/formation/delete_groupe/"+ids, "windows", 'width=800,height=500');
+       $.ajax({url:"/mvc_test/formation/delete_groupe/"+ids});
+       //  window.open("/mvc_test/formation/delete_groupe/"+ids, "windows", 'width=800,height=500');
           $("[name='checkbox']").attr("type","hidden"); 
      }
         
@@ -184,8 +186,59 @@ echo "<input class=\"edit\" type=\"hidden\" value=\"Suppression Groupe\" onclick
     
     function view_it_for(id)
     {
+        $('#seance').load('/mvc_test/formation/get_seance/'+id+' .seance',function(){
+    
+     var tab=new Array();
         
-        
+        alert($('.seance p').html());});
+    alert($('.seance > p').length);
+        $(document).ready(function() {
+        $('.seance > p').each(
+            function(){
+                alert($(this).html());
+
+        tab.push($(this).html());
+            } );
+            var d = $("#date_debut").attr("value").toString();
+    d = d.split("-");
+
+    $(document).ready(function() {
+        $("#jour").text($("#date_debut").attr("value"));
+        $("head").append('<link rel=\'stylesheet\' type=\'text/css\' href=\'/mvc_test/libs/css/fullcalendar.css\' />')
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'title',
+                center: 'basicWeek basicDay',
+                right: 'today prev,next'
+            },
+            defaultView: 'basicDay',
+            firstDay: 1,
+            height: 300,
+            contentHeight: 300,
+            year: d[0],
+            month: parseInt(d[1]) - 1,
+            date: d[2],
+            events: [
+				{
+					title: 'Click for Google',
+					start: new Date(d[0], parseInt(d[1]) - 1, d[2],8,15),
+					end: new Date(d[0], parseInt(d[1]) - 1, parseInt(d[2]),10,15),
+                                        allDay: false,
+					url: 'http://google.com/'
+				}
+			],
+                        timeFormat: 'H(:mm)'
+            
+
+        });
+
+
+
+
+    });
+    
+        });
+       
         
     }
 
