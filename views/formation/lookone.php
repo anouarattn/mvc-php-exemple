@@ -190,25 +190,21 @@ echo "<input class=\"edit\" type=\"hidden\" value=\"Suppression Groupe\" onclick
     
      var tab=new Array();
         
-        alert($('.seance p').html());});
-    alert($('.seance > p').length);
-        $(document).ready(function() {
-        $('.seance > p').each(
-            function(){
-                alert($(this).html());
+    
 
-        tab.push($(this).html());
-            } );
+        $(document).ready(function() {
+        
             var d = $("#date_debut").attr("value").toString();
     d = d.split("-");
 
     $(document).ready(function() {
         $("#jour").text($("#date_debut").attr("value"));
-        $("head").append('<link rel=\'stylesheet\' type=\'text/css\' href=\'/mvc_test/libs/css/fullcalendar.css\' />')
-        $('#calendar').fullCalendar({
+        $("head").append('<link rel=\'stylesheet\' type=\'text/css\' href=\'/mvc_test/libs/css/fullcalendar.css\' />');
+        
+        myCalendar=$('#calendar').fullCalendar({
             header: {
                 left: 'title',
-                center: 'basicWeek basicDay',
+                center: 'basicWeek basicDay agendaDay agendaWeek',
                 right: 'today prev,next'
             },
             defaultView: 'basicDay',
@@ -218,15 +214,8 @@ echo "<input class=\"edit\" type=\"hidden\" value=\"Suppression Groupe\" onclick
             year: d[0],
             month: parseInt(d[1]) - 1,
             date: d[2],
-            events: [
-				{
-					title: 'Click for Google',
-					start: new Date(d[0], parseInt(d[1]) - 1, d[2],8,15),
-					end: new Date(d[0], parseInt(d[1]) - 1, parseInt(d[2]),10,15),
-                                        allDay: false,
-					url: 'http://google.com/'
-				}
-			],
+            
+           
                         timeFormat: 'H(:mm)'
             
 
@@ -234,12 +223,51 @@ echo "<input class=\"edit\" type=\"hidden\" value=\"Suppression Groupe\" onclick
 
 
 
+$('.seance').children().each(
+            function(){
 
+        tab.push($(this).html());
+            } );
+            var ii=0;
+                 var lengthh= tab.length/4; 
+                 
+        while(ii< lengthh){
+            var t=tab.slice(0,4);
+            
+            tab=tab.slice(4,tab.length);
+     
+var bits = t[2].split(/\D/);
+
+
+var debut = new Date(bits[0], --bits[1], bits[2], bits[3], bits[4]);
+
+  var bitss = t[3].split(/\D/);
+var fin = new Date(bitss[0], --bitss[1], bitss[2], bitss[3], bitss[4]);   
+
+            var myEvent = {
+  title:t[1],
+  allDay: false,
+  start: new Date(debut.getFullYear(), parseInt(debut.getMonth()), debut.getDate(),debut.getHours(),debut.getMinutes()),
+  end: new Date(fin.getFullYear(), parseInt(fin.getMonth()), fin.getDate(),fin.getHours(),fin.getMinutes()),
+  url: '/mvc_test/formation/view_seance/'+t[0]
+};
+//alert(new Date(debut.getFullYear(), debut.getMonth()-1, debut.getDate(),debut.getHours(),debut.getMinutes()));
+//alert(new Date(fin.getFullYear(), fin.getMonth()-1, fin.getDate(),fin.getHours(),fin.getMinutes()));
+myCalendar.fullCalendar( 'renderEvent', myEvent,true);
+      
+      
+            ii++;
+           
+        }
+  
     });
     
         });
+        
+        });
+    }
        
         
-    }
-
+ 
+    
 </script>

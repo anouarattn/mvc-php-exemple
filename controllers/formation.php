@@ -250,6 +250,13 @@ else  {
         else echo "pas de seance dans le groupe";
          
     }
+    
+    public function view_seance($id)
+    {
+        
+       $this->view->render("formation/view_seance"); 
+        
+    }
 
 
 }
