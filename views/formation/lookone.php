@@ -33,7 +33,6 @@
 echo "<input  type=\"submit\" value=\"edit\" onclick=\"edit()\"  />";
 echo "<input class=\"edit\" type=\"hidden\" value=\"Ajout Seance\" onclick=\"add_seance()\"  />";
 echo "<input class=\"edit\"  type=\"hidden\" value=\"Ajout Groupe\" onclick=\"add_groupe()\" />";
-echo "<input class=\"edit\"  type=\"hidden\" value=\"Suppression Seance\" onclick=\"delete_seance()\" />";
 echo "<input class=\"edit\" type=\"hidden\" value=\"Suppression Groupe\" onclick=\"delete_groupe()\" />";
     
 
@@ -76,45 +75,7 @@ echo "<input class=\"edit\" type=\"hidden\" value=\"Suppression Groupe\" onclick
 <!--  <script src="/mvc_test/libs/js/date.js"  ></script> -->
 <script  src='/mvc_test/libs/js/fullcalendar/fullcalendar.js'></script>
 <script>
-/*
-    var d = $("#date_debut").attr("value").toString();
-    d = d.split("-");
 
-    $(document).ready(function() {
-        $("#jour").text($("#date_debut").attr("value"));
-        $("head").append('<link rel=\'stylesheet\' type=\'text/css\' href=\'/mvc_test/libs/css/fullcalendar.css\' />')
-        $('#calendar').fullCalendar({
-            header: {
-                left: 'title',
-                center: 'basicWeek basicDay',
-                right: 'today prev,next'
-            },
-            defaultView: 'basicDay',
-            firstDay: 1,
-            height: 300,
-            contentHeight: 300,
-            year: d[0],
-            month: parseInt(d[1]) - 1,
-            date: d[2],
-            events: [
-				{
-					title: 'Click for Google',
-					start: new Date(d[0], parseInt(d[1]) - 1, d[2],8,15),
-					end: new Date(d[0], parseInt(d[1]) - 1, parseInt(d[2]),10,15),
-                                        allDay: false,
-					url: 'http://google.com/'
-				}
-			],
-                        timeFormat: 'H(:mm)'
-            
-
-        });
-
-
-
-
-    });
-*/
     var editvar=0;
     function edit()
     {
@@ -186,7 +147,9 @@ echo "<input class=\"edit\" type=\"hidden\" value=\"Suppression Groupe\" onclick
     
     function view_it_for(id)
     {
+         $('.seance').remove();
         $('#seance').load('/mvc_test/formation/get_seance/'+id+' .seance',function(){
+           
     
      var tab=new Array();
         
@@ -265,6 +228,7 @@ myCalendar.fullCalendar( 'renderEvent', myEvent,true);
         });
         
         });
+        
     }
        
         

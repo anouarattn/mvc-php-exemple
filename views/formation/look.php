@@ -17,10 +17,10 @@ echo "<br/><br/>";
 echo "<article>";
 echo "<fieldset>";
 echo "<legend><h1>Liste des Formations</h1></legend>";
-echo "<table border=\"1\"> ";
+echo "<table border=\"1\" id=\"table\" class=\"display\"> ";
 
 
-
+echo  "<thead>";
 echo "<tr  > ";
 for ($j = 0; $j < $size2; $j++) {
 
@@ -41,8 +41,8 @@ echo "<th>" . "Plus" . "</th> ";
 
 echo "</tr> ";
 
-
-
+echo  "</thead>";
+echo "<tbody>";
 
 $gett = '';
 
@@ -71,13 +71,13 @@ foreach ($_POST["donnees"] as $object) {
 
     echo "</tr> ";
 }
-
+echo "</tbody>";
 echo "</table></fieldset></article>";
 ?>
 
 <script>
 
- 
+ $('head').append(' <link rel="stylesheet" href="/mvc_test/libs/js/DataTables/media/css/demo_table.css" />');
 
     function changed()
     {
@@ -227,7 +227,8 @@ echo "</table></fieldset></article>";
 </body>
 </html>
 
-<script src="/mvc_test/libs/js/jquery.js"  ></script>
+<script src="/mvc_test/libs/js/DataTables/media/js/jquery.dataTables.js"  ></script>
+
 <script>
 
     function operation()
@@ -291,5 +292,39 @@ echo "</table></fieldset></article>";
 
 
     }
+        var fr= {  "sProcessing":     "Traitement en cours...",
+    "sSearch":         "Rechercher&nbsp;:",
+    "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
+    "sInfo":           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+    "sInfoEmpty":      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+    "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+    "sInfoPostFix":    "",
+    "sLoadingRecords": "Chargement en cours...",
+    "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+    "sEmptyTable":     "Aucune donnée disponible dans le tableau",
+    "oPaginate": {
+        "sFirst":      "Premier",
+        "sPrevious":   "Pr&eacute;c&eacute;dent",
+        "sNext":       "Suivant",
+        "sLast":       "Dernier"
+    },
+    "oAria": {
+        "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+        "sSortDescending": ": activer pour trier la colonne par ordre décroissant"
+    }};
+$(document).ready(function()
 
+{
+    
+    $('#table').dataTable(
+        {
+    "aLengthMenu": [[1,5,10, 25, 50, -1], [1,5,10, 25, 50, "All"]],
+    "bFilter": false,"bInfo": false,
+   "oLanguage": fr
+    } );
+            
+           
+    
+}
+);
 </script>

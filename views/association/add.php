@@ -2,23 +2,33 @@
 
 
     <article>
-    <form  method="post"  action="/mvc_test/association/add"  enctype="multipart/form-data"> 
         <fieldset>
   <legend><h1>Ajout d'un association Dans la base de données</h1></legend>
+    <form  method="post"  action="/mvc_test/association/add"  enctype="multipart/form-data"> 
+        <table >
+            <tr>
         <p>
 
-            <label for="nom_association" >Nom : </label><input type="text" name="nom_association" id="nom_association" placeholder="Nom de l'association"  /><br/>
- 
-            <label for="tel_association" >Telephone : </label><input type="text" name="tel_association" id="tel_association" placeholder="Telephone de l'association"  /><br/>
-             <label for="fax_association" >Fax : </label><input type="text" name="fax_association" id="fax_association" placeholder="Fax de l'association"  /><br/>
-            <label for="ad_association" >Adresse : </label><input type="text" name="ad_association" id="ad_association" placeholder="Adresse de l'association"  /><br/>
+                <td align="right">  <label for="nom_association" >Nom : </label></td>    <td align="left"><input type="text" name="nom_association" id="nom_association" placeholder="Nom de l'association"  /></td>
+                 </tr>
+  <tr>
+           <td align="right">   <label for="tel_association" >Telephone : </label></td><td align="left"> <input type="text" name="tel_association" id="tel_association" placeholder="Telephone de l'association"  /></td>
+          </tr>
+           <tr>
+                <td align="right">  <label for="fax_association" >Fax : </label></td><td align="left"><input type="text" name="fax_association" id="fax_association" placeholder="Fax de l'association"  /></td>
+             </tr>
+                        <tr>
 
-            <label for="email_association" >E-mail : </label><input type="email" name="email_association" id="email_association" placeholder="E-mail de l'association"  /><br/>
-           
+         <td align="right">   <label for="ad_association" >Adresse : </label></td><td align="left"><input type="text" name="ad_association" id="ad_association" placeholder="Adresse de l'association"  /></td>
+ </tr>
+           <tr>
+            <td align="right"> <label for="email_association" >E-mail : </label></td><td align="left"><input type="email" name="email_association" id="email_association" placeholder="E-mail de l'association"  /></td>
+          </tr>
+             <tr>
 
-            <label for="president_association" >Président : </label><input type="text" name="president_association" id="president_association" placeholder="Président de l'association"  /><br/>
 
-            <label for="region_association" >Region : </label>
+
+           <td align="right">  <label for="region_association" >Region : </label></td><td align="left">
     <select name="region_association" id="region_association">  
     <option value="Eddahab_Lagouira">Oued-Eddahab - Lagouira</option>
         <option value="Chaouia_Ouardigha">Chaouia-Ouardigha</option>
@@ -36,8 +46,11 @@
         <option value="Guelmim_Esmara">Guelmim-Esmara</option>
         <option value="Gharb_Cherarda_Beni_Hsan">Gharb-Cherarda-Beni Hsan</option>
         <option value="Laayoune_Boujdour_Sakia_El_Hamra">Laayoune-Boujdour-Sakia El Hamra</option>
-    </select><br/>
-                 <label for="secteur_association" >Secteur d'activité : </label>
+    </select></td>
+          </tr>
+          <tr>
+                <td align="right">
+                 <label for="secteur_association" >Secteur d'activité : </label></td><td align="left">
 <input type="text" name="secteur_association" id="secteur_association" placeholder="secteur d'activité" value="" readonly />
    <?php  
 
@@ -60,22 +73,29 @@
     
             ?>
   </select>
+  
      <a href="javascript:add()">autre...</a>
-     <br/>
+     </td>
+          </tr>
             
-            
-            <input type="submit" value="Submit" name="submit" /><br/>
+                    
+ 
+          <tr>
+                <td align="right"></td><td align="left">
+            <input type="submit" value="Submit" name="submit" /></td></tr>
         </p>
-
- </fieldset>
+        </tr>
+</table>
+         <input type="hidden" name="president_association" value="" id="president_association" placeholder="Président de l'association"  /><br/>
     </form>
+   </fieldset>
 </article>
 
 
   </section>
            </body>
 </html>
-<script src="/mvc_test/libs/js/jquery.js"  ></script>
+
 <script>
    function operation()
     {

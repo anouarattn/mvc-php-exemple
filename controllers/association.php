@@ -4,6 +4,7 @@ require_once 'libs/Model.php';
 require_once 'models/association_model.php';
 require_once 'models/groupe_model.php';
 require_once 'models/seance_model.php';
+require_once 'models/membre_model.php';
 
 require_once 'libs/objects/association_object.php';
 require_once 'libs/objects/groupe_object.php';
@@ -66,7 +67,7 @@ public function look()
        $tab_rows = (new association_model())->getAll("association_object", 'association');
 
         if (isset($tab_rows)) {
-            $_POST["noms_column"] = array("identifiant", "Nom", "Adresse", "Télephone","Fax","Email", "Président", "Region","secteur");
+            $_POST["noms_column"] = array("Identifiant", "Nom", "Adresse", "Télephone","Fax","Email", "Président", "Region","secteur");
             $_POST["donnees"] = $tab_rows;
            //print_r($tab_rows);
             // $_POST["type"]="animateur";
@@ -81,9 +82,16 @@ public function lookone($id)
     if( isset($id) and intval($id)==$id)
     {
      $_POST["association"]=(new Association_model())->getAll("Association_object","association","idassociation=".$id);
+          $temp=(new Membre_model())->get_membre_by_formation_id($id);
+          $_POST["membre"]=$temp[0];
+          $_POST["fonction"]=$temp[1];
+       //print_r($temp);
+          $_POST["noms_column"]=array("Identifiant","Nom","Prenom","Fonction");
+       //   print_r($_POST["membre"]);
+         // print_r($_POST["membre"]);
     }
     
-      // print_r($tab_seance_object); 
+    
     $this->view->render("association/lookone");
 }
 
@@ -115,6 +123,40 @@ public function add_animateur_to_association()
 
     }
     
+    
+       public function modify($ids="") {
+        
+           if (isset($_POST['submit'])) {
+               
+                $assoc = new Association_object(array(
+                $_POST["id_association"]
+                , $_POST["nom_association"]
+                , $_POST["ad_association"]
+                , $_POST["tel_association"]
+                , $_POST["fax_association"]
+                , $_POST["email_association"]
+                , $_POST["president_association"]
+                , $_POST["region_association"]
+                , $_POST["secteur_association"]
+            ));
+               
+                        (new Association_model())->update($assoc);
+   
+           }
+else {
+                $id = explode(",", $ids);
+                $where="idassociation=";
+                 $where.=$id[0];
+                
+                
+        $_POST["result"]=(new Association_model())->getAll("Association_object", "association",$where);
+        $this->view->render("association/modify");
+}
+        
+                        
+
+        
+    }
   
 
 }

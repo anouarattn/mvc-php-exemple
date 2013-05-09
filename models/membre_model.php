@@ -1,4 +1,5 @@
 <?php
+require_once 'libs/objects/membre_object.php';
 
 class Membre_model extends Model {
 
@@ -60,11 +61,28 @@ class Membre_model extends Model {
         $this->_db = $db;
     }
     
-   public function get_formation_animateur(){
+   
+   
+    public  function get_membre_by_formation_id($id) {
+        
        
-       
-       
-   }
+        //retourne la liste de tous les Object(animateur, association, formation ...) de la base de données
+    
+                $getall = $this->_db->query('SELECT idmembre,nmembre,addmembre,telmembre,mailmembre,cinmembre,pnmembre,nomfonction_ass FROM membre join fonction_ass on idmembre=membre_idmembre  WHERE idmembre IN (SELECT membre_idmembre FROM fonction_ass WHERE association_idassociation='.$id.');');
+                
+     
+    
+        while ($donnees = $getall->fetch(PDO::FETCH_ASSOC)) {
+            
+        $membre= array_slice($donnees,0,7);
+            $Object_tab[] = new Membre_object($membre);
+            $fonction=array_slice($donnees,7,8);
+           
+        }
+      //  print_r(array($Object_tab,$fonction));
+           
+       if(isset($Object_tab) && isset($fonction)) return  array($Object_tab,$fonction);
+    }
 
 }
 

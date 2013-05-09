@@ -4,6 +4,10 @@
     <head>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="/mvc_test/libs/css/styles.css" /> 
+        
+        
+
+        <script src="/mvc_test/libs/js/jquery.js"  ></script>
 
 
     </head>

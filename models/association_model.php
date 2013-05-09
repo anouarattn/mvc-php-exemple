@@ -28,6 +28,26 @@ faxeassociation,mailassociaiton,prassociation,rassociation,secactivite) values(:
       */
     }
     
+        public function update(Association_object $assoc) {
+
+        $inserto = $this->_db->prepare('UPDATE  association SET nassociation=:nom,adassociation=:adresse,telassociation=:tel,faxeassociation=:faxe,
+        mailassociation=:mail,prassociation=:president,rassociation=:region,secactivite=:secteur WHERE idassociation=' . $assoc->get_id() . ';');
+print_r($inserto);
+
+
+        $inserto->bindValue(':nom', $assoc->get_nom());
+        $inserto->bindValue(':adresse', $assoc->get_adresse());
+        $inserto->bindValue(':tel', $assoc->get_telephone());
+        $inserto->bindValue(':faxe', $assoc->get_faxe());
+        $inserto->bindValue(':mail', $assoc->get_email());
+        $inserto->bindValue(':president', $assoc->get_president());
+        $inserto->bindValue(':region', $assoc->get_region());
+        $inserto->bindValue(':secteur', $assoc->get_secteur());
+
+        $inserto->execute();
+    }
+
+    
     
 
 }

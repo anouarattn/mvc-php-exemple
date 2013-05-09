@@ -14,7 +14,7 @@ class Fonction_association_model extends Model {
         $add->bindValue(':date_debut_fonction', $fonction_association->get_date_debut_fonction());
     
         $add->execute();
-        print_r($add->errorinfo());
+       // print_r($add->errorinfo());
 //print_r($add->errorinfo());
         
       /*  echo "\nPDOStatement::errorInfo():\n";

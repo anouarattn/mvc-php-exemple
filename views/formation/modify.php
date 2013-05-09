@@ -58,6 +58,7 @@ self.close();
   
     
     }
+$('#fofo').remove();
 
 
 </script>

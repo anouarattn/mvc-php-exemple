@@ -4,11 +4,16 @@ body
     background-color:#f1f0f1;
 
 }
+
+
+
 nav
 {
-   
+  position:relative;
+
   border: 2px dotted #ccc8cb; 
   background-color: #e3e1e2;
+  z-index:4;
 }
 
 nav ul
@@ -68,25 +73,25 @@ nav li:hover ul
 #centre
 {
    margin-left: 44px;
-    
+   
 }
 
 #animateur
 {
    margin-left: 44px;
-    
+
 }
 
 #formation
 {
    margin-left: 44px;
-    
+   
 }
 
 #association
 {
    margin-left: 44px;
-    
+
 }
 
 
@@ -94,7 +99,17 @@ nav li:hover ul
 #accuiel
 {
    margin-left: 44px;
-    
+  
 }
 
+    
+#logo
+{
+    position:relative;
 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+    z-index:-1;
+}
