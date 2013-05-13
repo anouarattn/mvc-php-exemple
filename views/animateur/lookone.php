@@ -1,11 +1,9 @@
 
-<script type="text/javascript">var headID = document.getElementsByTagName("head")[0];
-    var cssNode = document.createElement('link');
-    cssNode.type = 'text/css';
-    cssNode.rel = 'stylesheet';
-    cssNode.href = '/mvc_test/libs/css/animateur.css';
-    cssNode.media = 'screen';
-    headID.appendChild(cssNode);</script>
+<script type="text/javascript">
+ $('head').append(' <link rel="stylesheet" href="/mvc_test/libs/css/animateur.css" />');
+
+
+</script>
 
 
 

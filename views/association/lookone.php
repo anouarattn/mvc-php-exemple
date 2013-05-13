@@ -1,36 +1,84 @@
 
-
-
-<fieldset>
-<legend><h1>Informations Générales</h1></legend>
-            <ul>
-                <li>Identifiant: <?php echo $_POST["association"][0]->get_id() ?></li>
-                <li>Nom: <?php echo $_POST["association"][0]->get_nom() ?></li>
-                <li>Adresse: <?php echo $_POST["association"][0]->get_adresse() ?></li>
-                <li>Tel: <?php echo $_POST["association"][0]->get_telephone() ?></li>
-                <li>Fax: <?php echo $_POST["association"][0]->get_faxe() ?></li>
-                <li>Email: <?php echo $_POST["association"][0]->get_email() ?></li>
-                <li>Président: <?php echo $_POST["association"][0]->get_president() ?></li>
-                <li>Region: <?php echo $_POST["association"][0]->get_region() ?></li>
-                <li>Secteur d'activité: <?php echo  substr($_POST["association"][0]->get_secteur(), 0, -1) ?></li>
-            </ul>
-        
-</fieldset>
-
-<fieldset>
-<legend><h1>Formations</h1></legend>
             
 <?php 
+if(isset($_POST["association"])){
+echo "<fieldset>";
+echo "<legend><h1>Informations Générales</h1></legend>";
 
-?>
+        echo    "<ul>";
+             echo   "<li>Identifiant: ".   $_POST["association"][0]->get_id() ."</li>";
+             echo  " <li>Nom: ". $_POST["association"][0]->get_nom()."</li>";
+            echo    "<li>Adresse: ".  $_POST["association"][0]->get_adresse()."</li>";
+         echo       "<li>Tel: ".$_POST["association"][0]->get_telephone() ."</li>";
+          echo     " <li>Fax: ". $_POST["association"][0]->get_faxe() ."</li>";
+                echo "<li>Email: ".  $_POST["association"][0]->get_email() ."</li>";
+                    
+               echo "<li>Président: ". $_POST["association"][0]->get_president() . "</li>";
+            echo    "<li>Region: ". $_POST["association"][0]->get_region()."</li>";
+              echo  "<li>Secteur d'activité: ".  substr($_POST["association"][0]->get_secteur(), 0, -1) ."</li>";
+         echo   "</ul>";
         
-</fieldset>
+echo "</fieldset>";
 
-<fieldset>
-    <legend><h1>Membres</h1></legend>
-    <table border="1" id="table" class="display"> "
-        <thead>
-    <?php 
+echo "<fieldset>";
+echo "<legend><h1>Formations</h1></legend>";
+
+if(isset($_POST["formation_assiste"])){
+    
+   
+        
+         echo "<table width=\"100%\" border=\"1\" id=\"table2\" class=\"displayy\">";
+        echo "<thead>";
+    
+    echo "<tr>";
+    
+      echo "<th>";
+    echo "Formation";
+    echo "</th>";  
+    echo "<th>";
+    echo "Présence";
+    echo "</th>"; 
+     
+echo "</tr>";
+    echo  "</thead>";
+echo "<tbody>";
+    foreach ($_POST["formation_assiste"] as $key => $value) {
+        
+    
+    
+    
+
+    echo "<tr> ";
+    echo "<td align=\"center\">";
+echo "<a href=\"/mvc_test/formation/lookone/".$_POST["formations"][$key][0]->getId()."\" >".$_POST["formations"][$key][0]->getIntitule()."</a>";
+    echo "</td>";
+     echo "<td align=\"center\">";
+     if($value->get_bool()==1) echo "Présente";
+     else echo "Absente";
+  
+    echo "</td>";
+  
+   
+echo "</tr> ";
+
+
+
+   
+    }
+    echo "</tbody>";
+    
+    echo "</table>";
+    
+}
+
+        
+echo "</fieldset>";
+
+echo "<fieldset>";
+ echo   "<legend><h1>Membres</h1></legend>";
+   echo "<table border=\"1\" id=\"table\" class=\"display\">";
+        echo "<thead>";
+    
     echo "<tr>";
     foreach ($_POST["noms_column"] as $value) {
       echo "<th>";
@@ -52,16 +100,18 @@ echo "<th>" . "Plus" . "</th> ";
     echo "</tr>";
     echo  "</thead>";
     echo "<tbody>";
+    if(isset($_POST["membre"])){
 foreach ($_POST["membre"] as $value) {
     echo "<tr> ";
     echo "<td>";
-    echo $value->getNom();
+    echo $value->getId();
     echo "</td>";
      echo "<td>";
-    echo $value->getPrenom();
+     echo $value->getNom();
+  
     echo "</td>";
      echo "<td>";
-    echo $value->getNom();
+      echo $value->getPrenom();
     echo "</td>";
        echo "<td>";
        $var="";
@@ -71,14 +121,21 @@ foreach ($_POST["membre"] as $value) {
        echo $var;
     echo "</td>"; 
     echo "<td><input type=\"checkbox\" class=\"checkbox\" value=\"" . $value->getId() . "\" ></td>";
-     echo "<td><a href=\"/mvc_test/membre/lookone/" . $value->getId() . "\"  ><img src=\"/mvc_test/libs/uploads/picture/plus.png\"  alt=\"plus\" height= \"40\" width=\"30\" ></a></td>";
-}
+     echo "<td><a href=\"/mvc_test/membre/lookone/".$_POST["association"][0]->get_id()."/" . $value->getId() . "\"  ><img src=\"/mvc_test/libs/uploads/picture/plus.png\"  alt=\"plus\" height= \"40\" width=\"30\" ></a></td>";
+    }}
 echo "</tr> ";
 echo "</tbody>";
+echo "</table>";
+echo "</fieldset>";
 
+echo "<fieldset>";
+ echo   "<legend><h1>Centre</h1></legend>";
+
+echo "</fieldset>";
+}
+else {echo "Association non existante";} 
 ?>
-    </table>
-</fieldset>
+    
 
 
 </section>
@@ -87,12 +144,116 @@ echo "</tbody>";
 
 
 
+<script src="/mvc_test/libs/js/DataTables/media/js/jquery.dataTables.js"  ></script>
+
 
 <script>
-    
+        $('head').append(' <link rel="stylesheet" href="/mvc_test/libs/js/DataTables/media/css/demo_table.css" />');
+
 function add_animateur(){
        var ok=window.open("add_animateur_to_formation","windows",'width=800,height=500' ); 
     }
+    
+    function operation()
+    {
+//alert($("select#Action").val()===1);
+        if ($("select#Action").val() == 1) {
+          
+var delete_elemtent=new Array(); 
+                $("input:checkbox").each(function()
+                {
+                    if ($(this).is(':checked') === true)
+                    {
+                        delete_elemtent.push($(this).val()); 
+                        $(this).parent().parent().remove();
+                    }
+                }
+            );
+                if(delete_elemtent.length==0) {  $("select#Action").val('0');}
+                else{
+           
+var deletee = window.open("/mvc_test/membre/delete/" + delete_elemtent, "windows", 'width=800,height=500');
+                  //      deletee.close();
+                       
+                       $("select#Action").val('0');
+                // this.href=\"/mvc_test/animateur/delete/" . $_POST["id"] ."\" ;
+            }
+
+        }
+
+        else if ($("select#Action").val() == 2) {
+        var delete_elemtent=new Array(); 
+
+        
+         $("input:checkbox").each(function()
+                {
+                    if ($(this).is(':checked') === true)
+                    {
+                        delete_elemtent.push($(this).val()); 
+                                    $(this).prop('checked', false);
+                    }
+                }
+            );
+                if(delete_elemtent.length==0) {$("select#Action").val('0'); }
+                else  {
+var deletee = window.open("/mvc_test/membre/modify/" + delete_elemtent, "windows", 'width=800,height=500');
+$("select#Action").val('0');
+}
+
+        }
+        else if ($("select#Action").val() == 3) {
+
+        }
+        //$("input:checkbox").each(function() { alert($(this).is(':checked')); });
+        //alert($("select#Action").val());
 
 
+
+
+    }
+
+  var fr= {  "sProcessing":     "Traitement en cours...",
+    "sSearch":         "Rechercher&nbsp;:",
+    "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
+    "sInfo":           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+    "sInfoEmpty":      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+    "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+    "sInfoPostFix":    "",
+    "sLoadingRecords": "Chargement en cours...",
+    "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+    "sEmptyTable":     "Aucune donnée disponible dans le tableau",
+    "oPaginate": {
+        "sFirst":      "Premier",
+        "sPrevious":   "Pr&eacute;c&eacute;dent",
+        "sNext":       "Suivant",
+        "sLast":       "Dernier"
+    },
+    "oAria": {
+        "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+        "sSortDescending": ": activer pour trier la colonne par ordre décroissant"
+    }};
+$(document).ready(function()
+
+{
+    
+    $('#table').dataTable(
+        {
+    "aLengthMenu": [[5,1,10, 25, 50, -1], [5,1,10, 25, 50, "All"]],
+    "bFilter": false,"bInfo": false,
+    "oLanguage": fr,
+    "iDisplayLength": 20
+  
+    } );
+         $('#table2').dataTable(
+        {
+    "aLengthMenu": [[5,1,10, 25, 50, -1], [5,1,10, 25, 50, "All"]],
+    "bFilter": false,"bInfo": false,
+    "oLanguage": fr,
+    "iDisplayLength": 20
+  
+    } );    
+           
+    
+}
+);
 </script>

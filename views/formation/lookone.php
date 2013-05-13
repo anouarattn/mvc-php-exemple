@@ -50,7 +50,7 @@ echo "<input class=\"edit\" type=\"hidden\" value=\"Suppression Groupe\" onclick
         echo "<ul>";
         foreach ($_POST["formation_animer_par"] as $value) {
             echo "<li class=" . $value->getId() . ">";
-            echo "<a   href=\"\mvc_test/animateur/lookone/" . $value->getId()."\" >" . $value->getNom() . " " . $value->getPrenom() . "</a><br/>";
+            echo "<a   href=\"\mvc_test/animateur/lookone/" . $_POST["formation"][0]->getId()."/".$value->getId(). "\" >" . $value->getNom() . " " . $value->getPrenom() . "</a><br/>";
             echo "<a class=\"delete\" href=\"javascript:delete_animateur(" . $value->getId() . ")\" >   supprimer</a>";
             echo "</li>";
         }

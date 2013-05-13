@@ -88,13 +88,13 @@ echo "</article>";
 
     function changed()
     {
-        
-        if($("select#search").val() == "nom"){
-            
+         
             var i = 1;
         var x = document.getElementsByTagName("tr");
         var sel = document.getElementsByTagName("input")[0].value.toString();
         var re = new RegExp(sel, "i");
+        if($("select#search").val() == "nom"){
+           
         while (i < x.length) {
 
             var y = x[i].getElementsByClassName("Nom")[0];
@@ -113,10 +113,7 @@ echo "</article>";
             
         }
         else if ($("select#search").val() == "cin"){
-                var i = 1;
-        var x = document.getElementsByTagName("tr");
-        var sel = document.getElementsByTagName("input")[0].value.toString();
-        var re = new RegExp(sel, "i");
+                
         while (i < x.length) {
 
             var y = x[i].getElementsByClassName("CIN")[0];
@@ -136,9 +133,7 @@ echo "</article>";
         }
         else if ($("select#search").val() == "adresse"){
                 var i = 1;
-        var x = document.getElementsByTagName("tr");
-        var sel = document.getElementsByTagName("input")[0].value.toString();
-        var re = new RegExp(sel, "i");
+       
         while (i < x.length) {
 
             var y = x[i].getElementsByClassName("Adresse")[0];
@@ -158,9 +153,7 @@ echo "</article>";
         else if ($("select#search").val() == "id"){
             
                 var i = 1;
-        var x = document.getElementsByTagName("tr");
-        var sel = document.getElementsByTagName("input")[0].value.toString();
-        var re = new RegExp(sel, "i");
+      
         while (i < x.length) {
 
             var y = x[i].getElementsByClassName("identifiant")[0];

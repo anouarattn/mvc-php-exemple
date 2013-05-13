@@ -30,29 +30,27 @@ class Membre_model extends Model {
       */
     }
 /*
-    public function delete(Animateur $anim) {
+    public function delete(Animateur $membre) {
         // supprime un animateur de la base de données utilisation de la mèthode exec()
-        $this->_db->exec('DELETE FROM Animateur WHERE id=' . $anim->getId() . ';');
+        $this->_db->exec('DELETE FROM Animateur WHERE id=' . $membre->getId() . ';');
     }*/
 
     public function update(Membre_object $membre) {
 
-        $inserto = $this->_db->prepare('UPDATE  animateur SET nanimateur=:nom,pranimateur=:prenom,addanimateur=:adresse,mailanimateur=:email,
-        telanimateur=:tel,cinanimateur=:cin,photoanimateur=:photo,cvanimateur=:cv,autanimateur=:autre WHERE idanimateur=' . $anim->getId() . ';');
+        $inserto = $this->_db->prepare('UPDATE  membre SET nmembre=:nom,addmembre=:adresse,telmembre=:tel,mailmembre=:email,cinmembre=:cin,pnmembre=:prenom WHERE idmembre=:id ;');
 
 
+        $inserto->bindValue(':id', $membre->getId());
+        $inserto->bindValue(':nom', $membre->getNom());
+        $inserto->bindValue(':prenom', $membre->getPrenom());
+        $inserto->bindValue(':adresse', $membre->getAdresse());
+        $inserto->bindValue(':email', $membre->getEmail());
+        $inserto->bindValue(':tel', $membre->getTelephone());
+        $inserto->bindValue(':cin', $membre->getCin());
 
-        $inserto->bindValue(':nom', $anim->getNom());
-        $inserto->bindValue(':prenom', $anim->getPrenom());
-        $inserto->bindValue(':adresse', $anim->getAdresse());
-        $inserto->bindValue(':email', $anim->getEmail());
-        $inserto->bindValue(':tel', $anim->getTelephone());
-        $inserto->bindValue(':cin', $anim->getCin());
-        $inserto->bindValue(':photo', $anim->getPhoto());
-        $inserto->bindValue(':cv', $anim->getCv());
-        $inserto->bindValue(':autre', $anim->getAutre());
 
         $inserto->execute();
+       // print_r($inserto->errorinfo());
     }
 
     
@@ -63,7 +61,7 @@ class Membre_model extends Model {
     
    
    
-    public  function get_membre_by_formation_id($id) {
+    public  function get_membre_by_association_id($id) {
         
        
         //retourne la liste de tous les Object(animateur, association, formation ...) de la base de données
@@ -73,7 +71,7 @@ class Membre_model extends Model {
      
     
         while ($donnees = $getall->fetch(PDO::FETCH_ASSOC)) {
-            
+         //   print_r($donnees);
         $membre= array_slice($donnees,0,7);
             $Object_tab[] = new Membre_object($membre);
             $fonction=array_slice($donnees,7,8);
@@ -83,7 +81,8 @@ class Membre_model extends Model {
            
        if(isset($Object_tab) && isset($fonction)) return  array($Object_tab,$fonction);
     }
-
+    
+     
 }
 
 ?>

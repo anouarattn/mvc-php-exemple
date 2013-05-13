@@ -30,6 +30,7 @@ echo "<th>
     <option value=\"0\">....</option>
   <option value=\"1\">Supprimer</option>
   <option value=\"2\">Modifier</option>
+  <option value=\"3\">Inviter</option>
   <option value=\"3\">Imprimer</option>
 </select>
 

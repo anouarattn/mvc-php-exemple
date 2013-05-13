@@ -3,6 +3,7 @@
 require_once 'libs/Utility.php';
 require_once 'libs/Model.php';
 require_once 'models/membre_model.php';
+require_once 'models/association_model.php';
 require_once 'libs/objects/membre_object.php';
 require_once 'models/fonction_association_model.php';
 require_once 'libs/objects/association_object.php';
@@ -24,11 +25,11 @@ class Membre extends Controller {
             $membre = new Membre_object(array(
                 ""
                 , $_POST["nom_membre"]
-                , $_POST["pnom_membre"]
                 , $_POST["ad_membre"]
                 , $_POST["tel_membre"]
                 , $_POST["email_membre"]
                 , $_POST["cin_membre"]
+                , $_POST["pnom_membre"]
                     )
             );
          
@@ -56,8 +57,27 @@ class Membre extends Controller {
 
     }
 
-    public function modify() {
-        $this->view->render("membre/modify");
+    public function modify($id='') {
+        
+        if(isset($_POST["submit"])){
+             $membre = new Membre_object(array(
+                $_POST["id_membre"]
+                , $_POST["nom_membre"]
+                , $_POST["ad_membre"]
+                , $_POST["tel_membre"]
+                , $_POST["email_membre"]
+                , $_POST["cin_membre"]
+                , $_POST["pnom_membre"]
+                    )
+            );
+        
+            $id_membre=(new Membre_model())->update($membre);
+           
+            echo '<script>window.opener.location.reload();window.close();</script>';  
+        }
+        else{
+        $_POST["submit"] = (new Membre_model())->getAll("Membre_object", 'membre','idmembre='.$id);
+        $this->view->render("membre/modify");}
     }
 
     public function look() {
@@ -79,24 +99,13 @@ class Membre extends Controller {
         
     }
 
-    public function lookone() {
+    public function lookone($id_formation,$id_membre) {
         
-         $_POST["formation_animer"] = (new Anime_formation_model())->get_formation_membre($_GET["identifiant"]);
-         
+    $_POST["membre"] = (new Membre_model())->getAll("Membre_object", 'membre',"idmembre=".$id_membre);
+    $_POST["fonctions"]=(new Fonction_association_model())->getAll("Fonction_association_object", 'fonction_ass',"membre_idmembre=".$id_membre);
+    $_POST["association"]=(new Association_model())->getAll("Association_object", 'association',"idassociation=".$id_formation);
+
       $this->view->render("membre/lookone");
-    }
-     public function add_fonction() {
-        
-         if(isset($_POST["submit"]))
-         {
-             echo $_POST["fonction"];
-             file_put_contents("c://wamp/www/mvc_test/libs/other/fonction_association.txt", "\n".$_POST["fonction"], FILE_APPEND );
-            // $file=fopen("c://wamp/www/mvc_test/libs/other/fonction_association.txt","r+") or exit("Unable to open file!");
-              //fwrite($file,$_POST["fonction"]."\n"); 
-               //fclose($file);
-             
-         }
-         $this->view->render("membre/add_fonction_membre_in_association");
     }
     
 

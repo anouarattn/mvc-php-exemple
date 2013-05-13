@@ -21,7 +21,7 @@ class Model {
     
                 $getall = $this->_db->query('SELECT * FROM '.$table_name.' WHERE ' .$where. ';');
                 
-             
+          //   print_r($where);
     
         while ($donnees = $getall->fetch(PDO::FETCH_ASSOC)) {
             
@@ -64,7 +64,7 @@ class Model {
         $db_access=new PDO('mysql:host=localhost;dbname=pole', 'root', '');
        $nb= $db_access->exec('DELETE FROM '.$table_name.' WHERE '. $colomn_name .'='.$id.';');
         
-    //    echo print_r($db_access->errorInfo());
+      echo print_r($db_access->errorInfo());
     }
 }
 

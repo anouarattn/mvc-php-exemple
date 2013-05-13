@@ -3,12 +3,16 @@ require_once 'libs/Utility.php';
 require_once 'libs/Model.php';
 require_once 'models/association_model.php';
 require_once 'models/groupe_model.php';
+require_once 'models/formation_model.php';
 require_once 'models/seance_model.php';
 require_once 'models/membre_model.php';
+require_once 'models/reponse_model.php';
 
 require_once 'libs/objects/association_object.php';
 require_once 'libs/objects/groupe_object.php';
+require_once 'libs/objects/reponse_object.php';
 require_once 'libs/objects/seance_object.php';
+require_once 'libs/objects/formation_object.php';
 
 class Association extends Controller {
 
@@ -82,13 +86,21 @@ public function lookone($id)
     if( isset($id) and intval($id)==$id)
     {
      $_POST["association"]=(new Association_model())->getAll("Association_object","association","idassociation=".$id);
-          $temp=(new Membre_model())->get_membre_by_formation_id($id);
+          $temp=(new Membre_model())->get_membre_by_association_id($id);
           $_POST["membre"]=$temp[0];
           $_POST["fonction"]=$temp[1];
        //print_r($temp);
           $_POST["noms_column"]=array("Identifiant","Nom","Prenom","Fonction");
        //   print_r($_POST["membre"]);
          // print_r($_POST["membre"]);
+          $_POST["formation_assiste"]=(new Reponse_model())->getAll("Reponse_object", "reponse","association_idassociation=".$id);
+          $formationarray=array();
+          if(isset($_POST["formation_assiste"])){
+          foreach ($_POST["formation_assiste"] as $key => $value) {
+            $formationarray[$key]= (new Formation_model())->getAll("Formation_object","formation","idformation=".$value->get_formationid());
+          }
+          $_POST["formations"]=$formationarray;}
+         //print_r($formation_assiste);
     }
     
     

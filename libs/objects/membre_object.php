@@ -106,7 +106,7 @@ class Membre_object extends Object {
 // la fonction ucfirst() retourne la chaine $key mais avec la premier lettre en majiscule comme ça en respecte le nom des méthodes setter	
         
         $i = 0;
-        $tab_attributs = array('Id', 'Nom', 'Prenom', 'Adresse', 'Telephone', 'Email', 'Cin');
+        $tab_attributs = array('Id', 'Nom', 'Adresse', 'Telephone', 'Email', 'Cin', 'Prenom');
         foreach ($entrees as $value) {
             $method = 'set' . $tab_attributs[$i++];
             $this->$method($value);

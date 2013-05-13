@@ -1,6 +1,6 @@
 <?php
 
-class Fonction_association_object {
+class Fonction_association_object extends Object{
 
     private $_nom_fonction;
     private $_association_id;
@@ -48,13 +48,15 @@ class Fonction_association_object {
         $this->_date_fin_fonction = $_date_fin_fonction;
     }
 
-    function __construct($_nom_fonction, $_association_id, $_membre_id, $_date_debut_fonction, $_date_fin_fonction) {
+    function __construct(array $entrees) {
      //   echo $_nom_fonction;
-        $this->_nom_fonction = $_nom_fonction;
-        $this->_association_id = $_association_id;
-        $this->_membre_id = $_membre_id;
-        $this->_date_debut_fonction = $_date_debut_fonction;
-        $this->_date_fin_fonction = $_date_fin_fonction;
+        
+        $this->set_nom_fonction($entrees['nomfonction_ass']);
+        $this->set_membre_id($entrees['membre_idmembre']);
+        $this->set_date_debut_fonction($entrees['ddebut_fonction']);
+        $this->set_date_fin_fonction($entrees['dfin_fonction']);
+        $this->set_association_id($entrees['association_idassociation']);
+
     }
 
 
