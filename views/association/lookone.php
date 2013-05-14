@@ -37,6 +37,9 @@ if(isset($_POST["formation_assiste"])){
     echo "</th>";  
     echo "<th>";
     echo "Présence";
+    echo "</th>";  
+    echo "<th>";
+    echo "Membres Présents";
     echo "</th>"; 
      
 echo "</tr>";
@@ -54,11 +57,16 @@ echo "<a href=\"/mvc_test/formation/lookone/".$_POST["formations"][$key][0]->get
     echo "</td>";
      echo "<td align=\"center\">";
      if($value->get_bool()==1) echo "Présente";
-     else echo "Absente";
-  
+     else if($value->get_bool()==0)  echo "Absente";
+     else if($value->get_bool()==2)  echo "inviter";
     echo "</td>";
   
-   
+     echo "<td align=\"center\">";
+     
+    echo "<a href=\"javascript:liste(".$_POST["association"][0]->get_id().",".$_POST["formations"][$key][0]->getId().")\" >Liste</a>";
+    echo "</td>";
+  
+    
 echo "</tr> ";
 
 
@@ -113,13 +121,7 @@ foreach ($_POST["membre"] as $value) {
      echo "<td>";
       echo $value->getPrenom();
     echo "</td>";
-       echo "<td>";
-       $var="";
-       foreach ( $_POST["fonction"] as $valuee) {
-           $var.=$valuee;
-       }
-       echo $var;
-    echo "</td>"; 
+     
     echo "<td><input type=\"checkbox\" class=\"checkbox\" value=\"" . $value->getId() . "\" ></td>";
      echo "<td><a href=\"/mvc_test/membre/lookone/".$_POST["association"][0]->get_id()."/" . $value->getId() . "\"  ><img src=\"/mvc_test/libs/uploads/picture/plus.png\"  alt=\"plus\" height= \"40\" width=\"30\" ></a></td>";
     }}
@@ -148,11 +150,19 @@ else {echo "Association non existante";}
 
 
 <script>
+    function liste(id_association,id_formation){
+               var ok=window.open("/mvc_test/association/liste_membres_present_d_formationx/"+id_association+"/"+id_formation,"windows",'width=800,height=500' ); 
+
+        
+        
+        
+    }
+    
+    
+    
         $('head').append(' <link rel="stylesheet" href="/mvc_test/libs/js/DataTables/media/css/demo_table.css" />');
 
-function add_animateur(){
-       var ok=window.open("add_animateur_to_formation","windows",'width=800,height=500' ); 
-    }
+
     
     function operation()
     {

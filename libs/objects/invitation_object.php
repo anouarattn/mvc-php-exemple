@@ -1,8 +1,8 @@
 <?php
 
-class Reponse_object extends Object {
+class Invitation_object extends Object {
     
-      private $_formationid;
+    private $_formationid;
     private $_associationid;
     private $_bool;
     public function get_formationid() {

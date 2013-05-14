@@ -6,13 +6,17 @@ require_once 'models/groupe_model.php';
 require_once 'models/formation_model.php';
 require_once 'models/seance_model.php';
 require_once 'models/membre_model.php';
-require_once 'models/reponse_model.php';
+require_once 'models/invitation_model.php';
+require_once 'models/assiste_model.php';
+
 
 require_once 'libs/objects/association_object.php';
 require_once 'libs/objects/groupe_object.php';
-require_once 'libs/objects/reponse_object.php';
+require_once 'libs/objects/invitation_object.php';
 require_once 'libs/objects/seance_object.php';
 require_once 'libs/objects/formation_object.php';
+require_once 'libs/objects/assiste_object.php';
+
 
 class Association extends Controller {
 
@@ -86,14 +90,14 @@ public function lookone($id)
     if( isset($id) and intval($id)==$id)
     {
      $_POST["association"]=(new Association_model())->getAll("Association_object","association","idassociation=".$id);
-          $temp=(new Membre_model())->get_membre_by_association_id($id);
-          $_POST["membre"]=$temp[0];
-          $_POST["fonction"]=$temp[1];
+          $temp=(new Membre_model())->get_membre_of_association($id);
+       //   print_r($temp);
+          $_POST["membre"]=$temp;
        //print_r($temp);
-          $_POST["noms_column"]=array("Identifiant","Nom","Prenom","Fonction");
+          $_POST["noms_column"]=array("Identifiant","Nom","Prenom");
        //   print_r($_POST["membre"]);
          // print_r($_POST["membre"]);
-          $_POST["formation_assiste"]=(new Reponse_model())->getAll("Reponse_object", "reponse","association_idassociation=".$id);
+          $_POST["formation_assiste"]=(new Invitation_model())->getAll("Invitation_object", "invitation","association_idassociation=".$id);
           $formationarray=array();
           if(isset($_POST["formation_assiste"])){
           foreach ($_POST["formation_assiste"] as $key => $value) {
@@ -169,6 +173,46 @@ else {
 
         
     }
+    
+    
+   public function liste_membres_present_d_formationx($id_association,$id_formation)
+   {
+    
+        $tab_rows = (new Membre_model())->get_membre_of_association($id_association);
+        $tab_rows2 = (new Membre_model())->getAll("Groupe_object","groupe","formation_idformation=".$id_formation );
+
+   // print_r($tab_rows);
+    if(isset($tab_rows)){
+        $_POST["membres"]=$tab_rows;
+       // print_r($_POST["membres"]);
+    
+    }
+    if(isset($tab_rows2)){
+       
+        $_POST["groupes"]=$tab_rows2;
+      //   print_r($_POST["groupes"]);
+    }
+        $this->view->render("association/liste_membres_present_d_formationx");
+
+    
+     if(isset($_POST["submit"])){
+         foreach ($_POST as $key => $value) {
+             if ($key!= "submit" && $key!= "donnees" && $key!="id_formation" ){
+                   
+
+                $add=(new Assiste_model())->add(new Anime_formation_object(intval($_POST["id_formation"]),intval($key)));
+                 
+             } 
+                            
+
+             
+         }
+         
+     }
+    
+       
+       
+   }
   
 
 }

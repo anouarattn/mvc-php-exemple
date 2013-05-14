@@ -64,6 +64,10 @@ echo "<input class=\"edit\" type=\"hidden\" value=\"Suppression Groupe\" onclick
 
 <fieldset>
     <legend><h1>Participants</h1></legend>
+    
+    
+    
+    
 </fieldset>
   <div id='seance'></div>
 </section>

@@ -65,16 +65,16 @@ class Membre_model extends Model {
         
        
         //retourne la liste de tous les Object(animateur, association, formation ...) de la base de données
-    
+     
                 $getall = $this->_db->query('SELECT idmembre,nmembre,addmembre,telmembre,mailmembre,cinmembre,pnmembre,nomfonction_ass FROM membre join fonction_ass on idmembre=membre_idmembre  WHERE idmembre IN (SELECT membre_idmembre FROM fonction_ass WHERE association_idassociation='.$id.');');
                 
-     
-    
+     //print_r($getall);
+    $fonction=array();
         while ($donnees = $getall->fetch(PDO::FETCH_ASSOC)) {
          //   print_r($donnees);
         $membre= array_slice($donnees,0,7);
             $Object_tab[] = new Membre_object($membre);
-            $fonction=array_slice($donnees,7,8);
+        $fonction[]=array_slice($donnees,7,8);
            
         }
       //  print_r(array($Object_tab,$fonction));
@@ -82,7 +82,20 @@ class Membre_model extends Model {
        if(isset($Object_tab) && isset($fonction)) return  array($Object_tab,$fonction);
     }
     
-     
+    
+        public  function get_membre_of_association($id) {
+            
+                            $getall = $this->_db->query('SELECT * FROM membre WHERE idmembre IN (SELECT DISTINCT membre_idmembre FROM fonction_ass WHERE association_idassociation='.$id.');');
+while ($donnees = $getall->fetch(PDO::FETCH_ASSOC)) {
+         //   print_r($donnees);
+
+            $Object_tab[] = new Membre_object($donnees);
+           
+        }
+               if(isset($Object_tab))  return  $Object_tab;
+
+
+        }
 }
 
 ?>
