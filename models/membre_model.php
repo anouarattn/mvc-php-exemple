@@ -85,7 +85,7 @@ class Membre_model extends Model {
     
         public  function get_membre_of_association($id) {
             
-                            $getall = $this->_db->query('SELECT * FROM membre WHERE idmembre IN (SELECT DISTINCT membre_idmembre FROM fonction_ass WHERE association_idassociation='.$id.');');
+                            $getall = $this->_db->query('SELECT * FROM membre WHERE idmembre IN (SELECT DISTINCT membre_idmembre FROM fonct_assoc_membre WHERE association_idassociation='.$id.');');
 while ($donnees = $getall->fetch(PDO::FETCH_ASSOC)) {
          //   print_r($donnees);
 

@@ -49,7 +49,7 @@ class Animateur extends Controller {
           (new Animateur_model())->delete("animateur",intval($value),'idanimateur');}
           else  {echo "Identifiant Non trouvé";}  
          }
-         $this->look();
+         echo "<script>window.opener.location.href = window.opener.location.href;;window.close();<script>";
 
     }
 

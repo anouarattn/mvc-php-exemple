@@ -7,6 +7,7 @@ require_once 'models/formation_model.php';
 require_once 'models/seance_model.php';
 require_once 'models/membre_model.php';
 require_once 'models/invitation_model.php';
+require_once 'models/Assoc_membre_fonction_model.php';
 require_once 'models/assiste_model.php';
 
 
@@ -92,10 +93,31 @@ public function lookone($id)
      $_POST["association"]=(new Association_model())->getAll("Association_object","association","idassociation=".$id);
           $temp=(new Membre_model())->get_membre_of_association($id);
        //   print_r($temp);
-          $_POST["membre"]=$temp;
+          
        //print_r($temp);
-          $_POST["noms_column"]=array("Identifiant","Nom","Prenom");
-       //   print_r($_POST["membre"]);
+          $_POST["noms_column"]=array("Identifiant","Nom","Prenom","Fonction","Période");
+          $membre=array();
+          if(isset($temp)){
+          foreach ($temp as $value) {
+              $mem=array();
+              $mem["idmembre"]=$value->getId();
+              $mem["nommembre"]=$value->getNom();
+              $mem["prenommembre"]=$value->getPrenom();
+              $fonc=(new Assoc_membre_fonction_model())->
+                  get_idfonction_nomfonction($value->getId(), $id);
+              $periode=(new Assoc_membre_fonction_model())->getAll("Fonction_assoc_membre_object",
+                      "fonct_assoc_membre", "association_idassociation=".$id." AND membre_idmembre=".$value->getId()." AND fonction_ass_idfonction_ass=".$fonc[0]->get_id_focntion());
+              
+              $mem["idfonction"]=$fonc[0]->get_id_focntion();
+              $mem["nomfonction"]=$fonc[0]->get_nom_fonction();
+              $mem["datedebut"]=$periode[0]->get_datedebut();
+              $mem["datefin"]=$periode[0]->get_datefin();
+          
+              $membre[]=$mem;
+              
+          }
+    $_POST["membre"]=$membre;}
+       //print_r($_POST["membre"]);
          // print_r($_POST["membre"]);
           $_POST["formation_assiste"]=(new Invitation_model())->getAll("Invitation_object", "invitation","association_idassociation=".$id);
           $formationarray=array();
@@ -174,12 +196,31 @@ else {
         
     }
     
+    public function add_membre_to_formation($membres,$groupe,$association,$formation)
+    {
+        $membres=explode(",",$membres);
+        $seances=(new Seance_model())->getAll("Seance_object", "seance", "groupe_idgroupe=".$groupe);
+        
+        foreach ($membres as $valuee) {
+            
+        if($valuee!=""){
+        foreach ($seances as $value) {
+            (new Assiste_model())->add(new Assiste_object(array("membre_idmembre"=>$valuee,"seance_idseance"=>$value->get_id(),"bolassist"=>2)));
+            
+        }}}
+        
+    }
+    
+    
+    
     
    public function liste_membres_present_d_formationx($id_association,$id_formation)
    {
     
         $tab_rows = (new Membre_model())->get_membre_of_association($id_association);
-        $tab_rows2 = (new Membre_model())->getAll("Groupe_object","groupe","formation_idformation=".$id_formation );
+        $tab_rows2 = (new Groupe_model())->getAll("Groupe_object","groupe","formation_idformation=".$id_formation );
+        
+        
 
    // print_r($tab_rows);
     if(isset($tab_rows)){
@@ -188,10 +229,19 @@ else {
     
     }
     if(isset($tab_rows2)){
+        $seances=array();
+        foreach ($tab_rows2 as $value) {
+             $seances[$value->getId()] = (new Seance_model())->getAll("Seance_object","seance","groupe_idgroupe=".$value->getId() );
+        }
        
         $_POST["groupes"]=$tab_rows2;
+        if(isset($seances)) $_POST["seances"]=$seances;
+        
+        
       //   print_r($_POST["groupes"]);
     }
+    $_POST["idassociation"]=$id_association;
+    $_POST["idformation"]=$id_formation;
         $this->view->render("association/liste_membres_present_d_formationx");
 
     

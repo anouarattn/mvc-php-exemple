@@ -62,7 +62,7 @@ class Anime_formation_model extends Model {
         
         
        $nb= $this->_db->exec('DELETE FROM anime_formation WHERE animateur_idanimateur ='.$id_animateur.' AND formation_idformation='.$id_formation.';');
-        print_r($nb);
+      //  print_r($nb);
   //  echo print_r($this->_db->errorInfo());
     }
     

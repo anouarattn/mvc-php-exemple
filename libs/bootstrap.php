@@ -15,7 +15,9 @@ class Bootstrap {
                 require_once $file;
 
                 $controllers = new $url[0];
-                 if (isset($url[4]) AND method_exists($controllers, $url[1]))
+                if (isset($url[5]) AND method_exists($controllers, $url[1]))
+                    $controllers->{$url[1]}($url[2],$url[3],$url[4],$url[5]);
+                 elseif (isset($url[4]) AND method_exists($controllers, $url[1]))
                     $controllers->{$url[1]}($url[2],$url[3],$url[4]);
                 elseif (isset($url[3]) AND method_exists($controllers, $url[1]))
                     $controllers->{$url[1]}($url[2],$url[3]);

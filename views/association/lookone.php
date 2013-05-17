@@ -112,18 +112,26 @@ echo "<th>" . "Plus" . "</th> ";
 foreach ($_POST["membre"] as $value) {
     echo "<tr> ";
     echo "<td>";
-    echo $value->getId();
+    echo $value["idmembre"];
     echo "</td>";
      echo "<td>";
-     echo $value->getNom();
+     echo $value["nommembre"];
   
     echo "</td>";
      echo "<td>";
-      echo $value->getPrenom();
+      echo $value["prenommembre"];
     echo "</td>";
+    echo "<td>";
+      echo $value["nomfonction"];
+    echo "</td>";
+     echo "<td>";
+     if($value["datefin"]=="0000-00-00") $value["datefin"]="En cours";
+      echo $value["datedebut"]." - ".$value["datefin"];
+    echo "</td>";
+ 
      
-    echo "<td><input type=\"checkbox\" class=\"checkbox\" value=\"" . $value->getId() . "\" ></td>";
-     echo "<td><a href=\"/mvc_test/membre/lookone/".$_POST["association"][0]->get_id()."/" . $value->getId() . "\"  ><img src=\"/mvc_test/libs/uploads/picture/plus.png\"  alt=\"plus\" height= \"40\" width=\"30\" ></a></td>";
+    echo "<td><input type=\"checkbox\" class=\"checkbox\" value=\"" . $value["idmembre"] . "\" ></td>";
+     echo "<td><a href=\"/mvc_test/membre/lookone/".$_POST["association"][0]->get_id()."/" . $value["idmembre"] . "\"  ><img src=\"/mvc_test/libs/uploads/picture/plus.png\"  alt=\"plus\" height= \"40\" width=\"30\" ></a></td>";
     }}
 echo "</tr> ";
 echo "</tbody>";

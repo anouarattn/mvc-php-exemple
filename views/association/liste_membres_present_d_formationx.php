@@ -1,6 +1,12 @@
 <?php
 
-echo "<select id=\"groupe\" onchange=\"changed()\">";
+
+echo "<fieldset>";
+echo "<legend><h1>Membres presents</h1></legend>";
+
+
+echo "</fieldset>";
+echo "<select id=\"groupe\" hidden>";
 echo "<option value=\"\" >".____."</option>";
     foreach ($_POST["groupes"] as $valuee) {
    echo "<option value=\"".$valuee->getId()."\">".$valuee->getNom()."</option>";
@@ -11,13 +17,14 @@ foreach ($_POST["membres"] as $value) {
 echo "<ul>";
  
     echo "<li>";
-    echo "<input type=\"checkbox\" name=\"".$value->getId()."\" id=\"".$value->getId()."\" value=\"\" \">"; 
+    echo "<input type=\"checkbox\" class=\"checkbox\"  value=\"".$value->getId()."\" \">"; 
     echo "<label for=\"".$value->getId()."\">[".$value->getId()."] ".$value->getNom()." ".$value->getPrenom()."</label>"; 
     echo "</li>";
      echo "</ul>";
 }
 
-
+echo "<input type=\"hidden\" id=\"idassociation\" value=\"".$_POST["idassociation"]."\" >";
+ echo "<input type=\"hidden\" id=\"idformation\" value=\"".$_POST["idformation"]."\" >";
 
    
 ?>
@@ -26,113 +33,35 @@ echo "<ul>";
 </html>
 
 <script>
+    var ids="";
+    $('.checkbox').change(
+        function(){
+    if(this.checked){
+        ids+=$(this).attr('value')+',';
+        $('select').removeAttr('hidden');
+        
+    }});
+    $('select').change(function(){
+        
+       //alert($("select option:selected").val());
+      // alert(ids);
+     // alert($("#idformation").val());
+    window.open("/mvc_test/association/add_membre_to_formation/"+ids+"/"+$("select option:selected").val()+"/"+$("#idassociation").val()+"/"+$("#idformation").val(), "windows", 'width=800,height=500');
+    //   $.ajax({url:"/mvc_test/association/add_membre_to_formation/"
+      //           +ids+"/"+$("select option:selected").val()+"/"+$("#idassociation").val()+"/"+$("#idformation").vale()});
+
+  ids="";
+    });
+    
+    
     document.getElementById("fofo").parentNode.removeChild(document.getElementById("fofo"));
 
-    var hidden = document.createElement('input');
-
-    hidden.setAttribute('type', 'hidden');
-     hidden.setAttribute('value',window.opener.document.getElementsByTagName("li")[14].getAttribute("value"));
-
- hidden.setAttribute('name','id_formation');
+  
 
 
 
-    document.getElementsByTagName("form")[0].appendChild(hidden);
-    function close_reload()
-    {
-           window.opener.location.reload();   
-       self.close();
-
-        
-    }
 
            
-       function changed()
-    {
-         
-      var  i=0;
-        if($("#groupe").val() == "nom"){
-           
-        while (i < x.length) {
-
-            var y = x[i].getElementsByClassName("Nom")[0];
-
-            var b = y.innerHTML.search(re);
-
-            if (b !== 0) {
-                x[i].setAttribute("hidden");
-            }
-            else if (b == 0 & x[i].hasAttribute("hidden")) {
-                x[i].removeAttribute("hidden");
-            }
-
-            i++;
-        }
-            
-        }
-        else if ($("select#search").val() == "cin"){
-                
-        while (i < x.length) {
-
-            var y = x[i].getElementsByClassName("CIN")[0];
-
-            var b = y.innerHTML.search(re);
-
-            if (b !== 0) {
-                x[i].setAttribute("hidden");
-            }
-            else if (b == 0 & x[i].hasAttribute("hidden")) {
-                x[i].removeAttribute("hidden");
-            }
-
-            i++;
-        }
-            
-        }
-        else if ($("select#search").val() == "adresse"){
-                var i = 1;
-       
-        while (i < x.length) {
-
-            var y = x[i].getElementsByClassName("Adresse")[0];
-
-            var b = y.innerHTML.search(re);
-
-            if (b < 0) {
-                x[i].setAttribute("hidden");
-            }
-            else if (b >= 0 & x[i].hasAttribute("hidden")) {
-                x[i].removeAttribute("hidden");
-            }
-            i++;
-        }
-            
-        }
-        else if ($("select#search").val() == "id"){
-            
-                var i = 1;
-      
-        while (i < x.length) {
-
-            var y = x[i].getElementsByClassName("identifiant")[0];
-
-            var b = y.innerHTML.search(re);
-
-            if (b !== 0) {
-                x[i].setAttribute("hidden");
-            }
-            else if (b == 0 & x[i].hasAttribute("hidden")) {
-                x[i].removeAttribute("hidden");
-            }
-
-            i++;
-        }
-            
-        }
-        
-        
-
-
-    }
+     
            
 </script>

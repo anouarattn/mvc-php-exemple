@@ -4,6 +4,7 @@ require_once 'libs/Utility.php';
 require_once 'libs/Model.php';
 require_once 'models/animateur_model.php';
 require_once 'libs/objects/animateur_object.php';
+require_once 'libs/objects/fonction_assoc_membre_object.php';
 require_once 'libs/objects/groupe_object.php';
 
 class Model {
@@ -16,7 +17,7 @@ class Model {
 
     public  function getAll($object_type,$table_name,$where="1" ) {
         
-       
+      
         //retourne la liste de tous les Object(animateur, association, formation ...) de la base de données
     
                 $getall = $this->_db->query('SELECT * FROM '.$table_name.' WHERE ' .$where. ';');
