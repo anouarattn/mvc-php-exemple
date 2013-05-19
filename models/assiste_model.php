@@ -9,7 +9,7 @@ class Assiste_model extends Model {
     }
 
       public  function add(Assiste_object $assiste) {
-         print_r($assiste);
+       //  print_r($assiste);
         $add = $this->_db->prepare('INSERT INTO assiste(membre_idmembre,seance_idseance,bolassist) values(:idmembre,:idseance,:boolassist)');
 
         $add->bindValue(':idmembre', $assiste->get_idmembre());
@@ -17,7 +17,7 @@ class Assiste_model extends Model {
         $add->bindValue(':boolassist', $assiste->get_bolassiste());
         
         $add->execute();
-       print_r($add->errorinfo());
+      // print_r($add->errorinfo());
        return $this->_db->lastInsertId();
        
        

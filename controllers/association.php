@@ -32,7 +32,7 @@ class Association extends Controller {
     {
           if(isset($_POST["submit"]))
          {
-             echo "ok";
+             //echo "ok";
              file_put_contents("c://wamp/www/mvc_test/libs/other/secteur_association.txt", "\n".$_POST["secteur_association"], FILE_APPEND );
             // $file=fopen("c://wamp/www/mvc_test/libs/other/fonction_association.txt","r+") or exit("Unable to open file!");
               //fwrite($file,$_POST["fonction"]."\n"); 
@@ -204,11 +204,17 @@ else {
         foreach ($membres as $valuee) {
             
         if($valuee!=""){
+            if(isset($seances)){
         foreach ($seances as $value) {
             (new Assiste_model())->add(new Assiste_object(array("membre_idmembre"=>$valuee,"seance_idseance"=>$value->get_id(),"bolassist"=>2)));
             
-        }}}
-        
+        }}
+        else {echo "pas de seances trouvé";}
+        }}
+            echo "<script>document.getElementById(\"fofo\").parentNode.removeChild(document.getElementById(\"fofo\"))</script>";
+
+                               echo "<script> window.open(\"/mvc_test/association/liste_membres_present_d_formationx/".$association."/".$formation."\", \"windows\", 'width=800,height=500');</script>";
+
     }
     
     
@@ -217,11 +223,9 @@ else {
    public function liste_membres_present_d_formationx($id_association,$id_formation)
    {
     
+       
         $tab_rows = (new Membre_model())->get_membre_of_association($id_association);
         $tab_rows2 = (new Groupe_model())->getAll("Groupe_object","groupe","formation_idformation=".$id_formation );
-        
-        
-
    // print_r($tab_rows);
     if(isset($tab_rows)){
         $_POST["membres"]=$tab_rows;
@@ -257,10 +261,10 @@ else {
 
              
          }
-         
+
      }
     
-       
+
        
    }
   

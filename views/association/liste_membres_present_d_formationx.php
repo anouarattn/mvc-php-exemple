@@ -47,8 +47,7 @@ echo "<input type=\"hidden\" id=\"idassociation\" value=\"".$_POST["idassociatio
       // alert(ids);
      // alert($("#idformation").val());
     window.open("/mvc_test/association/add_membre_to_formation/"+ids+"/"+$("select option:selected").val()+"/"+$("#idassociation").val()+"/"+$("#idformation").val(), "windows", 'width=800,height=500');
-    //   $.ajax({url:"/mvc_test/association/add_membre_to_formation/"
-      //           +ids+"/"+$("select option:selected").val()+"/"+$("#idassociation").val()+"/"+$("#idformation").vale()});
+     
 
   ids="";
     });

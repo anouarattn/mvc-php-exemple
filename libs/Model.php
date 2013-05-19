@@ -67,6 +67,14 @@ class Model {
         
       echo print_r($db_access->errorInfo());
     }
+    
+    public function liste_membres_present_d_formationx($id_assiciation,$id_formation){
+        
+        $getall = $this->_db->query('SELECT distinct idmembre,nmembre,pnmembre,idgroupe,ngroupe FROM membre join groupe on idgroupe 
+IN ( SELECT distinct ss.groupe_idgroupe FROM seance as ss WHERE exists 
+( SELECT * FROM assiste WHERE seance_idseance=ss.idseance AND idmembre=membre_idmembre)  ) WHERE formation_idformation=10;');
+        
+    }
 }
 
 ?>
