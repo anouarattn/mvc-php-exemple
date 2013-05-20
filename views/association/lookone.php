@@ -36,7 +36,7 @@ if(isset($_POST["formation_assiste"])){
     echo "Formation";
     echo "</th>";  
     echo "<th>";
-    echo "Présence";
+    echo "Etat";
     echo "</th>";  
     echo "<th>";
     echo "Membres Présents";

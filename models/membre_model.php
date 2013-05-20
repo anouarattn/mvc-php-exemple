@@ -96,6 +96,14 @@ while ($donnees = $getall->fetch(PDO::FETCH_ASSOC)) {
 
 
         }
+        
+        public function delete_membre_from_formation($idformation,$idmembre,$idgroupe)
+        {
+            $getall = $this->_db->prepare('DELETE FROM assiste WHERE membre_idmembre=? AND seance_idseance IN 
+(SELECT idseance FROM seance WHERE groupe_idgroupe IN ( SELECT idgroupe from groupe WHERE formation_idformation=? AND idgroupe=?)) ');
+                    $getall->execute(array($idmembre,$idformation,$idgroupe));
+                    
+        }
 }
 
 ?>

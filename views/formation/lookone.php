@@ -65,7 +65,54 @@ echo "<input class=\"edit\" type=\"hidden\" value=\"Suppression Groupe\" onclick
 <fieldset>
     <legend><h1>Participants</h1></legend>
     
+    <?php
+        echo "<table width=\"100%\" border=\"1\" id=\"table2\" class=\"displayy\">";
+        echo "<thead>";
     
+    echo "<tr>";
+    
+      echo "<th>";
+    echo "Association";
+    echo "</th>";  
+    echo "<th>";
+    echo "Editions";
+    echo "</th>";  
+echo "</tr>";
+    echo  "</thead>";
+echo "<tbody>";
+    foreach ($_POST["formation_assiste"] as $key => $value) {
+        
+    
+    
+    
+
+    echo "<tr> ";
+    echo "<td align=\"center\">";
+echo "<a href=\"/mvc_test/formation/lookone/".$_POST["formations"][$key][0]->getId()."\" >".$_POST["formations"][$key][0]->getIntitule()."</a>";
+    echo "</td>";
+     echo "<td align=\"center\">";
+     if($value->get_bool()==1) echo "Présente";
+     else if($value->get_bool()==0)  echo "Absente";
+     else if($value->get_bool()==2)  echo "inviter";
+    echo "</td>";
+  
+     echo "<td align=\"center\">";
+     
+    echo "<a href=\"javascript:liste(".$_POST["association"][0]->get_id().",".$_POST["formations"][$key][0]->getId().")\" >Liste</a>";
+    echo "</td>";
+  
+    
+echo "</tr> ";
+
+
+
+   
+    }
+    echo "</tbody>";
+    
+    echo "</table>";
+    
+    ?>
     
     
 </fieldset>

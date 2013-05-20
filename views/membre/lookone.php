@@ -44,12 +44,12 @@
               <?php
               
               foreach ($_POST["fonctions"] as $value) {
-                if($value->get_date_fin_fonction()=="0000-00-00"){
+                if($value["dfin_fonction"]=="0000-00-00"){
                     
                     
                      echo "<article>";
-                 echo   "<h2>".$value->get_nom_fonction()."</h2>";
-                 echo   "<p class=\"subDetails\">".$value->get_date_debut_fonction(). "  -  En cours</p>";
+                 echo   "<h2>".$value["nomfonction_ass"]."</h2>";
+                 echo   "<p class=\"subDetails\">".$value["ddebut_fonction"]. "  -  En cours</p>";
                 echo "</article>";
                 
                    
@@ -60,16 +60,46 @@
                 }
                 
                    foreach ($_POST["fonctions"] as $value) {
-                                    if($value->get_date_fin_fonction()!="0000-00-00"){
+                                    if($value["dfin_fonction"]!="0000-00-00"){
 
                     echo "<article>";
-                 echo   "<h2>".$value->get_nom_fonction()."</h2>";
-                 echo   "<p class=\"subDetails\">".$value->get_date_debut_fonction(). "  -  ".$value->get_date_fin_fonction()."</p>";
+                 echo   "<h2>".$value["nomfonction_ass"]."</h2>";
+                 echo   "<p class=\"subDetails\">".$value["ddebut_fonction"]. "  -  ".$value["dfin_fonction"]."</p>";
                 echo "</article>";
                     
                 }}
                 
                   
+          
+              
+              ?>
+
+                   
+            </div>
+             <div class="sectionTitle">
+                <h1>Formations</h1>
+            </div>
+            <div class="sectionContent">
+       
+              <?php
+              
+              foreach ($_POST["formation"] as $value) {
+            
+                    
+                    
+                     echo "<article>";
+                 echo   "<h2><a href=\"/mvc_test/formation/lookone/\" ".$value["idformation"].">".$value["intiformation"]."</a>: ".$value["tformation"]."</h2>";
+                 echo   "<p class=\"subDetails\">".$value["dformation"]. "  -  ".$value["fformation"]."</p>";
+                echo "</article>";
+                
+                   
+                    
+                
+             
+                
+                }
+                
+                 
           
               
               ?>

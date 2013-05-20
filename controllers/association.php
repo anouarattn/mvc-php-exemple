@@ -222,8 +222,9 @@ else {
     
    public function liste_membres_present_d_formationx($id_association,$id_formation)
    {
-    
-       
+   
+       $_POST["view"]=(new Association_Model())->liste_membres_present_d_formationx($id_association,$id_formation);
+    // print_r( $_POST["view"]);
         $tab_rows = (new Membre_model())->get_membre_of_association($id_association);
         $tab_rows2 = (new Groupe_model())->getAll("Groupe_object","groupe","formation_idformation=".$id_formation );
    // print_r($tab_rows);
@@ -267,6 +268,8 @@ else {
 
        
    }
+   
+   public function inviter(){}
   
 
 }

@@ -31,7 +31,7 @@ echo "<th>
   <option value=\"1\">Supprimer</option>
   <option value=\"2\">Modifier</option>
   <option value=\"3\">Inviter</option>
-  <option value=\"3\">Imprimer</option>
+  <option value=\"4\">Imprimer</option>
 </select>
 
 </th> ";
@@ -233,6 +233,12 @@ $("select#Action").val('0');
 
         }
         else if ($("select#Action").val() == 3) {
+            
+              $("input:checkbox").each(function(){
+                  
+                  
+                  
+              });
 
         }
         //$("input:checkbox").each(function() { alert($(this).is(':checked')); });

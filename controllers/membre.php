@@ -149,11 +149,13 @@ class Membre extends Controller {
         
     }
 
-    public function lookone($id_formation,$id_membre) {
+    public function lookone($id_assoc,$id_membre) {
         
     $_POST["membre"] = (new Membre_model())->getAll("Membre_object", 'membre',"idmembre=".$id_membre);
-    $_POST["fonctions"]=(new Fonction_association_model())->getAll("Fonction_association_object", 'fonction_ass',"membre_idmembre=".$id_membre);
-    $_POST["association"]=(new Association_model())->getAll("Association_object", 'association',"idassociation=".$id_formation);
+        $_POST["fonctions"]=(new Fonction_association_model())->fonction_membre_in_assoc($id_membre,$id_assoc);
+        $_POST["formation"]=(new Fonction_association_model())->get_formation_by_membre_id($id_membre);
+//print_r($_POST["formation"]);
+    $_POST["association"]=(new Association_model())->getAll("Association_object", 'association',"idassociation=".$id_assoc);
 
       $this->view->render("membre/lookone");
     }
@@ -174,6 +176,12 @@ class Membre extends Controller {
 
     }
     
+    
+     public function delete_from_formation($idformation,$idmembre,$idgroupe)
+    {
+        (new Membre_model())->delete_membre_from_formation($idformation,$idmembre,$idgroupe);
+
+    }
 
 }
 ?>
