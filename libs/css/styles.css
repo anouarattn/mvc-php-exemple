@@ -1,3 +1,7 @@
+
+@media screen
+
+{
 body
 {
     
@@ -112,4 +116,15 @@ nav li:hover ul
     margin-right: auto;
     
     z-index:-1;
+}
+}
+@media print
+
+{
+nav
+{
+    visibility:hidden;
+
+}
+
 }

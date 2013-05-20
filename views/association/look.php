@@ -239,7 +239,7 @@ $("select#Action").val('0');
                    if ($(this).is(':checked') === true){idassoc+=$(this).attr('value')+",";}
                   $(this).prop('checked', false);
               });
-  window.open("/mvc_test/association/inviter"+idassoc, "windows", 'width=800,height=500');
+  window.open("/mvc_test/association/inviter/"+idassoc, "windows", 'width=800,height=500');
   $("select#Action").val('0');
         }
         //$("input:checkbox").each(function() { alert($(this).is(':checked')); });

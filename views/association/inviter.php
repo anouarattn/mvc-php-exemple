@@ -10,6 +10,9 @@ if(isset($_POST["formation"]))
         
     }
     echo "</select>";
+    echo "<input type=\"hidden\" value=\"".$_POST["ids"]."\">";
+    echo "<textarea rows=\"6\" cols=\"70\" hidden>";
+    echo "</textarea>";
 }
 
 
@@ -20,13 +23,15 @@ if(isset($_POST["formation"]))
 
 
 $('select').change(function(){
-    alert($("select option:selected").val());
+ //   alert($("input").val());
    // window.open("/mvc_test/association/inviter/"+$("select option:selected").val(), "windows", 'width=800,height=500');
     $.ajax({
-  type: "POST",
-  url: "mvc_test/association/inviter",
-  data: { select: $("select option:selected").val()}
-  
+  url: "/mvc_test/association/inviter/"+$("input").val()+"/"+$("select option:selected").val()
+    }).done(function(){
+        
+        $.post("/mvc_test/association/mailing",function(data) {
+  alert("Data Loaded: " + data);
+});
     });
     
 });
