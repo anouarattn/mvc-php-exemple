@@ -7,6 +7,11 @@ class Invitation_model extends Model {
     }
 
     
+    public function inviter($idformation,$idassociation)
+    {
+         $add = $this->_db->prepare('INSERT INTO invitation(formation_idformation,association_idassociation,boolreponse) values(?,?,2);');
+        $add->execute(array($idformation,$idassociation));
+    }
     
     
 }

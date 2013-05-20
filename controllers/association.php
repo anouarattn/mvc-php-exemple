@@ -269,7 +269,29 @@ else {
        
    }
    
-   public function inviter(){}
+   public function inviter($ids='',$form=''){
+       if($ids!=''){
+       echo "<script>document.getElementById(\"fofo\").parentNode.removeChild(document.getElementById(\"fofo\"));</script>";
+              $_POST["formation"] = (new Formation_model())->getAll("Formation_object", 'formation');
+              
+              if(isset($_POST["select"]))
+              {
+                  
+                   $id = explode(",", $ids);
+                   foreach ($id as $value) {
+                       if(intval($value)==$value and $value!=""){
+                           
+                           (new Invitation_model())->inviter($_POST["select"], $value);
+                       }
+                   }
+                   
+                  
+       }}
+       else{       echo "<script>document.getElementById(\"fofo\").parentNode.removeChild(document.getElementById(\"fofo\"));</script>";
+      echo "pas d'association selectionner";}
+$this->view->render("association/inviter");
+       
+   }
   
 
 }
