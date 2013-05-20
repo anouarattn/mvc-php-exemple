@@ -297,7 +297,7 @@ $this->view->render("association/inviter");
    {
      
      $_POST["association"]=(new Association_model())->getAll("Association_object","association","idassociation=".$id);
-       $this->view->render("association/inviter");
+       $this->view->render("association/mailing");
    }
   
 

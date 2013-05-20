@@ -11,7 +11,7 @@ if(isset($_POST["formation"]))
     }
     echo "</select>";
     echo "<input type=\"hidden\" value=\"".$_POST["ids"]."\">";
-    echo "<textarea rows=\"6\" cols=\"70\" hidden>";
+    echo "<textarea id=\"mailing\" rows=\"6\" cols=\"70\" hidden>";
     echo "</textarea>";
 }
 
@@ -28,12 +28,11 @@ $('select').change(function(){
     $.ajax({
   url: "/mvc_test/association/inviter/"+$("input").val()+"/"+$("select option:selected").val()
     }).done(function(){
-        
-        $.post("/mvc_test/association/mailing",function(data) {
-  alert("Data Loaded: " + data);
+       $("#mailing").val(load("/mvc_test/association/inviter/4,"));
+       $("#mailing").removeAttr("hidden");
 });
     });
     
-});
+
 
 </script>
