@@ -293,11 +293,22 @@ $this->view->render("association/inviter");
        
    }
    
-   public function mailing($idassoc)
+   public function mailing($idassoc,$idformation)
    {
-     
-     $_POST["association"]=(new Association_model())->getAll("Association_object","association","idassociation=".$id);
-       $this->view->render("association/mailing");
+       
+       $_POST["formation"]=(new Formation_model())->getAll("Formation_object","formation","idformation=".$idformation);
+      $idassoc = explode(",", $idassoc);
+      $tab =array();
+                   foreach ($idassoc as $value) {
+                       //print_r($value);
+                       if($value!=""){
+     $_POST["association"][]=(new Association_model())->getAll("Association_object","association","idassociation=".$value);
+                       }
+                   
+                   }
+                                      $this->view->render("association/mailing");
+
+                //   print_r($_POST["association"]);
    }
   
 

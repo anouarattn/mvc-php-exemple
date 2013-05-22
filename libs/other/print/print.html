@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8" />
+
 <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
@@ -17,14 +19,14 @@
     </header>
     <section>
         <div id="titre">
-        
+            <h5></h5>
         </div>
          <div id="tableeee">
             
             
         </div>
     </section>
-
+    <input type="submit" value="Imprimer" onclick="window.print();">
 </body>
 
 </html>
@@ -34,9 +36,10 @@
 <script>
     
    
-
-   if(window.opener.npn=="animateur"){
+$("h5").text(window.opener.titl);
    $("#tableeee").append(window.opener.all);
+   if(window.opener.npn=="animateur"){
+       
    $(document).ready(function()
 
 {
@@ -45,10 +48,46 @@
   $("#contratcel").remove();
   $("#cvcel").remove();
    $(".doc").remove(); 
-    $("#checkboxx").remove(); 
-    $("#pluss").remove(); 
+    $(".checkboxx").remove(); 
+    $(".pluss").remove(); 
     });
    
+   $("#tableeee").attr("style","@media print{margin:auto;position:absolute;left:4%;top:479%;}");
+  
    }
+   if(window.opener.npn=="association"){
+       
+  
+  $(document).ready(function()
+
+{
+  $("#selectrows").remove();
+  $("#plusrow").remove();
+
+    $(".checkboxx").remove(); 
+    $(".pluss").remove(); 
+    $("tr").each(function(){
+        
+        $(this).children("td:first").remove();
+        $(this).children("th:first").remove();
+    });
+    $("link").attr("href","styles1.css")
+    });
+  
+   }
+    if(window.opener.npn=="formation"){
+       
+  
+  $(document).ready(function()
+
+{
+  $("#selectrows").remove();
+  $("#plusrow").remove();
+
+    $(".checkboxx").remove(); 
+    $(".pluss").remove(); 
+   $("link").attr("href","styles1.css")
+  
+   });}
   
 </script>

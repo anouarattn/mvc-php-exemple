@@ -26,7 +26,7 @@ for ($j = 0; $j < $size2; $j++) {
 
     echo "<th>" . $_POST["noms_column"][$j] . "</th> ";
 }
-echo "<th>
+echo "<th id=\"selectrows\">
     <select id=\"Action\"  onchange=\"operation();\">
     <option value=\"0\">....</option>
   <option value=\"1\">Supprimer</option>
@@ -37,7 +37,7 @@ echo "<th>
 </th> ";
 
 //echo "<th>" . "Supprimer" . "</th> ";
-echo "<th>" . "Plus" . "</th> ";
+echo "<th id=\"plusrow\">" . "Plus" . "</th> ";
 
 echo "</tr> ";
 
@@ -63,10 +63,10 @@ foreach ($_POST["donnees"] as $object) {
         $i++;
     }
 
-    echo "<td><input type=\"checkbox\" class=\"checkbox\" value=\"" . $id_val . "\" ></td>";
+    echo "<td class=\"checkboxx\"><input type=\"checkbox\" class=\"checkbox\" value=\"" . $id_val . "\" ></td>";
 
 
-    echo "<td><a href=\"/mvc_test/formation/lookone/" . $id_val . "\"  ><img src=\"/mvc_test/libs/uploads/picture/plus.png\"  alt=\"plus\" height= \"40\" width=\"30\" ></a></td>";
+    echo "<td class=\"pluss\"><a href=\"/mvc_test/formation/lookone/" . $id_val . "\"  ><img src=\"/mvc_test/libs/uploads/picture/plus.png\"  alt=\"plus\" height= \"40\" width=\"30\" ></a></td>";
 
 
     echo "</tr> ";
@@ -230,7 +230,10 @@ echo "</table></fieldset></article>";
 <script src="/mvc_test/libs/js/DataTables/media/js/jquery.dataTables.js"  ></script>
 
 <script>
-
+var all="";
+var pdp;
+var npn="formation";
+var titl="";
     function operation()
     {
 //alert($("select#Action").val()===1);
@@ -283,11 +286,34 @@ echo "</table></fieldset></article>";
 
         }
         else if ($("select#Action").val() == 3) {
+             $("select#Action").val('0');
+        
+            var rows_elemtent=""; 
+                $("input:checkbox").each(function()
+                {
+                    if ($(this).is(':checked') === true)
+                    {
+                        
+                        rows_elemtent+="<tr>"+$(this).parent().parent().html()+"</tr>"; 
+                        $(this).prop('checked', false);
+                        
+                    }
+                }
+            );
+              
+              all="<table border=\"1\"  id=\"table\" class=\"display\"><thead>"+$("thead").html()+"</thead><tbody>"+rows_elemtent+"</tbody></table>";
+     
+           //   $("textarea").text(all);
+            //  all.$("#selectrows").parent().remove("#selectrows");
+            //  var ndx = $("#selectrows").parent().index() + 1;
+              //alert($("#selectrows").parent().html());
+             //$("td", event.delegateTarget).remove(":nth-child(" + ndx + ")");
+titl=prompt("Entrer le titre de la première feuille");
+var deletee = window.open("/mvc_test/libs/other/print/print.html", "windows", 'width=800,height=500');
+                     
 
         }
-        //$("input:checkbox").each(function() { alert($(this).is(':checked')); });
-        //alert($("select#Action").val());
-
+       
 
 
 

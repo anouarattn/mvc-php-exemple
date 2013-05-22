@@ -10,9 +10,14 @@ if(isset($_POST["formation"]))
         
     }
     echo "</select>";
+  echo  "<h3 hidden>Associations invitées avec succés</h3><br/>";
+  echo  "<h4 hidden>Listes des Emails</h4>";
     echo "<input type=\"hidden\" value=\"".$_POST["ids"]."\">";
-    echo "<textarea id=\"mailing\" rows=\"6\" cols=\"70\" hidden>";
-    echo "</textarea>";
+    
+    echo "<div id=\"divi\"></div><br/>";
+    
+    
+    
 }
 
 
@@ -28,8 +33,14 @@ $('select').change(function(){
     $.ajax({
   url: "/mvc_test/association/inviter/"+$("input").val()+"/"+$("select option:selected").val()
     }).done(function(){
-       $("#mailing").val(load("/mvc_test/association/inviter/4,"));
-       $("#mailing").removeAttr("hidden");
+       // alert("dsf");
+       
+        $("#divi").load("/mvc_test/association/mailing/"+$("input").val()+"/"+$("select option:selected").val()+" #ok");
+        $("h3").removeAttr("hidden");
+                $("h4").removeAttr("hidden");
+
+    //   $("#mailing").text($.load("/mvc_test/association/inviter/4,"));
+      
 });
     });
     

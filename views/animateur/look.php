@@ -76,8 +76,8 @@ foreach ($_POST["donnees"] as $object) {
         $i++;
     }
     
-    echo "<td id=\"checkboxx\"><input type=\"checkbox\" class=\"checkbox\" value=\"" . $id_val . "\" ></td>";
-    echo "<td id=\"pluss\"><a href=\"/mvc_test/animateur/lookone/" . $id_val . "\"  ><img src=\"/mvc_test/libs/uploads/picture/plus.png\"  alt=\"plus\" height= \"40\" width=\"30\" ></a></td>";
+    echo "<td class=\"checkboxx\"><input type=\"checkbox\" class=\"checkbox\" value=\"" . $id_val . "\" ></td>";
+    echo "<td class=\"pluss\"><a href=\"/mvc_test/animateur/lookone/" . $id_val . "\"  ><img src=\"/mvc_test/libs/uploads/picture/plus.png\"  alt=\"plus\" height= \"40\" width=\"30\" ></a></td>";
    
     echo "</tr> ";
 }
@@ -194,6 +194,7 @@ echo "</article>";
 var all="";
 var pdp;
 var npn="animateur";
+var titl="";
     function operation()
     {
 //alert($("select#Action").val()===1);
@@ -242,7 +243,7 @@ $("select#Action").val('0');
 
         }
         else if ($("select#Action").val() == 3) {
-           
+           $("select#Action").val('0');
         
             var rows_elemtent=""; 
                 $("input:checkbox").each(function()
@@ -251,6 +252,7 @@ $("select#Action").val('0');
                     {
                         
                         rows_elemtent+="<tr>"+$(this).parent().parent().html()+"</tr>"; 
+                        $(this).prop('checked', false);
                         
                     }
                 }
@@ -258,14 +260,10 @@ $("select#Action").val('0');
               
               all="<table border=\"1\"  id=\"table\" class=\"display\"><thead>"+$("thead").html()+"</thead><tbody>"+rows_elemtent+"</tbody></table>";
      
-           //   $("textarea").text(all);
-            //  all.$("#selectrows").parent().remove("#selectrows");
-            //  var ndx = $("#selectrows").parent().index() + 1;
-              //alert($("#selectrows").parent().html());
-             //$("td", event.delegateTarget).remove(":nth-child(" + ndx + ")");
-
+        
+titl=prompt("Entrer le titre de la première feuille");
 var deletee = window.open("/mvc_test/libs/other/print/print.html", "windows", 'width=800,height=500');
- $.remove("div");                       
+                       
                         
 
 
