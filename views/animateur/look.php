@@ -21,11 +21,17 @@ echo "<table border=\"1\"  id=\"table\" class=\"display\"> ";
 echo  "<thead>";
 echo "<tr  > ";
 for ($j = 0; $j < $size2; $j++) {
-
+    if($_POST["noms_column"][$j]=="Contrat"){
+        echo "<th id=\"contratcel\">" . $_POST["noms_column"][$j] . "</th> ";
+    }
+ else if($_POST["noms_column"][$j]=="CV"){
+        echo "<th id=\"cvcel\">" . $_POST["noms_column"][$j] . "</th> ";
+    }
+   else 
     echo "<th>" . $_POST["noms_column"][$j] . "</th> ";
 }
 //echo "<th>" . "Modifier" . "</th> ";
-echo "<th>
+echo "<th id=\"selectrows\">
     <select id=\"Action\"  onchange=\"operation();\">
     <option value=\"0\">....</option>
   <option value=\"1\">Supprimer</option>
@@ -36,7 +42,7 @@ echo "<th>
 </th> ";
 
 //echo "<th>" . "Supprimer" . "</th> ";
-echo "<th>" . "Plus" . "</th> ";
+echo "<th id=\"plusrow\">" . "Plus" . "</th> ";
 
 echo "</tr> ";
 
@@ -70,8 +76,8 @@ foreach ($_POST["donnees"] as $object) {
         $i++;
     }
     
-    echo "<td><input type=\"checkbox\" class=\"checkbox\" value=\"" . $id_val . "\" ></td>";
-    echo "<td><a href=\"/mvc_test/animateur/lookone/" . $id_val . "\"  ><img src=\"/mvc_test/libs/uploads/picture/plus.png\"  alt=\"plus\" height= \"40\" width=\"30\" ></a></td>";
+    echo "<td id=\"checkboxx\"><input type=\"checkbox\" class=\"checkbox\" value=\"" . $id_val . "\" ></td>";
+    echo "<td id=\"pluss\"><a href=\"/mvc_test/animateur/lookone/" . $id_val . "\"  ><img src=\"/mvc_test/libs/uploads/picture/plus.png\"  alt=\"plus\" height= \"40\" width=\"30\" ></a></td>";
    
     echo "</tr> ";
 }
@@ -177,6 +183,7 @@ echo "</article>";
 
     }
 </script>
+
 </section>
 </body>
 </html>
@@ -184,7 +191,9 @@ echo "</article>";
 
 <script src="/mvc_test/libs/js/DataTables/media/js/jquery.dataTables.js"  ></script>
 <script>
-
+var all="";
+var pdp;
+var npn="animateur";
     function operation()
     {
 //alert($("select#Action").val()===1);
@@ -233,6 +242,35 @@ $("select#Action").val('0');
 
         }
         else if ($("select#Action").val() == 3) {
+           
+        
+            var rows_elemtent=""; 
+                $("input:checkbox").each(function()
+                {
+                    if ($(this).is(':checked') === true)
+                    {
+                        
+                        rows_elemtent+="<tr>"+$(this).parent().parent().html()+"</tr>"; 
+                        
+                    }
+                }
+            );
+              
+              all="<table border=\"1\"  id=\"table\" class=\"display\"><thead>"+$("thead").html()+"</thead><tbody>"+rows_elemtent+"</tbody></table>";
+     
+           //   $("textarea").text(all);
+            //  all.$("#selectrows").parent().remove("#selectrows");
+            //  var ndx = $("#selectrows").parent().index() + 1;
+              //alert($("#selectrows").parent().html());
+             //$("td", event.delegateTarget).remove(":nth-child(" + ndx + ")");
+
+var deletee = window.open("/mvc_test/libs/other/print/print.html", "windows", 'width=800,height=500');
+ $.remove("div");                       
+                        
+
+
+
+            
 
         }
         //$("input:checkbox").each(function() { alert($(this).is(':checked')); });
@@ -266,14 +304,14 @@ $(document).ready(function()
 
 {
     
-    $('#table').dataTable(
+    pdp= $('#table').dataTable(
         {
     "aLengthMenu": [[1,5,10, 25, 50, -1], [1,5,10, 25, 50, "All"]],
     "bFilter": false,"bInfo": false,
 "oLanguage": fr
     } );
             
-           
+    
     
 }
 );

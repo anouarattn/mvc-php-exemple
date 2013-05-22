@@ -4,7 +4,7 @@
   size: auto;   /* auto is the initial value */
   margin: 0%;
 }
-    img
+    #immg
     {
         
         position:absolute;
@@ -12,5 +12,56 @@ left:68%;
 top: 5%;
     }
     
-    
+    h4{
+        margin-bottom:-19px;
+        
+        
+    }
+      #titre
+    {
+        margin: 0 0 0 0;
+       position:absolute;
+       left:84%;
+       top:293%;        
+    }
+     #table
+    {
+margin:auto;
+    position:absolute;
+  
+       top:479%;         
+    }
 }
+
+   @page {
+  size: auto;   /* auto is the initial value */
+  margin: 0%;
+}
+    #immg
+    {
+        
+        position:absolute;
+left:68%;
+top: 5%;
+    }
+    
+    h4{
+        
+        margin-bottom:-19px;
+        
+        
+    }
+     
+     #titre
+    {
+       position:absolute;
+       left:44%;
+       bottom:-170%;        
+    }
+    #table
+    {
+margin:auto;
+    position:absolute;
+  
+       bottom:11%;         
+    }

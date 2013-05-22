@@ -7,9 +7,48 @@
 <body>
     
     <header>
-        <img src="images/logo.png" alt="logo" height="202" width="300" >
-        
+        <img  id="immg" src="images/logo.png" alt="logo" height="202" width="300" >
+        <div id="header">
+        <h4>Pôle Formation et Ingénierie Sociale</h4>
+        <h4>Centre Associatif Solidaire</h4>
+        <h4>Sidi Bouknadel, Route Kenitra</h4>
+        </div>
+       
     </header>
+    <section>
+        <div id="titre">
+        
+        </div>
+         <div id="tableeee">
+            
+            
+        </div>
+    </section>
+
 </body>
 
 </html>
+
+ <script src="/mvc_test/libs/js/jquery.js"  ></script>
+
+<script>
+    
+   
+
+   if(window.opener.npn=="animateur"){
+   $("#tableeee").append(window.opener.all);
+   $(document).ready(function()
+
+{
+  $("#selectrows").remove();
+  $("#plusrow").remove();
+  $("#contratcel").remove();
+  $("#cvcel").remove();
+   $(".doc").remove(); 
+    $("#checkboxx").remove(); 
+    $("#pluss").remove(); 
+    });
+   
+   }
+  
+</script>
